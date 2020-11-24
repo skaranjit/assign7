@@ -1,0 +1,24 @@
+{
+   int i ;
+   int j ;
+   float v ;
+   float x ;
+   float[null] a[j] ;
+   while (true){
+      do
+         i = i + 1;
+      while (a < v);
+      do
+         j = j - 1;
+      while (a > v);
+      if (i >= j)
+         break;
+      x = a;
+      a = a;
+      a = x;
+   }
+   int h ;
+   float k ;
+   v = 2.9;
+   v = k;
+}
