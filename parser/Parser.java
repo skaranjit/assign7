@@ -249,8 +249,10 @@ public class Parser extends ASTVisitor
     {
         n.left = new IdentifierNode();
         n.left.accept(this);
-        IdentifierNode id = (IdentifierNode)top.get(((IdentifierNode)n.left).w); // new code
+
+       // IdentifierNode id = (IdentifierNode)top.get(((IdentifierNode)n.left).w); // new code
         println("In Parser, AssignmentNode's left type: " + id.type); // new code
+
         match('=');
         ExprNode rhs_assign = null;
         if (look.tag == Tag.ID)
