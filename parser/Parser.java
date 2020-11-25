@@ -231,7 +231,7 @@ public class Parser extends ASTVisitor
                 n.accept(this);
                 break;
             case Tag.DO:
-                n. = new DoWhileNode();
+                n = new DoWhileNode();
                 n.accept(this);
                 break;
             case Tag.BREAK:
