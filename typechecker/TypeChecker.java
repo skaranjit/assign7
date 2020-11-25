@@ -111,7 +111,7 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(TypeNode n)
     {
-        System.out.println("visiting TypeNode"+n.basic);
+        System.out.println("visiting TypeNode "+n.basic);
         if(n.array != null)
         {
             n.array.accept(this);
