@@ -5,6 +5,7 @@ import assign7.visitor.*;
 import assign7.parser.*;
 import assign7.lexer.*;
 import java.io.*;
+import java.util.*;
 
 public class TypeChecker extends ASTVisitor
 {
