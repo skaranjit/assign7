@@ -115,7 +115,11 @@ public class TypeChecker extends ASTVisitor
             n.stmts.accept(this);
         }
     }
-
+    public void visit(StatementNode n )
+    {
+    	System.out.println("Visiting StatementNode");
+	n.accept(this);
+   }
     public void visit(ParenNode n) {
         System.out.println("visiting ParenNode");
         n.node.accept(this);
@@ -135,6 +139,7 @@ public class TypeChecker extends ASTVisitor
             n.elseStmt.accept(this);
         }
     }
+    
 
     public void visit(WhileNode n)
     {
