@@ -318,8 +318,7 @@ public class TypeChecker extends ASTVisitor
 		((BlockStatementNode)n).accept(this);
 	else if(n instanceof AssignmentNode)
 		((AssignmentNode)n).accept(this);
-	else if (n instanceof DeclarationNode)
-		((DeclarationNode)n).accept(this);
+	
     }
 
 
