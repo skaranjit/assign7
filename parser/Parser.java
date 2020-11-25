@@ -384,8 +384,6 @@ public class Parser extends ASTVisitor
     public void visit(WhileNode n)
     {
         match(Tag.WHILE);
-        match('(');
-        ExprNode rhs_assign = null;
         n.condition = new ParenNode();
 	((ParenNode)n.condition).accept(this);
         n.stmt = new StatementNode();
@@ -415,7 +413,6 @@ public class Parser extends ASTVisitor
 		(n.stmt).accept(this);
 	}
         match(Tag.WHILE);
-        match('(');
 	n.condition = new ParenNode();
 	((ParenNode)n.condition).accept(this);
         match(';');
