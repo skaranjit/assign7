@@ -215,7 +215,7 @@ public class Parser extends ASTVisitor
             }
         }
     }
-    public void visit(StatementNode){
+    public void visit(StatementNode n){
     	 switch (look.tag)
         {
             case Tag.ID:
