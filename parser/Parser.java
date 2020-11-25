@@ -252,14 +252,10 @@ public class Parser extends ASTVisitor
         n.left = new IdentifierNode();
         n.left.accept(this);
 
-        if (top.get(n.left.w)==null){
-            error("Variable Must be Declared");
-        }else {
-            n.left.type = top.get(n.left.w).type;
-        }
+      
 
-        IdentifierNode id = (IdentifierNode)top.get(((IdentifierNode)n.left).w); // new code
-        println("In Parser, AssignmentNode's left type: " + id.type); // new code
+       // IdentifierNode id = (IdentifierNode)top.get(((IdentifierNode)n.left).w); // new code
+        //println("In Parser, AssignmentNode's left type: " + id.type); // new code
 
         //((IdentifierNode)n.left).type = id.type; // new code
 
