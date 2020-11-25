@@ -179,12 +179,12 @@ public class Parser extends ASTVisitor
             rhs_assign = new ParenNode();
             ((ParenNode)rhs_assign).accept(this);
         }
-	else {
-            n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-           // n.size.type = Type.Int;
-        }
+// 	else {
+//             n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
+//            // n.size.type = Type.Int;
+//         }
 	while(look.tag != ']'){        
-      		n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
+      		rhs_assign = (BinExprNode) parseBinExprNode(rhs_assign, 0);
 	}
 	match(']');
         if (look.tag == '[')
@@ -192,7 +192,10 @@ public class Parser extends ASTVisitor
             n.type = new ArrayTypeNode();
             n.type.accept(this);
         }
-	
+	else
+	{
+		n.size = rhs_assign;
+	}
     }
 
 
