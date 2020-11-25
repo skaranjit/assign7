@@ -157,28 +157,28 @@ public class TypeChecker extends ASTVisitor
     public void visit (ArrayIDNode n)
     {
         System.out.println("visiting ArrayIDNode");
-//         n.id.accept(this);
-//         n.node.accept(this);
-//         if (n.node.type != Type.Int){
-//             error("Index of Array must be an Integer");
-//         }
-//         if(n.id != null)
-//         {
-//             n.id.accept(this);
-//         }
+        n.id.accept(this);
+        n.node.accept(this);
+        if (n.node.type != Type.Int){
+            error("Index of Array must be an Integer");
+        }
+        if(n.id != null)
+        {
+            n.id.accept(this);
+        }
     }
 
     public void visit(ArrayTypeNode n)
     {
         System.out.println("ArrayDimsNode");
-        //n.size.accept(this);
-//         if (n.size.type != Type.Int){
-//             error("Index of Array must be an Integer");
-//         }
-//         if(n.type != null)
-//         {
-//             n.type.accept(this);
-//         }
+        n.size.accept(this);
+        if (n.size.type != Type.Int){
+            error("Index of Array must be an Integer");
+        }
+        if(n.type != null)
+        {
+            n.type.accept(this);
+        }
     }
 
     public void visit(BreakNode n)
