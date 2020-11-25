@@ -87,7 +87,7 @@ public class TypeChecker extends ASTVisitor
         System.out.println("visiting DeclarationNode");
         n.type.accept(this);
 	n.id.type =n.type.basic;
-	if(top.get(n.id.w) != null) error("Variable: "+ n.id.w+" is already declared.");
+	
         n.id.accept(this);
 	
     }
