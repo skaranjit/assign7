@@ -388,34 +388,36 @@ public class Parser extends ASTVisitor
     public void visit(ConditionalNode n)
     {
         match(Tag.IF);
-        match('(');
-        ExprNode rhs_assign = null;
+	n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
+	ExprNode rhs_assign = null;
+	
 
-        if (look.tag == Tag.ID)
-        {
-            rhs_assign = new IdentifierNode();
-            ((IdentifierNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.NUM)
-        {
-            rhs_assign = new NumNode();
-            ((NumNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.REAL)
-        {
-            rhs_assign = new RealNode();
-            ((RealNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-        {
-            rhs_assign = new BooleanNode();
-            ((BooleanNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == '(')
-        {
-            rhs_assign = new ParenNode();
-            ((ParenNode)rhs_assign).accept(this);
-        }
+//         if (look.tag == Tag.ID)
+//         {
+//             rhs_assign = new IdentifierNode();
+//             ((IdentifierNode)rhs_assign).accept(this);
+//         }
+//         else if (look.tag == Tag.NUM)
+//         {
+//             rhs_assign = new NumNode();
+//             ((NumNode)rhs_assign).accept(this);
+//         }
+//         else if (look.tag == Tag.REAL)
+//         {
+//             rhs_assign = new RealNode();
+//             ((RealNode)rhs_assign).accept(this);
+//         }
+//         else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
+//         {
+//             rhs_assign = new BooleanNode();
+//             ((BooleanNode)rhs_assign).accept(this);
+//         }
+//         else if (look.tag == '(')
+//         {
+//             rhs_assign = new ParenNode();
+//             ((ParenNode)rhs_assign).accept(this);
+//         }
         if (look.tag == ')')
         {
             n.condition = rhs_assign;
