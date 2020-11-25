@@ -339,6 +339,7 @@ public class TypeChecker extends ASTVisitor
     public void visit(BooleanNode n)
     {
         System.out.println("visiting BooleanNode");
+	isBool = true;
 
     }
 
