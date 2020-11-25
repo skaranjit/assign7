@@ -61,32 +61,19 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.print(" ");
     }
-//    void error (String s) throws Error{
-//	throw new Error ("near line " + this.parser.lexer.line + ": " + s);
-//    }
 
-//    public Type getType(IdentifierNode a){
-//        String x = a.id;
-//	if(!(top.table.containsKey(x)))
-//	{
-//		 error("Variable " + x +" has not been declared.");
-//	}
-//	return top.table.get(x);
-//    }
     public void visit (CompilationUnit n)
     {
         System.out.println("\nTypechecker starts");
-//        top = new Env();
-//        top = n.symbolTable;
-//        visit(n.block);
+
         n.block.accept(this);
     }
 
     public void visit (BlockStatementNode n)
     {
         System.out.println("visiting Block");
-// 	top = new Env(top);
-// 	top = n.sTable.prev;
+	n.sTable = top;
+	top = new Env(top);
         n.decls.accept(this);
         n.stmts.accept(this);
     }
