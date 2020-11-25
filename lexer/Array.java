@@ -1,4 +1,4 @@
-package assign6.lexer;
+package assign7.lexer;
 public class Array extends Type {
    public Type of;                  // array *of* type
    public int size = 1;             // number of elements
