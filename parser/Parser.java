@@ -412,8 +412,9 @@ public class Parser extends ASTVisitor
     {
         match(Tag.DO);
 	while(look.tag != Tag.WHILE){
-        n.stmt = new StatementNode();
-        (n.stmt).accept(this);
+		n.stmt = new StatementNode();
+		(n.stmt).accept(this);
+	}
         match(Tag.WHILE);
         match('(');
 	n.condition = new ParenNode();
