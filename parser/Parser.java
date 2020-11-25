@@ -257,8 +257,7 @@ public class Parser extends ASTVisitor
         {
             rhs_assign = new IdentifierNode();
             ((IdentifierNode)rhs_assign).accept(this);
-            println(top.get(((IdentifierNode)rhs_assign).w).type.toString());
-            rhs_assign.type = top.get(((IdentifierNode)rhs_assign).w).type;
+           
         }
         else if (look.tag == Tag.NUM)
         {
