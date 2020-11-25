@@ -1,6 +1,6 @@
-package assign6.ast;
+package assign7.ast;
 
-import assign6.visitor.ASTVisitor;
+import assign7.visitor.ASTVisitor;
 
 public class StatementNode
 {
