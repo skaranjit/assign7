@@ -350,12 +350,14 @@ public class TypeChecker extends ASTVisitor
     public void visit(NumNode n)
     {
         System.out.println("visiting NumNode");
+	n.printNode();
 
     }
 
     public void visit(RealNode n)
     {
         System.out.println("visiting RealNode");
+	n.printNode();
     }
 
 
