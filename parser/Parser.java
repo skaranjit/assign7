@@ -730,11 +730,13 @@ public class Parser extends ASTVisitor
         else if (look.tag == Tag.NUM)
         {
             rhs_assign = new NumNode();
+	    rhs_assign.type = Type.Int;
             ((NumNode)rhs_assign).accept(this);
         }
         else if (look.tag == Tag.REAL)
         {
             rhs_assign = new RealNode();
+	    rhs_assign.type = Type.Float;
             ((RealNode)rhs_assign).accept(this);
         }
         else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
