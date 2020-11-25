@@ -179,6 +179,10 @@ public class Parser extends ASTVisitor
             rhs_assign = new ParenNode();
             ((ParenNode)rhs_assign).accept(this);
         }
+	else {
+            n.size = (ExprNode) parseBinExprNode(rhs_assign, 0);
+           // n.size.type = Type.Int;
+        }
         
         match(']');
         if (look.tag == '[')
