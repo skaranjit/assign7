@@ -310,23 +310,19 @@ public class TypeChecker extends ASTVisitor
 	System.out.println("Node Type: " + n.stmt.toString());
 	if(n.stmt instanceof ConditionalNode)
 		((ConditionalNode)n.stmt).accept(this);
-		isBool = false;
+
 	else if(n.stmt instanceof WhileNode)
 		((WhileNode)n.stmt).accept(this);
-		isBool = false;
+	
 	else if(n.stmt instanceof DoWhileNode)
 		((DoWhileNode)n.stmt).accept(this);
-		isBool = false;
 	else if(n.stmt instanceof DoWhileNode)
 		((DoWhileNode)n.stmt).accept(this);
-		isBool = false;
 	else if(n.stmt instanceof BlockStatementNode)
 		((BlockStatementNode)n.stmt).accept(this);
-		isBool = false;
 	else if(n.stmt instanceof AssignmentNode)
 		((AssignmentNode)n.stmt).accept(this);
-		isBool = false;
-	
+	isBool = false;
     }
 
 
