@@ -98,6 +98,7 @@ public class Parser extends ASTVisitor
         top = new Env(top); // new code
         n.decls = new Declarations();
         n.decls.accept(this);
+	 n.sTable = top; 
         n.stmts = new Statements();
         n.stmts.accept(this);
         match('}');
