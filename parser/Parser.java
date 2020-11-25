@@ -183,7 +183,6 @@ public class Parser extends ASTVisitor
             n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
             n.size.type = Type.Int;
         }
-        //match(Tag.NUM);
         match(']');
         if (look.tag == '[')
         {
@@ -252,17 +251,8 @@ public class Parser extends ASTVisitor
     {
         n.left = new IdentifierNode();
         n.left.accept(this);
-
-        if (top.get(n.left.w)==null){
-            error("Variable Must be Declared");
-        }else {
-            n.left.type = top.get(n.left.w).type;
-        }
-
         IdentifierNode id = (IdentifierNode)top.get(((IdentifierNode)n.left).w); // new code
         println("In Parser, AssignmentNode's left type: " + id.type); // new code
-
-
         match('=');
         ExprNode rhs_assign = null;
         if (look.tag == Tag.ID)
@@ -271,40 +261,29 @@ public class Parser extends ASTVisitor
             ((IdentifierNode)rhs_assign).accept(this);
             println(top.get(((IdentifierNode)rhs_assign).w).type.toString());
             rhs_assign.type = top.get(((IdentifierNode)rhs_assign).w).type;
-            if (top.get(((IdentifierNode)rhs_assign).w)==null){
-                error("Variable Must be Declared");
-            }else {
-                n.right = rhs_assign;
-                n.right.type = rhs_assign.type;
-            }
         }
         else if (look.tag == Tag.NUM)
         {
             rhs_assign = new NumNode();
             ((NumNode)rhs_assign).accept(this);
-            rhs_assign.type = Type.Int;
         }
         else if (look.tag == Tag.REAL)
         {
             rhs_assign = new RealNode();
             ((RealNode)rhs_assign).accept(this);
-            rhs_assign.type = Type.Float;
         }
         else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
         {
             rhs_assign = new BooleanNode();
             ((BooleanNode)rhs_assign).accept(this);
-            n.right.type = Type.Bool;
         }
         else if (look.tag == '(')
         {
             rhs_assign = new ParenNode();
             ((ParenNode)rhs_assign).accept(this);
-            rhs_assign.type = ((ParenNode)rhs_assign).type;
         }
         if (look.tag == ';')
         {
-	    
             n.right = rhs_assign;
         }
         else {
@@ -342,6 +321,7 @@ public class Parser extends ASTVisitor
         while (getPrecedence(look.tag) >= precedence)
         {
             Token token_op = look;
+	    System.out.println("Operator: " + token_op);
             int op = getPrecedence(look.tag);
             move();
             ExprNode rhs = null;
@@ -392,41 +372,6 @@ public class Parser extends ASTVisitor
 	n.condition = new ParenNode();
 	((ParenNode)n.condition).accept(this);
 	ExprNode rhs_assign = null;
-	
-
-//         if (look.tag == Tag.ID)
-//         {
-//             rhs_assign = new IdentifierNode();
-//             ((IdentifierNode)rhs_assign).accept(this);
-//         }
-//         else if (look.tag == Tag.NUM)
-//         {
-//             rhs_assign = new NumNode();
-//             ((NumNode)rhs_assign).accept(this);
-//         }
-//         else if (look.tag == Tag.REAL)
-//         {
-//             rhs_assign = new RealNode();
-//             ((RealNode)rhs_assign).accept(this);
-//         }
-//         else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-//         {
-//             rhs_assign = new BooleanNode();
-//             ((BooleanNode)rhs_assign).accept(this);
-//         }
-//         else if (look.tag == '(')
-//         {
-//             rhs_assign = new ParenNode();
-//             ((ParenNode)rhs_assign).accept(this);
-//         }
-//         if (look.tag == ')')
-//         {
-//             n.condition = rhs_assign;
-//         }
-//         else
-//             n.condition = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-
-//         match(')');
         switch (look.tag)
         {
             case Tag.ID:
@@ -493,39 +438,8 @@ public class Parser extends ASTVisitor
         match(Tag.WHILE);
         match('(');
         ExprNode rhs_assign = null;
-        if (look.tag == Tag.ID)
-        {
-            rhs_assign = new IdentifierNode();
-            ((IdentifierNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.NUM)
-        {
-            rhs_assign = new NumNode();
-            ((NumNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.REAL)
-        {
-            rhs_assign = new RealNode();
-            ((RealNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-        {
-            rhs_assign = new BooleanNode();
-            ((BooleanNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == '(')
-        {
-            rhs_assign = new ParenNode();
-            ((ParenNode)rhs_assign).accept(this);
-        }
-        if (look.tag == ')')
-        {
-            n.condition = rhs_assign;
-        }
-        else
-            n.condition = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-
-        match(')');
+        n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
         n.stmt = new StatementNode();
         n.stmt.accept(this);
     }
@@ -579,40 +493,8 @@ public class Parser extends ASTVisitor
 	}
         match(Tag.WHILE);
         match('(');
-	System.out.println("Inside DoWhile While node");
-        ExprNode rhs_assign = null;
-        if (look.tag == Tag.ID)
-        {
-            rhs_assign = new IdentifierNode();
-            ((IdentifierNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.NUM)
-        {
-            rhs_assign = new NumNode();
-            ((NumNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.REAL)
-        {
-            rhs_assign = new RealNode();
-            ((RealNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-        {
-            rhs_assign = new BooleanNode();
-            ((BooleanNode)rhs_assign).accept(this);
-        }else if (look.tag == '(')
-        {
-            rhs_assign = new ParenNode();
-            ((ParenNode)rhs_assign).accept(this);
-        }
-        if (look.tag == ')')
-        {
-            n.condition = rhs_assign;
-        }
-        else
-            n.condition = (ExprNode) parseBinExprNode(rhs_assign, 0);
-
-        match(')');
+	n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
         match(';');
     }
 
