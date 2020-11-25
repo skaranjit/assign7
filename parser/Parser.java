@@ -181,7 +181,7 @@ public class Parser extends ASTVisitor
         }
         else {
             n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-            n.size.type = Type.Int;
+           // n.size.type = Type.Int;
         }
         match(']');
         if (look.tag == '[')
