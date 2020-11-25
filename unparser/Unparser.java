@@ -142,7 +142,7 @@ public class Unparser extends ASTVisitor
     public void visit(ArrayTypeNode n)
     {
         print("[");
-        ((BinnExprNode)n.size).accept(this);
+        (n.size).accept(this);
 //         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
 //         if(n.size instanceof NumNode) print("" + ((NumNode)n.size).value);
 //         print("" +n.size);
@@ -163,20 +163,21 @@ public class Unparser extends ASTVisitor
 
     public void visit(StatementNode n)
     {
-        if(n.stmt instanceof ConditionalNode)
-            ((ConditionalNode)n.stmt).accept(this);
+        n.stmt.accept(this);
+//         if(n.stmt instanceof ConditionalNode)
+//             ((ConditionalNode)n.stmt).accept(this);
 
-        else if(n.stmt instanceof WhileNode)
-            ((WhileNode)n.stmt).accept(this);
+//         else if(n.stmt instanceof WhileNode)
+//             ((WhileNode)n.stmt).accept(this);
 
-        else if(n.stmt instanceof DoWhileNode)
-            ((DoWhileNode)n.stmt).accept(this);
-        else if(n.stmt instanceof DoWhileNode)
-            ((DoWhileNode)n.stmt).accept(this);
-        else if(n.stmt instanceof BlockStatementNode)
-            ((BlockStatementNode)n.stmt).accept(this);
-        else if(n.stmt instanceof AssignmentNode)
-            ((AssignmentNode)n.stmt).accept(this);
+//         else if(n.stmt instanceof DoWhileNode)
+//             ((DoWhileNode)n.stmt).accept(this);
+//         else if(n.stmt instanceof DoWhileNode)
+//             ((DoWhileNode)n.stmt).accept(this);
+//         else if(n.stmt instanceof BlockStatementNode)
+//             ((BlockStatementNode)n.stmt).accept(this);
+//         else if(n.stmt instanceof AssignmentNode)
+//             ((AssignmentNode)n.stmt).accept(this);
 
     }
 
