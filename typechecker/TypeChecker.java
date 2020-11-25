@@ -306,6 +306,7 @@ public class TypeChecker extends ASTVisitor
     public void visit(StatementNode n)
     {
         System.out.println("Visiting Statement");
+	n.accept(this);
 	if(n instanceof ConditionalNode)
 		((ConditionalNode)n).accept(this);
 	else if(n instanceof WhileNode)
