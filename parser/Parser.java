@@ -648,7 +648,7 @@ public class Parser extends ASTVisitor
         n.id = look.toString();
         n.w = (Word)look; // new code
 	if((IdentifierNode)top.get(n.w) != null){
-		n.type = (IdentifierNode)top.get((Word)look).type;
+		n.type = top.get((Word)look).type;
 		println(n.id + " Identifier from top");
 	}
 	
