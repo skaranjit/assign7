@@ -1,6 +1,6 @@
-package assign6.ast;
+package assign7.ast;
 
-import assign6.visitor.*;
+import assign7.visitor.*;
 
 
 public class WhileNode extends StatementNode
