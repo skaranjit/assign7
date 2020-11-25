@@ -157,8 +157,9 @@ public class TypeChecker extends ASTVisitor
     public void visit (ArrayIDNode n)
     {
         System.out.println("visiting ArrayIDNode");
-        if (n.id != null) n.id.accept(this);
-        n.node.accept(this);
+	if(n.node instanceof NumNode) ((NumNode)n.node).accept(this);
+	if(n.node instanceof IdentifierNode) ((IdentifierNode)n.node).accept(this);
+      //  n.node.accept(this);
         if (n.node.type != Type.Int){
             error("Index of Array must be an Integer");
         }
@@ -172,6 +173,8 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.println("ArrayDimsNode");
         //n.size.accept(this);
+	if(n.size instanceof NumNode) ((NumNode)n.size).accept(this);
+	if(n.size instanceof IdentifierNode) ((IdentifierNode)n.size).accept(this);
         if (n.size.type != Type.Int){
             error("Index of Array must be an Integer");
         }
@@ -307,7 +310,6 @@ public class TypeChecker extends ASTVisitor
     public void visit(StatementNode n)
     {
         System.out.println("Visiting Statement");
-	System.out.println("Node Type: " + n.stmt.toString());
 	if(n.stmt instanceof ConditionalNode)
 		((ConditionalNode)n.stmt).accept(this);
 
