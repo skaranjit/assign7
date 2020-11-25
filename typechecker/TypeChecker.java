@@ -1,9 +1,9 @@
-package assign6.typechecker;
+package assign7.typechecker;
 
-import assign6.ast.*;
-import assign6.visitor.*;
-import assign6.parser.*;
-import assign6.lexer.*;
+import assign7.ast.*;
+import assign7.visitor.*;
+import assign7.parser.*;
+import assign7.lexer.*;
 import java.io.*;
 
 public class TypeChecker extends ASTVisitor
