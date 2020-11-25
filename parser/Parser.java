@@ -206,46 +206,44 @@ public class Parser extends ASTVisitor
 			n.stmts = new Statements();
 			n.stmts.accept(this);
 			break;
-                case Tag.ID:
-                    n.stmt = new AssignmentNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.IF:
-                    n.stmt = new ConditionalNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.WHILE:
-                    n.stmt = new WhileNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.DO:
-                    n.stmt = new DoWhileNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.BREAK:
-                    n.stmt = new BreakNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case '{':
-                    n.stmt = new BlockStatementNode();
-                    (n.stmt).accept(this);
-                     n.stmts = new Statements();
-                     n.stmts.accept(this);
-                    break;
+          	default:
+			n.stmt = new StatementNode();
+			n.stmt.accept(this);
+			n.stmts = new Statements();
+			n.stmts.accept(this);
+			break;
             }
         }
     }
-
+    public void visit(StatementNode){
+    	 switch (look.tag)
+        {
+            case Tag.ID:
+                n.stmt = new AssignmentNode();
+                (n.stmt).accept(this);
+                break;
+            case Tag.IF:
+                n.stmt = new ConditionalNode();
+                (n.stmt).accept(this);
+                break;
+            case Tag.WHILE:
+                n.stmt = new WhileNode();
+                (n.stmt).accept(this);
+                break;
+            case Tag.DO:
+                n.stmt = new DoWhileNode();
+                (n.stmt).accept(this);
+                break;
+            case Tag.BREAK:
+                n.stmt = new BreakNode();
+                (n.stmt).accept(this);
+                break;
+            case '{':
+                n.stmt = new BlockStatementNode();
+                (n.stmt).accept(this);
+                break;
+        }
+    }
 
     public void visit(AssignmentNode n)
     {
@@ -372,63 +370,14 @@ public class Parser extends ASTVisitor
 	n.condition = new ParenNode();
 	((ParenNode)n.condition).accept(this);
 	ExprNode rhs_assign = null;
-        switch (look.tag)
-        {
-            case Tag.ID:
-                n.stmt = new AssignmentNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.IF:
-                n.stmt = new ConditionalNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.WHILE:
-                n.stmt = new WhileNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.DO:
-                n.stmt = new DoWhileNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.BREAK:
-                n.stmt = new BreakNode();
-                (n.stmt).accept(this);
-                break;
-            case '{':
-                n.stmt = new BlockStatementNode();
-                (n.stmt).accept(this);
-                break;
-        }
+        n.stmt = new StatementNode();
+	n.stmt.accept(this);
 
         if (look.tag == Tag.ELSE)
         {
-            switch (look.tag)
-            {
-                case Tag.ID:
-                    n.elseStmt = new AssignmentNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.IF:
-                    n.elseStmt = new ConditionalNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.WHILE:
-                    n.elseStmt = new WhileNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.DO:
-                    n.elseStmt = new DoWhileNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.BREAK:
-                    n.elseStmt = new BreakNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case '{':
-                    n.elseStmt = new BlockStatementNode();
-                    (n.elseStmt).accept(this);
-                    break;
-            }
+            n.elseStmt = new StatementNode();
+            (n.elseStmt).accept(this);
+           
         }
         else n.elseStmt= null;
     }
@@ -463,34 +412,8 @@ public class Parser extends ASTVisitor
     {
         match(Tag.DO);
 	while(look.tag != Tag.WHILE){
-        switch (look.tag)
-        {
-            case Tag.ID:
-                n.stmt = new AssignmentNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.IF:
-                n.stmt = new ConditionalNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.WHILE:
-                n.stmt = new WhileNode();
-                ((WhileNode)n.stmt).accept(this);
-                break;
-            case Tag.DO:
-                n.stmt = new DoWhileNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.BREAK:
-                n.stmt = new BreakNode();
-                (n.stmt).accept(this);
-                break;
-            case '{':
-                n.stmt = new BlockStatementNode();
-                (n.stmt).accept(this);
-                break;
-        }
-	}
+        n.stmt = new StatementNode();
+        (n.stmt).accept(this);
         match(Tag.WHILE);
         match('(');
 	n.condition = new ParenNode();
