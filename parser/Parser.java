@@ -418,14 +418,14 @@ public class Parser extends ASTVisitor
 //             rhs_assign = new ParenNode();
 //             ((ParenNode)rhs_assign).accept(this);
 //         }
-        if (look.tag == ')')
-        {
-            n.condition = rhs_assign;
-        }
-        else
-            n.condition = (BinExprNode) parseBinExprNode(rhs_assign, 0);
+//         if (look.tag == ')')
+//         {
+//             n.condition = rhs_assign;
+//         }
+//         else
+//             n.condition = (BinExprNode) parseBinExprNode(rhs_assign, 0);
 
-        match(')');
+//         match(')');
         switch (look.tag)
         {
             case Tag.ID:
