@@ -105,6 +105,7 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.println("visiting DeclarationNode");
         n.type.accept(this);
+	n.id.type =n.type.basic;
         n.id.accept(this);
     }
 
