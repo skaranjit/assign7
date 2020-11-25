@@ -179,15 +179,16 @@ public class Parser extends ASTVisitor
             rhs_assign = new ParenNode();
             ((ParenNode)rhs_assign).accept(this);
         }
-        else {
-            n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-           // n.size.type = Type.Int;
-        }
+        
         match(']');
         if (look.tag == '[')
         {
             n.type = new ArrayTypeNode();
             n.type.accept(this);
+        }
+	else {
+            n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
+           // n.size.type = Type.Int;
         }
     }
 
