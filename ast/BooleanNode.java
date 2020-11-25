@@ -1,7 +1,7 @@
-package assign6.ast;
+package assign7.ast;
 
-import assign6.lexer.Word;
-import assign6.visitor.ASTVisitor;
+import assign7.lexer.Word;
+import assign7.visitor.ASTVisitor;
 
 public class BooleanNode extends ExprNode
 {
