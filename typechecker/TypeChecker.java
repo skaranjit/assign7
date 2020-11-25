@@ -106,7 +106,7 @@ public class TypeChecker extends ASTVisitor
         System.out.println("Visiting Statements");
        if (n.stmts != null)
        {
-       	   n.stmt.accept(this);
+       	   if(n.stmt!=null) n.stmt.accept(this);
 	   if(n.decls != null) n.decls.accept(this);
             n.stmts.accept(this);
         }
