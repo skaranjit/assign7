@@ -98,6 +98,7 @@ public class Parser extends ASTVisitor
         top = new Env(top); // new code
         n.decls = new Declarations();
         n.decls.accept(this);
+	 n.sTable = top; 
         n.stmts = new Statements();
         n.stmts.accept(this);
         match('}');
@@ -182,7 +183,6 @@ public class Parser extends ASTVisitor
             n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
             n.size.type = Type.Int;
         }
-        //match(Tag.NUM);
         match(']');
         if (look.tag == '[')
         {
@@ -206,62 +206,52 @@ public class Parser extends ASTVisitor
 			n.stmts = new Statements();
 			n.stmts.accept(this);
 			break;
-                case Tag.ID:
-                    n.stmt = new AssignmentNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.IF:
-                    n.stmt = new ConditionalNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.WHILE:
-                    n.stmt = new WhileNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.DO:
-                    n.stmt = new DoWhileNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case Tag.BREAK:
-                    n.stmt = new BreakNode();
-                    (n.stmt).accept(this);
-                    n.stmts = new Statements();
-                    n.stmts.accept(this);
-                    break;
-                case '{':
-                    n.stmt = new BlockStatementNode();
-                    (n.stmt).accept(this);
-                     n.stmts = new Statements();
-                     n.stmts.accept(this);
-                    break;
+          	default:
+			n.stmt = new StatementNode();
+			n.stmt.accept(this);
+			n.stmts = new Statements();
+			n.stmts.accept(this);
+			break;
             }
         }
     }
-
+    public void visit(StatementNode n){
+    	 switch (look.tag)
+        {
+            case Tag.ID:
+                n.stmt = new AssignmentNode();
+                n.stmt.accept(this);
+                break;
+            case Tag.IF:
+                n.stmt  = new ConditionalNode();
+                n.stmt.accept(this);
+		break;
+            case Tag.WHILE:
+                n.stmt = new WhileNode();
+                n.stmt.accept(this);
+                break;
+            case Tag.DO:
+                n.stmt = new DoWhileNode();
+                n.stmt.accept(this);
+                break;
+            case Tag.BREAK:
+                n.stmt = new BreakNode();
+                n.stmt.accept(this);
+                break;
+            case '{':
+                n.stmt = new BlockStatementNode();
+                n.stmt.accept(this);
+                break;
+        }
+    }
 
     public void visit(AssignmentNode n)
     {
         n.left = new IdentifierNode();
         n.left.accept(this);
 
-      
-
        // IdentifierNode id = (IdentifierNode)top.get(((IdentifierNode)n.left).w); // new code
-        //println("In Parser, AssignmentNode's left type: " + id.type); // new code
-
-        //((IdentifierNode)n.left).type = id.type; // new code
-
-        //if (look.tag == '['){ // new code
-        //    n.left = parseArrayAccessNode((IdentifierNode)n.left); // new code
-        //} // new code
+        println("In Parser, AssignmentNode's left type: " + id.type); // new code
 
         match('=');
         ExprNode rhs_assign = null;
@@ -269,42 +259,30 @@ public class Parser extends ASTVisitor
         {
             rhs_assign = new IdentifierNode();
             ((IdentifierNode)rhs_assign).accept(this);
-            println(top.get(((IdentifierNode)rhs_assign).w).type.toString());
-            rhs_assign.type = top.get(((IdentifierNode)rhs_assign).w).type;
-            if (top.get(((IdentifierNode)rhs_assign).w)==null){
-                error("Variable Must be Declared");
-            }else {
-                n.right = rhs_assign;
-                n.right.type = rhs_assign.type;
-            }
+           
         }
         else if (look.tag == Tag.NUM)
         {
             rhs_assign = new NumNode();
             ((NumNode)rhs_assign).accept(this);
-            rhs_assign.type = Type.Int;
         }
         else if (look.tag == Tag.REAL)
         {
             rhs_assign = new RealNode();
             ((RealNode)rhs_assign).accept(this);
-            rhs_assign.type = Type.Float;
         }
         else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
         {
             rhs_assign = new BooleanNode();
             ((BooleanNode)rhs_assign).accept(this);
-            n.right.type = Type.Bool;
         }
         else if (look.tag == '(')
         {
             rhs_assign = new ParenNode();
             ((ParenNode)rhs_assign).accept(this);
-            rhs_assign.type = ((ParenNode)rhs_assign).type;
         }
         if (look.tag == ';')
         {
-	    
             n.right = rhs_assign;
         }
         else {
@@ -342,6 +320,7 @@ public class Parser extends ASTVisitor
         while (getPrecedence(look.tag) >= precedence)
         {
             Token token_op = look;
+	    System.out.println("Operator: " + token_op);
             int op = getPrecedence(look.tag);
             move();
             ExprNode rhs = null;
@@ -389,99 +368,17 @@ public class Parser extends ASTVisitor
     public void visit(ConditionalNode n)
     {
         match(Tag.IF);
-        match('(');
-        ExprNode rhs_assign = null;
-
-        if (look.tag == Tag.ID)
-        {
-            rhs_assign = new IdentifierNode();
-            ((IdentifierNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.NUM)
-        {
-            rhs_assign = new NumNode();
-            ((NumNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.REAL)
-        {
-            rhs_assign = new RealNode();
-            ((RealNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-        {
-            rhs_assign = new BooleanNode();
-            ((BooleanNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == '(')
-        {
-            rhs_assign = new ParenNode();
-            ((ParenNode)rhs_assign).accept(this);
-        }
-        if (look.tag == ')')
-        {
-            n.condition = rhs_assign;
-        }
-        else
-            n.condition = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-
-        match(')');
-        switch (look.tag)
-        {
-            case Tag.ID:
-                n.stmt = new AssignmentNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.IF:
-                n.stmt = new ConditionalNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.WHILE:
-                n.stmt = new WhileNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.DO:
-                n.stmt = new DoWhileNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.BREAK:
-                n.stmt = new BreakNode();
-                (n.stmt).accept(this);
-                break;
-            case '{':
-                n.stmt = new BlockStatementNode();
-                (n.stmt).accept(this);
-                break;
-        }
+	n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
+	ExprNode rhs_assign = null;
+        n.stmt = new StatementNode();
+	n.stmt.accept(this);
 
         if (look.tag == Tag.ELSE)
         {
-            switch (look.tag)
-            {
-                case Tag.ID:
-                    n.elseStmt = new AssignmentNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.IF:
-                    n.elseStmt = new ConditionalNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.WHILE:
-                    n.elseStmt = new WhileNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.DO:
-                    n.elseStmt = new DoWhileNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case Tag.BREAK:
-                    n.elseStmt = new BreakNode();
-                    (n.elseStmt).accept(this);
-                    break;
-                case '{':
-                    n.elseStmt = new BlockStatementNode();
-                    (n.elseStmt).accept(this);
-                    break;
-            }
+            n.elseStmt = new StatementNode();
+            (n.elseStmt).accept(this);
+           
         }
         else n.elseStmt= null;
     }
@@ -489,41 +386,8 @@ public class Parser extends ASTVisitor
     public void visit(WhileNode n)
     {
         match(Tag.WHILE);
-        match('(');
-        ExprNode rhs_assign = null;
-        if (look.tag == Tag.ID)
-        {
-            rhs_assign = new IdentifierNode();
-            ((IdentifierNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.NUM)
-        {
-            rhs_assign = new NumNode();
-            ((NumNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.REAL)
-        {
-            rhs_assign = new RealNode();
-            ((RealNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-        {
-            rhs_assign = new BooleanNode();
-            ((BooleanNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == '(')
-        {
-            rhs_assign = new ParenNode();
-            ((ParenNode)rhs_assign).accept(this);
-        }
-        if (look.tag == ')')
-        {
-            n.condition = rhs_assign;
-        }
-        else
-            n.condition = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-
-        match(')');
+        n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
         n.stmt = new StatementNode();
         n.stmt.accept(this);
     }
@@ -547,70 +411,12 @@ public class Parser extends ASTVisitor
     {
         match(Tag.DO);
 	while(look.tag != Tag.WHILE){
-        switch (look.tag)
-        {
-            case Tag.ID:
-                n.stmt = new AssignmentNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.IF:
-                n.stmt = new ConditionalNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.WHILE:
-                n.stmt = new WhileNode();
-                ((WhileNode)n.stmt).accept(this);
-                break;
-            case Tag.DO:
-                n.stmt = new DoWhileNode();
-                (n.stmt).accept(this);
-                break;
-            case Tag.BREAK:
-                n.stmt = new BreakNode();
-                (n.stmt).accept(this);
-                break;
-            case '{':
-                n.stmt = new BlockStatementNode();
-                (n.stmt).accept(this);
-                break;
-        }
+		n.stmt = new StatementNode();
+		(n.stmt).accept(this);
 	}
         match(Tag.WHILE);
-        match('(');
-	System.out.println("Inside DoWhile While node");
-        ExprNode rhs_assign = null;
-        if (look.tag == Tag.ID)
-        {
-            rhs_assign = new IdentifierNode();
-            ((IdentifierNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.NUM)
-        {
-            rhs_assign = new NumNode();
-            ((NumNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.REAL)
-        {
-            rhs_assign = new RealNode();
-            ((RealNode)rhs_assign).accept(this);
-        }
-        else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)
-        {
-            rhs_assign = new BooleanNode();
-            ((BooleanNode)rhs_assign).accept(this);
-        }else if (look.tag == '(')
-        {
-            rhs_assign = new ParenNode();
-            ((ParenNode)rhs_assign).accept(this);
-        }
-        if (look.tag == ')')
-        {
-            n.condition = rhs_assign;
-        }
-        else
-            n.condition = (ExprNode) parseBinExprNode(rhs_assign, 0);
-
-        match(')');
+	n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
         match(';');
     }
 
@@ -646,7 +452,7 @@ public class Parser extends ASTVisitor
         n.id = look.toString();
         n.w = (Word)look; // new code
 	if((IdentifierNode)top.get(n.w) != null){
-		n = (IdentifierNode)top.get((Word)look);
+		n.type = top.get((Word)look).type;
 		println(n.id + " Identifier from top");
 	}
 	
@@ -718,18 +524,23 @@ public class Parser extends ASTVisitor
         if (look.tag == Tag.ID)
         {
             rhs_assign = new IdentifierNode();
+	   
 	    System.out.println("Inside Parenthesis Identifier node");
+	    
             ((IdentifierNode)rhs_assign).accept(this);
+	    rhs_assign.type = ((IdentifierNode)rhs_assign).type;
 	    System.out.println("Type: " + rhs_assign.type);
         }
         else if (look.tag == Tag.NUM)
         {
             rhs_assign = new NumNode();
+	    rhs_assign.type = Type.Int;
             ((NumNode)rhs_assign).accept(this);
         }
         else if (look.tag == Tag.REAL)
         {
             rhs_assign = new RealNode();
+	    rhs_assign.type = Type.Float;
             ((RealNode)rhs_assign).accept(this);
         }
         else if (look.tag == Tag.TRUE || look.tag == Tag.FALSE)

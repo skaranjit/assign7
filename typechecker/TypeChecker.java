@@ -5,6 +5,7 @@ import assign7.visitor.*;
 import assign7.parser.*;
 import assign7.lexer.*;
 import java.io.*;
+import java.util.*;
 
 public class TypeChecker extends ASTVisitor
 {
@@ -12,27 +13,21 @@ public class TypeChecker extends ASTVisitor
     public CompilationUnit cu = null;
     public boolean whileLoop = false;
     public boolean doLoop = false;
+    public boolean isBool = false;
 
     int level = 0;
     String indent = "...";
 
     public Env top = null;
-//    public Type lhsExp = null;
-//    public Type rhsExp = null;
-//    public boolean hasbeenInitialized = false;
-//    public String[] initilizedTokens = new String[1000];
-
 
     public TypeChecker(Parser parser)
     {
             this.parser = parser;
             cu = parser.cu;
-            //visit(this.parser.cu);
             visit(cu);
     }
     public TypeChecker()
     {
-            //this.parser = new Parser();
             visit(this.parser.cu);
     }
 
@@ -61,32 +56,18 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.print(" ");
     }
-//    void error (String s) throws Error{
-//	throw new Error ("near line " + this.parser.lexer.line + ": " + s);
-//    }
 
-//    public Type getType(IdentifierNode a){
-//        String x = a.id;
-//	if(!(top.table.containsKey(x)))
-//	{
-//		 error("Variable " + x +" has not been declared.");
-//	}
-//	return top.table.get(x);
-//    }
     public void visit (CompilationUnit n)
     {
         System.out.println("\nTypechecker starts");
-//        top = new Env();
-//        top = n.symbolTable;
-//        visit(n.block);
+
         n.block.accept(this);
     }
 
     public void visit (BlockStatementNode n)
     {
         System.out.println("visiting Block");
-// 	top = new Env(top);
-// 	top = n.sTable.prev;
+	top = new Env(n.sTable);
         n.decls.accept(this);
         n.stmts.accept(this);
     }
@@ -105,12 +86,15 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.println("visiting DeclarationNode");
         n.type.accept(this);
+	n.id.type =n.type.basic;
+	
         n.id.accept(this);
+	
     }
 
     public void visit(TypeNode n)
     {
-        System.out.println("visiting TypeNode"+n.basic);
+        System.out.println("visiting TypeNode "+n.basic);
         if(n.array != null)
         {
             n.array.accept(this);
@@ -122,12 +106,12 @@ public class TypeChecker extends ASTVisitor
         System.out.println("Visiting Statements");
        if (n.stmts != null)
        {
-       	   if(n.stmt != null) n.stmt.accept(this);
+       	   if(n.stmt!=null) n.stmt.accept(this);
 	   if(n.decls != null) n.decls.accept(this);
             n.stmts.accept(this);
         }
     }
-
+    
     public void visit(ParenNode n) {
         System.out.println("visiting ParenNode");
         n.node.accept(this);
@@ -136,10 +120,8 @@ public class TypeChecker extends ASTVisitor
     public void visit(ConditionalNode n)
     {
         System.out.println("IfStatement/ConditionalNode");
-//          if (n.condition.type != Type.Bool){
-//             error("Conditional Must be Boolean");
-//         }
         n.condition.accept(this);
+	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
         if (n.elseStmt != null)
         {
@@ -147,6 +129,7 @@ public class TypeChecker extends ASTVisitor
             n.elseStmt.accept(this);
         }
     }
+    
 
     public void visit(WhileNode n)
     {
@@ -154,6 +137,7 @@ public class TypeChecker extends ASTVisitor
         System.out.println("visiting WhileNode");
        
         n.condition.accept(this);
+	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
         whileLoop = false;
     }
@@ -166,6 +150,7 @@ public class TypeChecker extends ASTVisitor
         n.stmt.accept(this);
          
         n.condition.accept(this);
+	if (!isBool) error("Condition Must be boolean");
         doLoop = false;
     }
 
@@ -250,10 +235,15 @@ public class TypeChecker extends ASTVisitor
         IdentifierNode leftId = null;
 
         if (n.left instanceof IdentifierNode) {
+	 leftId = (IdentifierNode)n.left;
+	 System.out.println(leftId.w);
+	  if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
+	  System.out.println(leftType);
+	   ((IdentifierNode) n.left).type = leftType;
             ((IdentifierNode) n.left).accept(this);
 
-            leftId = (IdentifierNode) n.left;
-            leftType = leftId.type;
+           
+	    if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
         } else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
         } else if (n.left instanceof RealNode) {
@@ -303,6 +293,10 @@ public class TypeChecker extends ASTVisitor
         } else {
             System.out.println("@@@ n.right == null in BinExprNode: " + n.right);
         }
+	String[] boolOperator = {">=",">","<","<=","==","!="};
+	if(Arrays.asList(boolOperator).contains(n.op.toString())){
+		isBool = true;
+	}else isBool = false;
         if (leftType == Type.Float || rightType == Type.Float) {
             n.type = Type.Float;
         } else {
@@ -313,21 +307,30 @@ public class TypeChecker extends ASTVisitor
     public void visit(StatementNode n)
     {
         System.out.println("Visiting Statement");
+	System.out.println("Node Type: " + n.stmt.toString());
+	if(n.stmt instanceof ConditionalNode)
+		((ConditionalNode)n.stmt).accept(this);
+
+	else if(n.stmt instanceof WhileNode)
+		((WhileNode)n.stmt).accept(this);
+	
+	else if(n.stmt instanceof DoWhileNode)
+		((DoWhileNode)n.stmt).accept(this);
+	else if(n.stmt instanceof DoWhileNode)
+		((DoWhileNode)n.stmt).accept(this);
+	else if(n.stmt instanceof BlockStatementNode)
+		((BlockStatementNode)n.stmt).accept(this);
+	else if(n.stmt instanceof AssignmentNode)
+		((AssignmentNode)n.stmt).accept(this);
+	isBool = false;
     }
 
 
     public void visit(IdentifierNode n)
     {
-        System.out.println("visiting IdentifierNode");
-	//if(top.get(n.w) != null) println(n.w +" in symbol table");
-	println (n.w + " in Identifier Node");
-// 		println("Variable is already declared: " +n.w);
-// 	}
- 	println("Type: " + n.type);
-//         if(n.type == null){
-// 		error("Syntax error: Variable " + n.id + " not declared. Cannot use undeclared variable.");
-// 	}
-	
+        System.out.println("visiting IdentifierNode: "+n.w+" of type: "+n.type);
+	//if(top.get(n.w) != null) n.type = top.get(n.w).type;
+	if(n.type == null) error("Variable "+n.w+" is not declared."); 
         if (n.array != null)
         {
             n.array.accept(this);
@@ -338,6 +341,7 @@ public class TypeChecker extends ASTVisitor
     public void visit(BooleanNode n)
     {
         System.out.println("visiting BooleanNode");
+	isBool = true;
 
     }
 
