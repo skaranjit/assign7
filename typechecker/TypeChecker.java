@@ -307,19 +307,19 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.println("Visiting Statement");
 	if(n instanceof ConditionalNode)
-		(ConditionalNode)n.accept(this);
+		((ConditionalNode)n).accept(this);
 	else if(n instanceof WhileNode)
-		(WhileNode)n.accept(this);
+		((WhileNode)n).accept(this);
 	else if(n instanceof DoWhileNode)
-		(DoWhileNode)n.accept(this);
+		((DoWhileNode)n).accept(this);
 	else if(n instanceof DoWhileNode)
-		(DoWhileNode)n.accept(this);
+		((DoWhileNode)n).accept(this);
 	else if(n instanceof BlockStatementNode)
-		(BlockStatementNode)n.accept(this);
+		((BlockStatementNode)n).accept(this);
 	else if(n instanceof AssignmentNode)
-		(AssignmentNode)n.accept(this);
+		((AssignmentNode)n).accept(this);
 	else if (n instanceof DeclarationNode)
-		(DeclarationNode)n.accept(this);
+		((DeclarationNode)n).accept(this);
     }
 
 
