@@ -306,7 +306,14 @@ public class TypeChecker extends ASTVisitor
     public void visit(StatementNode n)
     {
         System.out.println("Visiting Statement");
-	if(n!= null) n.accept(this);
+	if(n instanceof IdentifierNode){
+		(IdentifierNode)n.accept(this);
+	else if(n instanceof NumNode){
+		(NumNode)n.accept(this);
+	else if(n instanceof RealNode){
+		(RealNode)n.accept(this);
+	else if(n instanceof ParenNode){
+		(ParenNode)n.accept(this);
     }
 
 
