@@ -219,28 +219,28 @@ public class Parser extends ASTVisitor
     	 switch (look.tag)
         {
             case Tag.ID:
-                n.stmt = new AssignmentNode();
-                (n.stmt).accept(this);
+                n = new AssignmentNode();
+                n.accept(this);
                 break;
             case Tag.IF:
-                n.stmt = new ConditionalNode();
-                (n.stmt).accept(this);
-                break;
+                n = new ConditionalNode();
+                n.accept(this);
+		break;
             case Tag.WHILE:
-                n.stmt = new WhileNode();
-                (n.stmt).accept(this);
+                n = new WhileNode();
+                n.accept(this);
                 break;
             case Tag.DO:
-                n.stmt = new DoWhileNode();
-                (n.stmt).accept(this);
+                n. = new DoWhileNode();
+                n.accept(this);
                 break;
             case Tag.BREAK:
-                n.stmt = new BreakNode();
-                (n.stmt).accept(this);
+                n = new BreakNode();
+                n.accept(this);
                 break;
             case '{':
-                n.stmt = new BlockStatementNode();
-                (n.stmt).accept(this);
+                n = new BlockStatementNode();
+                n.accept(this);
                 break;
         }
     }
