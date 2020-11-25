@@ -12,27 +12,21 @@ public class TypeChecker extends ASTVisitor
     public CompilationUnit cu = null;
     public boolean whileLoop = false;
     public boolean doLoop = false;
+    public boolean isBool = false;
 
     int level = 0;
     String indent = "...";
 
     public Env top = null;
-//    public Type lhsExp = null;
-//    public Type rhsExp = null;
-//    public boolean hasbeenInitialized = false;
-//    public String[] initilizedTokens = new String[1000];
-
 
     public TypeChecker(Parser parser)
     {
             this.parser = parser;
             cu = parser.cu;
-            //visit(this.parser.cu);
             visit(cu);
     }
     public TypeChecker()
     {
-            //this.parser = new Parser();
             visit(this.parser.cu);
     }
 
@@ -123,10 +117,8 @@ public class TypeChecker extends ASTVisitor
     public void visit(ConditionalNode n)
     {
         System.out.println("IfStatement/ConditionalNode");
-//          if (n.condition.type != Type.Bool){
-//             error("Conditional Must be Boolean");
-//         }
         n.condition.accept(this);
+	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
         if (n.elseStmt != null)
         {
@@ -142,6 +134,7 @@ public class TypeChecker extends ASTVisitor
         System.out.println("visiting WhileNode");
        
         n.condition.accept(this);
+	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
         whileLoop = false;
     }
@@ -154,6 +147,7 @@ public class TypeChecker extends ASTVisitor
         n.stmt.accept(this);
          
         n.condition.accept(this);
+	if (!isBool) error("Condition Must be boolean");
         doLoop = false;
     }
 
@@ -296,6 +290,10 @@ public class TypeChecker extends ASTVisitor
         } else {
             System.out.println("@@@ n.right == null in BinExprNode: " + n.right);
         }
+	String[] boolOperator = {">=",">","<","<=","==","!="};
+	if(Arrays.asList(boolOperator).contains(n.op.toString())){
+		isBool = true;
+	}else isBool = false;
         if (leftType == Type.Float || rightType == Type.Float) {
             n.type = Type.Float;
         } else {
