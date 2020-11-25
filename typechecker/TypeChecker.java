@@ -172,9 +172,9 @@ public class TypeChecker extends ASTVisitor
     public void visit(ArrayTypeNode n)
     {
         System.out.println("ArrayDimsNode");
-        //n.size.accept(this);
-	if(n.size instanceof NumNode) ((NumNode)n.size).accept(this);
-	if(n.size instanceof IdentifierNode) ((IdentifierNode)n.size).accept(this);
+        n.size.accept(this);
+// 	if(n.size instanceof NumNode) ((NumNode)n.size).accept(this);
+// 	if(n.size instanceof IdentifierNode) ((IdentifierNode)n.size).accept(this);
         if (n.size.type != Type.Int){
             error("Index of Array must be an Integer");
         }
@@ -310,20 +310,21 @@ public class TypeChecker extends ASTVisitor
     public void visit(StatementNode n)
     {
         System.out.println("Visiting Statement");
-	if(n.stmt instanceof ConditionalNode)
-		((ConditionalNode)n.stmt).accept(this);
+	n.stmt.accept(this);
+// 	if(n.stmt instanceof ConditionalNode)
+// 		((ConditionalNode)n.stmt).accept(this);
 
-	else if(n.stmt instanceof WhileNode)
-		((WhileNode)n.stmt).accept(this);
+// 	else if(n.stmt instanceof WhileNode)
+// 		((WhileNode)n.stmt).accept(this);
 	
-	else if(n.stmt instanceof DoWhileNode)
-		((DoWhileNode)n.stmt).accept(this);
-	else if(n.stmt instanceof DoWhileNode)
-		((DoWhileNode)n.stmt).accept(this);
-	else if(n.stmt instanceof BlockStatementNode)
-		((BlockStatementNode)n.stmt).accept(this);
-	else if(n.stmt instanceof AssignmentNode)
-		((AssignmentNode)n.stmt).accept(this);
+// 	else if(n.stmt instanceof DoWhileNode)
+// 		((DoWhileNode)n.stmt).accept(this);
+// 	else if(n.stmt instanceof DoWhileNode)
+// 		((DoWhileNode)n.stmt).accept(this);
+// 	else if(n.stmt instanceof BlockStatementNode)
+// 		((BlockStatementNode)n.stmt).accept(this);
+// 	else if(n.stmt instanceof AssignmentNode)
+// 		((AssignmentNode)n.stmt).accept(this);
 	isBool = false;
     }
 
