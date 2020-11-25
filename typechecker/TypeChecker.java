@@ -253,7 +253,7 @@ public class TypeChecker extends ASTVisitor
             ((IdentifierNode) n.left).accept(this);
 
             leftId = (IdentifierNode) n.left;
-            leftType = leftId.type;
+	    if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
         } else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
         } else if (n.left instanceof RealNode) {
