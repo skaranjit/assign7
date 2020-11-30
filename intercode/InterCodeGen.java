@@ -233,7 +233,7 @@ public class InterCodeGen extends ASTVisitor {
             ((BinExprNode) n.left).accept(this);
 
         Type rightType = null;
-	      IdentifierNode rightId = null;
+	IdentifierNode rightId = null;
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
                 ((IdentifierNode) n.right).accept(this);
@@ -244,8 +244,6 @@ public class InterCodeGen extends ASTVisitor {
                 ((NumNode) n.right).accept(this);
             } else if (n.right instanceof RealNode) {
                 ((RealNode) n.right).accept(this);
-
-
             } 
             else if (n.right instanceof BooleanNode)
             {
@@ -281,21 +279,18 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(BooleanNode n)
     {
         System.out.println("visiting BooleanNode");
-	      isBool = true;
-
     }
 
     public void visit(NumNode n)
     {
         System.out.println("visiting NumNode");
-	      n.printNode();
-
+	n.printNode();
     }
 
     public void visit(RealNode n)
     {
         System.out.println("visiting RealNode");
-	      n.printNode();
+	n.printNode();
     }
 
 
