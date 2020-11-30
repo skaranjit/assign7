@@ -10,9 +10,7 @@ import java.util.*;
 public class InterCodeGen extends ASTVisitor {
     public Parser parser = null;
     public CompilationUnit cu = null;
-    public boolean whileLoop = false;
-    public boolean doLoop = false;
-    public boolean isBool = false;
+   
 
     int level = 0;
     String indent = "...";
@@ -127,7 +125,6 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.println("IfStatement/ConditionalNode");
         n.condition.accept(this);
-	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
         if (n.elseStmt != null)
         {
@@ -139,24 +136,17 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(WhileNode n)
     {
-        whileLoop = true;
         System.out.println("visiting WhileNode");
-       
         n.condition.accept(this);
-	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
-        whileLoop = false;
     }
 
     public void visit(DoWhileNode n)
     {
         System.out.println("visiting DoWhileNode");
-       whileLoop = true;
         n.stmt.accept(this);
-        whileLoop = false;
         n.condition.accept(this);
 	if (!isBool) error("Condition Must be boolean");
-        whileLoop = true;
     }
 
     public void visit (ArrayIDNode n)
@@ -164,8 +154,7 @@ public class InterCodeGen extends ASTVisitor {
         System.out.println("visiting ArrayIDNode");
 	if(n.node instanceof NumNode) ((NumNode)n.node).accept(this);
 	if(n.node instanceof IdentifierNode) ((IdentifierNode)n.node).accept(this);
-      //  n.node.accept(this);
-        if (n.node.type != Type.Int){
+	if (n.node.type != Type.Int){
             error("Index of Array must be an Integer");
         }
         if(n.id != null)
@@ -178,8 +167,6 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.println("ArrayDimsNode");
         n.size.accept(this);
-//  	if(n.size instanceof NumNode) ((NumNode)n.size).accept(this);
-// 	if(n.size instanceof IdentifierNode) ((IdentifierNode)n.size).accept(this);
         if (n.size.type != Type.Int ){
             error("Index of Array must be an Integer");
         }
@@ -192,9 +179,6 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(BreakNode n)
     {
         System.out.println("visiting BreakNode");
-        if (whileLoop == false){
-            error("Break called outside of loop");
-        }
     }
 
     public void visit(AssignmentNode n)
@@ -210,13 +194,10 @@ public class InterCodeGen extends ASTVisitor {
         Type rightType = null;
         if(n.right instanceof IdentifierNode){
             ((IdentifierNode)n.right).accept(this);
-	    println("Debug: " + n.right.type);}
-        else if (n.right instanceof NumNode)
-        {
+	}else if (n.right instanceof NumNode){
             ((NumNode)n.right).accept(this);
             rightType = Type.Int;
-        }
-        else if(n.right instanceof RealNode)
+        }else if(n.right instanceof RealNode)
             ((RealNode)n.right).accept(this);
         else if(n.right instanceof ArrayIDNode)              //Dr. Lee uses ArrayNodes differently
             ((ArrayIDNode)n.right).accept(this);
@@ -225,15 +206,7 @@ public class InterCodeGen extends ASTVisitor {
         else{
             ((BinExprNode)n.right).accept(this);
             rightType = ((BinExprNode)n.right).type;
-        }
-
-	rightType = n.right.type;
-        if(leftType == Type.Int)
-            println("************* leftType is Type.Int");
-        if(leftType != rightType)
-        {
-            error("The right-hand side of an assignment of type: " + rightType + " is incompatible to the left-hand side "+leftId.id +" of type: " +leftType);
-        }
+	}
     }
 
     public void visit(BinExprNode n) {
