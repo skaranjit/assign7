@@ -146,7 +146,6 @@ public class InterCodeGen extends ASTVisitor {
         System.out.println("visiting DoWhileNode");
         n.stmt.accept(this);
         n.condition.accept(this);
-	if (!isBool) error("Condition Must be boolean");
     }
 
     public void visit (ArrayIDNode n)
