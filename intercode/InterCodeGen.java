@@ -244,10 +244,9 @@ public class InterCodeGen extends ASTVisitor {
 	        leftId = (IdentifierNode)n.left;
 	      System.out.println(leftId.w);
        ((IdentifierNode) n.left).accept(this);
-       leftType= ((IdentifierNode) n.left).type
+       leftType= ((IdentifierNode) n.left).type;
 
-           
-	    if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
+        if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
         }else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
         }else if (n.left instanceof RealNode) {
