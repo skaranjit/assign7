@@ -295,7 +295,7 @@ public class TypeChecker extends ASTVisitor
         } else {
             System.out.println("@@@ n.right == null in BinExprNode: " + n.right);
         }
-	String[] boolOperator = {">=",">","<","<=","==","!=","||",,"&&"};
+	String[] boolOperator = {">=",">","<","<=","==","!=","||","&&"};
 	println(n.op.toString());
 	if(Arrays.asList(boolOperator).contains(n.op.toString())){
 		isBool = true;
