@@ -232,7 +232,10 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(BinExprNode n) {
         System.out.println("visiting BinExprNode" + n.op);
-
+	String[] boolOperator = {">=",">","<","<=","==","!="};
+	if(Arrays.asList(boolOperator).contains(n.op.toString())){
+		isBool = true;
+	}else isBool = false;
         Type leftType = null;
         IdentifierNode leftId = null;
 
@@ -295,11 +298,7 @@ public class TypeChecker extends ASTVisitor
         } else {
             System.out.println("@@@ n.right == null in BinExprNode: " + n.right);
         }
-	String[] boolOperator = {">=",">","<","<=","==","!=","||","&&"};
-	println(n.op.toString());
-	if(Arrays.asList(boolOperator).contains(n.op.toString())){
-		isBool = true;
-	}else isBool = false;
+	
         if (leftType == Type.Float || rightType == Type.Float) {
             n.type = Type.Float;
         } else {
