@@ -63,17 +63,19 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit (CompilationUnit n)
     {
-        System.out.println("\nTypechecker starts");
+        println("\nTypechecker starts");
 
         n.block.accept(this);
+	println("*************End of the Program*************");
     }
 
     public void visit (BlockStatementNode n)
     {
-        System.out.println("visiting Block");
+        println("Start of BlockStatemet");
 	top = new Env(n.sTable);
         n.decls.accept(this);
         n.stmts.accept(this);
+	println("**********End of the BlockStatement**********");
     }
 
     public void visit(Declarations n)
@@ -88,7 +90,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(DeclarationNode n)
     {
-        System.out.println("visiting DeclarationNode");
+        println("visiting DeclarationNode");
         n.type.accept(this);
 	n.id.type =n.type.basic;
 	
@@ -98,7 +100,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(TypeNode n)
     {
-        System.out.println("visiting TypeNode "+n.basic);
+        println("visiting TypeNode "+n.basic);
         if(n.array != null)
         {
             n.array.accept(this);
@@ -107,7 +109,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit (Statements n)
     {
-        System.out.println("Visiting Statements");
+        println("Visiting Statements");
        if (n.stmts != null)
        {
        	   if(n.stmt!=null) n.stmt.accept(this);
