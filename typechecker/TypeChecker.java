@@ -144,14 +144,13 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(DoWhileNode n)
     {
-        doLoop = true;
         System.out.println("visiting DoWhileNode");
-       
+       whileLoop = true;
         n.stmt.accept(this);
-         
+        whileLoop = false;
         n.condition.accept(this);
 	if (!isBool) error("Condition Must be boolean");
-        doLoop = false;
+        whileLoop = true;
     }
 
     public void visit (ArrayIDNode n)
@@ -187,9 +186,9 @@ public class TypeChecker extends ASTVisitor
     public void visit(BreakNode n)
     {
         System.out.println("visiting BreakNode");
-//         if (whileLoop == false){
-//             error("Break called outside of loop");
-//         }
+        if (whileLoop == false){
+            error("Break called outside of loop");
+        }
     }
 
     public void visit(AssignmentNode n)
