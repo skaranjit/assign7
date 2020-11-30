@@ -190,22 +190,7 @@ public class InterCodeGen extends ASTVisitor {
 
         println("In TypeChecker, AssignmentNode's left type: "+leftType);
 
-        Type rightType = null;
-        if(n.right instanceof IdentifierNode){
-            ((IdentifierNode)n.right).accept(this);
-	}else if (n.right instanceof NumNode){
-            ((NumNode)n.right).accept(this);
-            rightType = Type.Int;
-        }else if(n.right instanceof RealNode)
-            ((RealNode)n.right).accept(this);
-        else if(n.right instanceof ArrayIDNode)              //Dr. Lee uses ArrayNodes differently
-            ((ArrayIDNode)n.right).accept(this);
-        else if(n.right instanceof ParenNode)
-            ((ParenNode)n.right).accept(this);
-        else{
-            ((BinExprNode)n.right).accept(this);
-            rightType = ((BinExprNode)n.right).type;
-	}
+        n.right.accept(this);
     }
 
     public void visit(BinExprNode n) {
