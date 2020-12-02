@@ -120,6 +120,9 @@ public class ASTVisitor
     {
 
     }
+    public void visit(GotoNode n){
+        
+    }
 
     public void visit(WhileNode n)
     {
