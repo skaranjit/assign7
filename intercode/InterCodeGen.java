@@ -86,7 +86,7 @@ public class InterCodeGen extends ASTVisitor {
 	n.id.type =n.type.basic;
 	
         n.id.accept(this);
-	
+	println(" ");
     }
 
     public void visit(TypeNode n)
@@ -168,7 +168,7 @@ public class InterCodeGen extends ASTVisitor {
 	lnum++;
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
-
+	println(" ");
 
         n.right.accept(this);
     }
@@ -221,7 +221,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(IdentifierNode n)
     {
-        print("" + n.w);
+        print (" " + n.w);
         if (n.array != null)
         {
             n.array.accept(this);
