@@ -12,18 +12,22 @@ public class ASTVisitor
 
     public void visit(BlockStatementNode n)
     {
-        n.decls.accept(this);
-        n.stmts.accept(this);
+        //n.decls.accept(this);
+        //n.stmts.accept(this);
+        for (DeclarationNode decl : n.decls)
+            decl.accept(this);
+        for (StatementNode stmt : n.stmts)
+            stmt.accept(this);
     }
 
-    public void visit(Declarations n)
-    {
-        if (n.decls != null)
-        {
-            n.decl.accept(this);
-            n.decls.accept(this);
-        }
-    }
+//     public void visit(Declarations n)
+//     {
+//         if (n.decls != null)
+//         {
+//             n.decl.accept(this);
+//             n.decls.accept(this);
+//         }
+//     }
 
     public void visit(DeclarationNode n)
     {
@@ -41,14 +45,14 @@ public class ASTVisitor
         n.type.accept(this);
     }
 
-    public void visit(Statements n)
-    {
-        if (n.stmts != null)
-        {
-            n.stmt.accept(this);
-            n.stmts.accept(this);
-        }
-    }
+//     public void visit(Statements n)
+//     {
+//         if (n.stmts != null)
+//         {
+//             n.stmt.accept(this);
+//             n.stmts.accept(this);
+//         }
+//     }
 
     public void visit(StatementNode n)
     {
