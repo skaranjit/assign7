@@ -114,7 +114,7 @@ public class InterCodeGen extends ASTVisitor {
         n.condition.accept(this);
 	println("");
         n.stmt.accept(this);
-	print("Goto L"+tmp+"\n");
+	print("L: "+lnum+"Goto L"+tmp+"\n");
         if (n.elseStmt != null)
         {
             print("Else Clause");
@@ -122,7 +122,10 @@ public class InterCodeGen extends ASTVisitor {
         }
     }
     
-
+    public void visit(GotoNode n){
+	    
+	    
+    }
     public void visit(WhileNode n)
     {
         System.out.println("visiting WhileNode");
