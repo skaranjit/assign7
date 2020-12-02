@@ -14,6 +14,7 @@ public class TypeChecker extends ASTVisitor
     public boolean whileLoop = false;
     public boolean doLoop = false;
     public boolean isBool = false;
+    
 
     int level = 0;
     String indent = "...";
