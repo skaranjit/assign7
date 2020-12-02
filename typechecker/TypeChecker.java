@@ -62,7 +62,7 @@ public class TypeChecker extends ASTVisitor
        println("\n*********TypeChecker starts************");
 
         n.block.accept(this);
-	println(("*********TypeChecker Passed***********");
+	println("*********TypeChecker Passed***********");
     }
 
     public void visit (BlockStatementNode n)
