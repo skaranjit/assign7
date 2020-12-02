@@ -14,7 +14,6 @@ public class InterCodeGen extends ASTVisitor {
     int lnum = 1;
     int tnum = 1;
     int level = 0;
-    String indent = "...";
 
     public Env top = null;
 
@@ -59,7 +58,28 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.print(" ");
     }
-    
+     int indent = 0;
+
+    void indentUp()
+    {
+        indent++;
+    }
+
+    void indentDown()
+    {
+        indent--;
+    }
+
+    void printIndent()
+    {
+        String s = "";
+        for (int i = 0; i < indent; i++)
+        {
+            s += "   ";
+        }
+        print(s);
+    }
+
   
 
     public void visit (CompilationUnit n)
@@ -111,7 +131,9 @@ public class InterCodeGen extends ASTVisitor {
 	lnum++;
         n.condition.accept(this);
 	println("");
+	indent++;
         n.stmt.accept(this);
+	indent--;
 	print("L"+lnum+" Goto L"+tmp+"\n");
         if (n.elseStmt != null)
         {
@@ -223,6 +245,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(StatementNode n)
     {
+	    printIndent();
 	    n.stmt.accept(this);
     }
 
