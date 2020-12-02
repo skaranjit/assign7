@@ -93,8 +93,10 @@ public class Parser extends ASTVisitor
     }
     public void visit (CompilationUnit n)
     {
+    	println("**************Parser Starts*****************");
         n.block = new BlockStatementNode(null);
         n.block.accept(this);
+	println("**************End of Parser*****************");
     }
 
 
@@ -115,29 +117,11 @@ public class Parser extends ASTVisitor
 		n.stmts.add(stmt);
 		stmt.accept(this);
 	}
-		
-//         n.decls = new Declarations();
-//         n.decls.accept(this);
-// 	 n.sTable = top; 
-//         n.stmts = new Statements();
-//         n.stmts.accept(this);
         match('}');
 	println("End of Block Statement");
         top = n.sTable; // new code
 	enclosingBlock = n.parent;
     }
-
-//     public void visit(Declarations n)
-//     {
-//         if (look.tag == Tag.BASIC)
-//         {
-//             n.decl = new DeclarationNode();
-//             n.decl.accept(this);
-//             n.decls = new Declarations();
-//             n.decls.accept(this);
-//         }
-//     }
-
 
     public void visit(DeclarationNode n)
     {
@@ -200,10 +184,7 @@ public class Parser extends ASTVisitor
             rhs_assign = new ParenNode();
             ((ParenNode)rhs_assign).accept(this);
         }
-// 	else {
-//             n.size = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-//            // n.size.type = Type.Int;
-//         }
+
 	while(look.tag != ']'){        
       		rhs_assign = (BinExprNode) parseBinExprNode(rhs_assign, 0);
 	}
@@ -219,30 +200,6 @@ public class Parser extends ASTVisitor
 	}
     }
 
-
-//     public void visit (Statements n)
-//     {
-//     	println("In Statements");
-// 	println("look.toString()");
-//         if (!look.toString().equals("}") && look.tag != Tag.EOF) // new line of code
-//         {
-//             switch (look.tag)
-//             {
-// 	    	case Tag.BASIC:
-// 			n.decls = new DeclarationNode();
-//             		n.decls.accept(this);
-// 			n.stmts = new Statements();
-// 			n.stmts.accept(this);
-// 			break;
-//           	default:
-// 			n.stmt = new StatementNode();
-// 			n.stmt.accept(this);
-// 			n.stmts = new Statements();
-// 			n.stmts.accept(this);
-// 			break;
-//             }
-//         }
-//     }
     public void visit(StatementNode n){
     	 switch (look.tag)
         {
@@ -391,6 +348,23 @@ public class Parser extends ASTVisitor
 
     public void visit(ConditionalNode n)
     {
+        IdentifierNode leftId = new IdentifierNode(new Word("i", Tag.ID).Type.Int);
+	AssignmentNode newAssign1 = new AssignmentNode(leftId, new NumNode(new Num(2)));
+	AssignmentNode newAssign2 = new AssignmentNode(leftId, new NumNode(new Num(219)));
+	AssignmentNode newAssign3 = new AssignmentNode(leftId, new NumNode(new Num(19)));
+
+	enclosingBlock.stmts.add(newAssign1);
+	enclosingBlock.stmts.add(newAssign2);
+	enclosingBlock.stmts.add(newAssign3);
+
+	AssignmentNode newAssign4 = new AssignmentNode(leftId, new NumNode(new Num(500)));
+	int idx = enclosingBlock.stmts.indexOf(newAssign2);
+	enclosingBlock.stmts.add(idx,newAssign4);
+	for (StatementNode s : enclosingBlock.stmts)
+		println(s);
+	if(elclosinBlock.stmts.contains(n))
+		println("********EnclosingBlock has this IfStatementNode**************");
+
         match(Tag.IF);
 	n.condition = new ParenNode();
 	((ParenNode)n.condition).accept(this);
