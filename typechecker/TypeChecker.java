@@ -128,8 +128,8 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(DoWhileNode n)
     {
-        System.out.println("visiting DoWhileNode");
-       whileLoop = true;
+        println("visiting DoWhileNode");
+        whileLoop = true;
         n.stmt.accept(this);
         whileLoop = false;
         n.condition.accept(this);
@@ -139,10 +139,9 @@ public class TypeChecker extends ASTVisitor
 
     public void visit (ArrayIDNode n)
     {
-        System.out.println("visiting ArrayIDNode");
+        println("visiting ArrayIDNode");
 	if(n.node instanceof NumNode) ((NumNode)n.node).accept(this);
 	if(n.node instanceof IdentifierNode) ((IdentifierNode)n.node).accept(this);
-      //  n.node.accept(this);
         if (n.node.type != Type.Int){
             error("Index of Array must be an Integer");
         }
@@ -154,10 +153,8 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(ArrayTypeNode n)
     {
-        System.out.println("ArrayDimsNode");
+        println("ArrayDimsNode");
         n.size.accept(this);
-//  	if(n.size instanceof NumNode) ((NumNode)n.size).accept(this);
-// 	if(n.size instanceof IdentifierNode) ((IdentifierNode)n.size).accept(this);
         if (n.size.type != Type.Int ){
             error("Index of Array must be an Integer");
         }
@@ -169,7 +166,7 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(BreakNode n)
     {
-        System.out.println("visiting BreakNode");
+        println("visiting BreakNode");
         if (whileLoop == false){
             error("Break called outside of loop");
         }
@@ -177,7 +174,7 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
-        System.out.println("AssignmentNode");
+        println("AssignmentNode");
         n.left.accept(this);
 
         IdentifierNode leftId = (IdentifierNode)n.left;
@@ -224,64 +221,40 @@ public class TypeChecker extends ASTVisitor
         IdentifierNode leftId = null;
 
         if (n.left instanceof IdentifierNode) {
-// 	 leftId = (IdentifierNode)n.left;
-// 	 System.out.println(leftId.w);
-// 	  if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
-// 	  System.out.println(leftType);
-// 	   ((IdentifierNode) n.left).type = leftType;
             ((IdentifierNode) n.left).accept(this);
 	    leftType = n.left.type;
-
-           
-// 	    if(top.get(leftId.w) != null) leftType = top.get(leftId.w).type;
         } else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
         } else if (n.left instanceof RealNode) {
             ((RealNode) n.left).accept(this);
-        }
-        else if (n.left instanceof BooleanNode)
+        } else if (n.left instanceof BooleanNode)
         {
             ((BooleanNode)n.left).accept(this);
-        }
-        //else if (n.left instanceof ArrayIDNode)            //Dr,lee Array node conversion???
-        //{
-        //    ((ArrayIDNode) n.left).accept(this);
-        //    }
-         else if (n.left instanceof ParenNode) {
+        } else if (n.left instanceof ParenNode) {
             ((ParenNode) n.left).accept(this);
         } else
             ((BinExprNode) n.left).accept(this);
 
         Type rightType = null;
-	 IdentifierNode rightId = null;
+	IdentifierNode rightId = null;
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
                 ((IdentifierNode) n.right).accept(this);
-
                 rightId = (IdentifierNode) n.right;
                 rightType = rightId.type;
             } else if (n.right instanceof NumNode) {
                 ((NumNode) n.right).accept(this);
             } else if (n.right instanceof RealNode) {
                 ((RealNode) n.right).accept(this);
-
-
-            } //else if (n.right instanceof ArrayIDNode)              //Dr.Lee Array conversion???
-            //{
-            //    ((ArrayIDNode) n.right).accept(this);
-           // }
-
-            else if (n.right instanceof BooleanNode)
-            {
+            } else if (n.right instanceof BooleanNode){
                 ((BooleanNode) n.right).accept(this);
-            }
-            else if (n.right instanceof ParenNode) {
+            } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
             } else {
                 ((BinExprNode) n.right).accept(this);
             }
         } else {
-            System.out.println("@@@ n.right == null in BinExprNode: " + n.right);
+            println("@@@ n.right == null in BinExprNode: " + n.right);
         }
 	
         if (leftType == Type.Float || rightType == Type.Float) {
@@ -295,20 +268,6 @@ public class TypeChecker extends ASTVisitor
     {
         System.out.println("Visiting Statement");
 	n.stmt.accept(this);
-// 	if(n.stmt instanceof ConditionalNode)
-// 		((ConditionalNode)n.stmt).accept(this);
-
-// 	else if(n.stmt instanceof WhileNode)
-// 		((WhileNode)n.stmt).accept(this);
-	
-// 	else if(n.stmt instanceof DoWhileNode)
-// 		((DoWhileNode)n.stmt).accept(this);
-// 	else if(n.stmt instanceof DoWhileNode)
-// 		((DoWhileNode)n.stmt).accept(this);
-// 	else if(n.stmt instanceof BlockStatementNode)
-// 		((BlockStatementNode)n.stmt).accept(this);
-// 	else if(n.stmt instanceof AssignmentNode)
-// 		((AssignmentNode)n.stmt).accept(this);
 	isBool = false;
     }
 
@@ -316,7 +275,6 @@ public class TypeChecker extends ASTVisitor
     public void visit(IdentifierNode n)
     {
         System.out.println("visiting IdentifierNode: "+n.w+" of type: "+n.type);
-	//if(top.get(n.w) != null) n.type = top.get(n.w).type;
 	if(n.type == null) error("Variable "+n.w+" is not declared."); 
         if (n.array != null)
         {
