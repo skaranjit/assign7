@@ -17,6 +17,7 @@ public class NumNode extends ExprNode
     {
         this.value = v.value;
         this.v = v;
+        this.type = Type.Int;
     }
 
     public void accept(ASTVisitor v)
