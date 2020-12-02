@@ -11,7 +11,8 @@ public class InterCodeGen extends ASTVisitor {
     public Parser parser = null;
     public CompilationUnit cu = null;
    
-
+    int lnum = 1;
+    int tnum = 1;
     int level = 0;
     String indent = "...";
 
