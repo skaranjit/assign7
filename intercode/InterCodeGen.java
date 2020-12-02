@@ -114,7 +114,7 @@ public class InterCodeGen extends ASTVisitor {
         n.condition.accept(this);
 	println("");
         n.stmt.accept(this);
-	print("L: "+lnum+"Goto L"+tmp+"\n");
+	print("L"+lnum+" Goto L"+tmp+"\n");
         if (n.elseStmt != null)
         {
             print("Else Clause");
