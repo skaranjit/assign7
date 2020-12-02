@@ -102,23 +102,17 @@ public class Unparser extends ASTVisitor
         println("{");
 
         indentUp();
-        n.decls.accept(this);
+        for(DeclarationNode decl: n.decls) 
+	        decl.accept(this);
         indentDown();
-
+        
         indentUp();
-        n.stmts.accept(this);
+        for(StatementNode stmt : n.stmts)
+	        stmt.accept(this);
         indentDown();
+        
         printIndent();
         println("}");
-    }
-
-    public void visit(Declarations n)
-    {
-        if (n.decls != null)
-        {
-            n.decl.accept(this);
-            n.decls.accept(this);
-        }
     }
 
     public void visit(DeclarationNode n)
@@ -152,33 +146,9 @@ public class Unparser extends ASTVisitor
             n.type.accept(this);
     }
 
-    public void visit(Statements n)
-    {
-        if (n.stmts != null){
-            if(n.stmt!= null)n.stmt.accept(this);
-             if(n.decls!= null)n.decls.accept(this);
-            n.stmts.accept(this);
-        }
-    }
-
     public void visit(StatementNode n)
     {
         n.stmt.accept(this);
-//         if(n.stmt instanceof ConditionalNode)
-//             ((ConditionalNode)n.stmt).accept(this);
-
-//         else if(n.stmt instanceof WhileNode)
-//             ((WhileNode)n.stmt).accept(this);
-
-//         else if(n.stmt instanceof DoWhileNode)
-//             ((DoWhileNode)n.stmt).accept(this);
-//         else if(n.stmt instanceof DoWhileNode)
-//             ((DoWhileNode)n.stmt).accept(this);
-//         else if(n.stmt instanceof BlockStatementNode)
-//             ((BlockStatementNode)n.stmt).accept(this);
-//         else if(n.stmt instanceof AssignmentNode)
-//             ((AssignmentNode)n.stmt).accept(this);
-
     }
 
     public void visit(AssignmentNode n)
