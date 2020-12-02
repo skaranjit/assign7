@@ -216,7 +216,7 @@ public class TypeChecker extends ASTVisitor
 	String[] boolOperator = {">=",">","<","<=","==","!="};
 	if(Arrays.asList(boolOperator).contains(n.op.toString())){
 		isBool = true;
-	}else isBool = false;
+	}
         Type leftType = null;
         IdentifierNode leftId = null;
 
