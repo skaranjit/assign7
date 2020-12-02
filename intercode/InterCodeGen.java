@@ -72,12 +72,10 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit (BlockStatementNode n)
     {
-        println("Start of BlockStatemet");
 	for(DeclarationNode decl : n.decls)
 	     decl.accept(this);
 	for(StatementNode stmt : n.stmts)
 	     stmt.accept(this);
-	println("**********End of the BlockStatement**********");
     }
 
     public void visit(DeclarationNode n)
