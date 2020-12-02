@@ -67,13 +67,10 @@ public class TypeChecker extends ASTVisitor
     public void visit (BlockStatementNode n)
     {
         System.out.println("visiting Block");
-        for(int i = 0; i < n.decls.length; i++)
-		if(n.decls[i] !=null)
-			visit(n.decls[i]);
-			
-        for(int i = 0; i < n.stmts.length; i++)
-		if(n.stmts[i] !=null)
-			visit(n.stmts[i]);
+        for(DeclarationNode decl: n.decls) 
+	     decl.accept(this);
+        for(StatementNode stmt : n.stmts)
+	     stmt.accept(this);
     }
 
     
