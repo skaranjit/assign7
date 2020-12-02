@@ -168,7 +168,7 @@ public class InterCodeGen extends ASTVisitor {
 	lnum++;
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
-	print(" = ");
+	print(" =");
         n.right.accept(this);
 	println("");
     }
@@ -191,7 +191,7 @@ public class InterCodeGen extends ASTVisitor {
             ((ParenNode) n.left).accept(this);
         }else
             ((BinExprNode) n.left).accept(this);
-
+        print(" "+n.op);
         Type rightType = null;
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
