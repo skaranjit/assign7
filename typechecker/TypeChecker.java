@@ -59,25 +59,24 @@ public class TypeChecker extends ASTVisitor
 
     public void visit (CompilationUnit n)
     {
-        System.out.println("\nTypechecker starts");
+       println("\n*********TypeChecker starts************");
 
         n.block.accept(this);
+	println(("*********TypeChecker Passed***********");
     }
 
     public void visit (BlockStatementNode n)
     {
-        System.out.println("visiting Block");
+  	println("visiting Block");
         for(DeclarationNode decl: n.decls) 
 	     decl.accept(this);
         for(StatementNode stmt : n.stmts)
 	     stmt.accept(this);
     }
 
-    
-
     public void visit(DeclarationNode n)
     {
-        System.out.println("visiting DeclarationNode");
+        println("visiting DeclarationNode");
         n.type.accept(this);
 	n.id.type =n.type.basic;
 	
@@ -87,7 +86,7 @@ public class TypeChecker extends ASTVisitor
 
     public void visit(TypeNode n)
     {
-        System.out.println("visiting TypeNode "+n.basic);
+        println("visiting TypeNode "+n.basic);
         if(n.array != null)
         {
             n.array.accept(this);
@@ -97,13 +96,13 @@ public class TypeChecker extends ASTVisitor
    
     
     public void visit(ParenNode n) {
-        System.out.println("visiting ParenNode");
+        println("visiting ParenNode");
         n.node.accept(this);
     }
 
     public void visit(ConditionalNode n)
     {
-        System.out.println("IfStatement/ConditionalNode");
+        println("IfStatement/ConditionalNode");
         n.condition.accept(this);
 	if (!isBool) error("Condition Must be boolean");
         n.stmt.accept(this);
@@ -118,7 +117,7 @@ public class TypeChecker extends ASTVisitor
     public void visit(WhileNode n)
     {
         whileLoop = true;
-        System.out.println("visiting WhileNode");
+        println("visiting WhileNode");
        
         n.condition.accept(this);
 	if (!isBool) error("Condition Must be boolean");
