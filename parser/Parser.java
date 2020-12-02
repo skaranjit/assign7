@@ -114,8 +114,9 @@ public class Parser extends ASTVisitor
 	}
 	while (opt(Tag.ID, Tag.IF, Tag.WHILE,Tag.DO,Tag.BREAK)){
 		StatementNode stmt = new StatementNode();
-		n.stmts.add(stmt);
+		
 		stmt.accept(this);
+		n.stmts.add(stmt);
 	}
         match('}');
 	println("End of Block Statement");
@@ -224,7 +225,7 @@ public class Parser extends ASTVisitor
                 n.stmt.accept(this);
                 break;
 	   case '{' :
-	   	n.stmt = new BlockStatementNode(null);
+	   	n.stmt = new BlockStatementNode(enclosingBlock);
 		n.stmt.accept(this);
 		break;
            default :
