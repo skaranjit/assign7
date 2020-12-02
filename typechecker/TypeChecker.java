@@ -67,20 +67,16 @@ public class TypeChecker extends ASTVisitor
     public void visit (BlockStatementNode n)
     {
         System.out.println("visiting Block");
-	top = new Env(n.sTable);
-        n.decls.accept(this);
-        n.stmts.accept(this);
+        for(int i = 0; i < n.decls.length; i++)
+		if(n.decls[i] !=null)
+			visit(n.decls[i]);
+			
+        for(int i = 0; i < n.stmts.length; i++)
+		if(n.stmts[i] !=null)
+			visit(n.stmts[i]);
     }
 
-    public void visit(Declarations n)
-    {
-        System.out.println("visiting Declarations");
-        if(n.decls != null)
-        {
-            n.decl.accept(this);
-            n.decls.accept(this);
-        }
-    }
+    
 
     public void visit(DeclarationNode n)
     {
@@ -101,16 +97,7 @@ public class TypeChecker extends ASTVisitor
         }
     }
 
-    public void visit (Statements n)
-    {
-        System.out.println("Visiting Statements");
-       if (n.stmts != null)
-       {
-       	   if(n.stmt!=null) n.stmt.accept(this);
-	   if(n.decls != null) n.decls.accept(this);
-            n.stmts.accept(this);
-        }
-    }
+   
     
     public void visit(ParenNode n) {
         System.out.println("visiting ParenNode");
