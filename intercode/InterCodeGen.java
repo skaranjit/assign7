@@ -158,39 +158,33 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(BreakNode n)
     {
-        System.out.println("visiting BreakNode");
     }
 
     public void visit(AssignmentNode n)
     {
-        System.out.println("AssignmentNode");
+	print("L"+lnum +": ");
         n.left.accept(this);
-
+	lnum++;
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
 
-        println("In TypeChecker, AssignmentNode's left type: "+leftType);
 
         n.right.accept(this);
     }
 
     public void visit(BinExprNode n) {
-        System.out.println("visiting BinExprNode" + n.op);
 
         Type leftType = null;
         IdentifierNode leftId = null;
 
         if (n.left instanceof IdentifierNode){
-	        leftId = (IdentifierNode)n.left;
-	      	System.out.println(leftId.w);
-       		((IdentifierNode) n.left).accept(this);
-       		leftType= ((IdentifierNode) n.left).type;
+       	    ((IdentifierNode) n.left).accept(this);
+	     leftType = n.left.type;
         }else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
         }else if (n.left instanceof RealNode) {
             ((RealNode) n.left).accept(this);
-        }else if (n.left instanceof BooleanNode)
-        {
+        }else if (n.left instanceof BooleanNode){
             ((BooleanNode)n.left).accept(this);
         }else if (n.left instanceof ParenNode) {
             ((ParenNode) n.left).accept(this);
@@ -198,42 +192,35 @@ public class InterCodeGen extends ASTVisitor {
             ((BinExprNode) n.left).accept(this);
 
         Type rightType = null;
-	IdentifierNode rightId = null;
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
                 ((IdentifierNode) n.right).accept(this);
-
-                rightId = (IdentifierNode) n.right;
                 rightType = rightId.type;
             } else if (n.right instanceof NumNode) {
                 ((NumNode) n.right).accept(this);
             } else if (n.right instanceof RealNode) {
                 ((RealNode) n.right).accept(this);
-            } 
-            else if (n.right instanceof BooleanNode)
-            {
+            } else if (n.right instanceof BooleanNode){
                 ((BooleanNode) n.right).accept(this);
-            }
-            else if (n.right instanceof ParenNode) {
+            } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
             } else {
                 ((BinExprNode) n.right).accept(this);
             }
         } else {
-            System.out.println("@@@ n.right == null in BinExprNode: " + n.right);
+            println("@@@ n.right == null in BinExprNode: " + n.right);
         }
     }
 
     public void visit(StatementNode n)
     {
-        System.out.println("Visiting Statement");
-	      n.stmt.accept(this);
+	    n.stmt.accept(this);
     }
 
 
     public void visit(IdentifierNode n)
     {
-        System.out.println("visiting IdentifierNode: "+n.w+" of type: "+n.type);
+        print(n.w);
         if (n.array != null)
         {
             n.array.accept(this);
