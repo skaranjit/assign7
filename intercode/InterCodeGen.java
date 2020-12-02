@@ -132,10 +132,8 @@ public class InterCodeGen extends ASTVisitor {
 	lnum++;
         n.condition.accept(this);
 	println("");
-	indent++;
         n.stmt.accept(this);
 	print("L"+lnum+" Goto L"+tmp+"\n");
-	indent--;
 	
         if (n.elseStmt != null)
         {
