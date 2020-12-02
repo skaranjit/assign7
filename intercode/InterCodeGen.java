@@ -168,9 +168,9 @@ public class InterCodeGen extends ASTVisitor {
 	lnum++;
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
-	
-
+	print(" = ");
         n.right.accept(this);
+	println("");
     }
 
     public void visit(BinExprNode n) {
