@@ -112,11 +112,12 @@ public class InterCodeGen extends ASTVisitor {
 	int tmp = lnum;
 	lnum++;
         n.condition.accept(this);
+	println("");
         n.stmt.accept(this);
-	print("Goto L"+tmp+"~\n");
+	print("Goto L"+tmp+"\n");
         if (n.elseStmt != null)
         {
-            System.out.println("Else Clause");
+            print("Else Clause");
             n.elseStmt.accept(this);
         }
     }
