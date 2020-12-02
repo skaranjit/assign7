@@ -60,28 +60,7 @@ public class InterCodeGen extends ASTVisitor {
         System.out.print(" ");
     }
     
-    int indent = 0;
-
-    void indentUp()
-    {
-        indent++;
-    }
-
-    void indentDown()
-    {
-        indent--;
-    }
-
-    void printIndent()
-    {
-        String s = "";
-        for (int i = 0; i < indent; i++)
-        {
-            s += "   ";
-        }
-        print(s);
-    }
-
+  
 
     public void visit (CompilationUnit n)
     {
