@@ -348,7 +348,7 @@ public class Parser extends ASTVisitor
 
     public void visit(ConditionalNode n)
     {
-        IdentifierNode leftId = new IdentifierNode(new Word("i", Tag.ID).Type.Int);
+        IdentifierNode leftId = new IdentifierNode(new Word("i", Tag.ID),Type.Int);
 	AssignmentNode newAssign1 = new AssignmentNode(leftId, new NumNode(new Num(2)));
 	AssignmentNode newAssign2 = new AssignmentNode(leftId, new NumNode(new Num(219)));
 	AssignmentNode newAssign3 = new AssignmentNode(leftId, new NumNode(new Num(19)));
@@ -361,8 +361,8 @@ public class Parser extends ASTVisitor
 	int idx = enclosingBlock.stmts.indexOf(newAssign2);
 	enclosingBlock.stmts.add(idx,newAssign4);
 	for (StatementNode s : enclosingBlock.stmts)
-		println(s);
-	if(elclosinBlock.stmts.contains(n))
+		System.out.println(s);
+	if(enclosinBlock.stmts.contains(n))
 		println("********EnclosingBlock has this IfStatementNode**************");
 
         match(Tag.IF);
