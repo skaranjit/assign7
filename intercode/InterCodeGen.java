@@ -105,9 +105,11 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(ConditionalNode n)
     {
-        System.out.println("IfStatement/ConditionalNode");
+	print("L"+lnum +": ");
+	print("IfFalse ");
         n.condition.accept(this);
         n.stmt.accept(this);
+	print("Goto L"+lnum);
         if (n.elseStmt != null)
         {
             System.out.println("Else Clause");
