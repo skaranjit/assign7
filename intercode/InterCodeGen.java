@@ -110,7 +110,7 @@ public class InterCodeGen extends ASTVisitor {
 	print("L"+lnum +": ");
 	print("IfFalse ");
 	int tmp = lnum;
-	lnum++
+	lnum++;
         n.condition.accept(this);
         n.stmt.accept(this);
 	print("Goto L"+tmp+"~\n");
