@@ -61,7 +61,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit (CompilationUnit n)
     {
-        println("\Intercode Generator starts");
+        println("Intercode Generator starts");
 
         n.block.accept(this);
 	println("*************End of the InterCode Generator*************");
