@@ -362,7 +362,7 @@ public class Parser extends ASTVisitor
 	enclosingBlock.stmts.add(idx,newAssign4);
 	for (StatementNode s : enclosingBlock.stmts)
 		System.out.println(s);
-	if(enclosinBlock.stmts.contains(n))
+	if(enclosingBlock.stmts.contains(n))
 		println("********EnclosingBlock has this IfStatementNode**************");
 
         match(Tag.IF);
