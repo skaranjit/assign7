@@ -20,7 +20,11 @@ public class IdentifierNode extends ExprNode
         this.id = w.lexeme;
         this.w = w;
     }
-
+    public IdentifierNode(Word w, Type t){
+        this.w = w;
+        this.id = w.lexeme;
+        this.type = t;
+    }
     public void accept(ASTVisitor v)
     {
         v.visit(this);
