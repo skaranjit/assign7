@@ -59,6 +59,29 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.print(" ");
     }
+    
+    int indent = 0;
+
+    void indentUp()
+    {
+        indent++;
+    }
+
+    void indentDown()
+    {
+        indent--;
+    }
+
+    void printIndent()
+    {
+        String s = "";
+        for (int i = 0; i < indent; i++)
+        {
+            s += "   ";
+        }
+        print(s);
+    }
+
 
     public void visit (CompilationUnit n)
     {
@@ -109,7 +132,7 @@ public class InterCodeGen extends ASTVisitor {
 	print("IfFalse ");
         n.condition.accept(this);
         n.stmt.accept(this);
-	print("Goto L"+lnum);
+	print("Goto L"+lnum+"~\n");
         if (n.elseStmt != null)
         {
             System.out.println("Else Clause");
