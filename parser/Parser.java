@@ -110,7 +110,7 @@ public class Parser extends ASTVisitor
 		n.decls.add(decl);
 		decl.accept(this);
 	}
-	while (opt(Tag.ID, Tag.IF, Tag.WHILE,Tag.DO,Tag.Break)){
+	while (opt(Tag.ID, Tag.IF, Tag.WHILE,Tag.DO,Tag.BREAK)){
 		StatementNode stmt = new StatementNode();
 		n.stmts.add(stmt);
 		stmt.accept(this);
@@ -266,10 +266,8 @@ public class Parser extends ASTVisitor
                 n.stmt = new BreakNode();
                 n.stmt.accept(this);
                 break;
-            case '{':
-                n.stmt = new BlockStatementNode();
-                n.stmt.accept(this);
-                break;
+           default :
+               error("Syntax Error: Statement needed");
         }
     }
 
