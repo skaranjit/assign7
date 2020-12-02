@@ -93,7 +93,7 @@ public class Parser extends ASTVisitor
     }
     public void visit (CompilationUnit n)
     {
-        n.block = new BlockStatementNode();
+        n.block = new BlockStatementNode(null);
         n.block.accept(this);
     }
 
@@ -104,7 +104,7 @@ public class Parser extends ASTVisitor
         n.sTable = top; // new code
         top = new Env(top); // new code
 	//Set EnclosingBlock to the current level block 
-	enclisingBlock = n;
+	enclosingBlock = n;
 	while (opt(Tag.BASIC)){
 		DeclarationNode decl = new DeclarationNode();
 		n.decls.add(decl);
