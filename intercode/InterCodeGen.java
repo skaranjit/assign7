@@ -125,6 +125,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(ConditionalNode n)
     {
+	indent++;
 	print("L"+lnum +": ");
 	print("IfFalse ");
 	int tmp = lnum;
@@ -133,13 +134,16 @@ public class InterCodeGen extends ASTVisitor {
 	println("");
 	indent++;
         n.stmt.accept(this);
-	indent--;
 	print("L"+lnum+" Goto L"+tmp+"\n");
+	indent--;
+	
         if (n.elseStmt != null)
         {
             print("Else Clause");
             n.elseStmt.accept(this);
         }
+	indent--;
+
     }
     
     public void visit(GotoNode n){
