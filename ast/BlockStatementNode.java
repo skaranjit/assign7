@@ -10,7 +10,7 @@ public class BlockStatementNode extends StatementNode
 //     public Declarations decls;
 //     public Statements stmts;
     public List<DeclarationNode> decls = new ArrayList<DeclarationNode>();
-    public List<StatementNode> stmt = new ArrayList<StatementNode>();
+    public List<StatementNode> stmts = new ArrayList<StatementNode>();
     
     public BlockStatementNode parent;
     public Env sTable;
@@ -18,7 +18,7 @@ public class BlockStatementNode extends StatementNode
     public BlockStatementNode(BlockStatementNode parent)
     {
         this.decls = new ArrayList<DeclarationNode>();
-        this.stmt = new ArrayList<StatementNode>();
+        this.stmts = new ArrayList<StatementNode>();
         this.parent = parent;
     }
 
