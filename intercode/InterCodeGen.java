@@ -195,7 +195,7 @@ public class InterCodeGen extends ASTVisitor {
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
                 ((IdentifierNode) n.right).accept(this);
-                rightType = rightId.type;
+                rightType = n.right.type;
             } else if (n.right instanceof NumNode) {
                 ((NumNode) n.right).accept(this);
             } else if (n.right instanceof RealNode) {
@@ -220,7 +220,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(IdentifierNode n)
     {
-        print(n.w);
+        print("" + n.w);
         if (n.array != null)
         {
             n.array.accept(this);
