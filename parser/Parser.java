@@ -223,6 +223,10 @@ public class Parser extends ASTVisitor
                 n.stmt = new BreakNode();
                 n.stmt.accept(this);
                 break;
+	   case '{' :
+	   	n.stmt = new BlockStatementNode(enclosingBlock);
+		n.stmt.accept(this);
+		break;
            default :
                error("Syntax Error: Statement needed");
         }
