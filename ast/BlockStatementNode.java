@@ -2,48 +2,31 @@ package assign7.ast;
 
 import assign7.visitor.*;
 import assign7.parser.*;
+import java.util.*;
 
-/*
+
 public class BlockStatementNode extends StatementNode
 {
-    public Declarations decls;
-    public Statements stmts;
-
-    public BlockStatementNode()
-    {
-
-    }
-
-    public BlockStatementNode(Declarations decls, Statements stmts)
-    {
-        this.decls = decls;
-        this.stmts = stmts;
-    }
-
-    public void accept(ASTVisitor v)
-    {
-        v.visit(this);
-    }
-}
-*/
-
-// new code
-public class BlockStatementNode extends StatementNode
-{
-    public Declarations decls;
-    public Statements stmts;
-
+//     public Declarations decls;
+//     public Statements stmts;
+    public List<DeclarationNode> decls = new ArrayList<DeclarationNode>();
+    public List<StatementNode> stmt = new ArrayList<StatementNode>();
+    
+    public BlockStatementNode parent;
     public Env sTable;
 
-    public BlockStatementNode()
+    public BlockStatementNode(BlockStatementNode parent)
     {
-
+        this.decls = new ArrayList<DeclarationNode>();
+        this.stmt = new ArrayList<StatementNode>();
+        this.parent = parent;
     }
 
-    public BlockStatementNode(Declarations decls, Statements stmts)
+    public BlockStatementNode(List<DeclarationNode> decls, List<StatementNode> stmts, BlockStatementNode parent)
     {
         this.decls = decls;
         this.stmts = stmts;
+        this.parent = parent;
     }
 
     public void accept(ASTVisitor v)
