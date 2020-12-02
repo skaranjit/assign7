@@ -16,6 +16,7 @@ public class Parser extends ASTVisitor
 
 
     public Env top = null;
+    public BlockStatementNode enclosingBlock = null; //current BlockStatement
 
     public Parser (Lexer lexer)
     {
@@ -83,7 +84,13 @@ public class Parser extends ASTVisitor
     void exit(int n){
         System.exit(n);
     }
-
+    
+    private boolean opt(int... tags){
+    	for (int tag: tags)
+		if(look.tag == tag)
+		 return true;
+	return false;
+    }
     public void visit (CompilationUnit n)
     {
         n.block = new BlockStatementNode();
@@ -96,26 +103,40 @@ public class Parser extends ASTVisitor
         match('{');
         n.sTable = top; // new code
         top = new Env(top); // new code
-        n.decls = new Declarations();
-        n.decls.accept(this);
-	 n.sTable = top; 
-        n.stmts = new Statements();
-        n.stmts.accept(this);
+	//Set EnclosingBlock to the current level block 
+	enclisingBlock = n;
+	while (opt(Tag.BASIC)){
+		DeclarationNode decl = new DeclarationNode();
+		n.decls.add(decl);
+		decl.accept(this);
+	}
+	while (opt(Tag.ID, Tag.IF, Tag.WHILE,Tag.DO,Tag.Break)){
+		StatementNode stmt = new StatementNode();
+		n.stmts.add(stmt);
+		stmt.accept(this);
+	}
+		
+//         n.decls = new Declarations();
+//         n.decls.accept(this);
+// 	 n.sTable = top; 
+//         n.stmts = new Statements();
+//         n.stmts.accept(this);
         match('}');
 	println("End of Block Statement");
         top = n.sTable; // new code
+	enclosingBlock = n.parent;
     }
 
-    public void visit(Declarations n)
-    {
-        if (look.tag == Tag.BASIC)
-        {
-            n.decl = new DeclarationNode();
-            n.decl.accept(this);
-            n.decls = new Declarations();
-            n.decls.accept(this);
-        }
-    }
+//     public void visit(Declarations n)
+//     {
+//         if (look.tag == Tag.BASIC)
+//         {
+//             n.decl = new DeclarationNode();
+//             n.decl.accept(this);
+//             n.decls = new Declarations();
+//             n.decls.accept(this);
+//         }
+//     }
 
 
     public void visit(DeclarationNode n)
@@ -199,29 +220,29 @@ public class Parser extends ASTVisitor
     }
 
 
-    public void visit (Statements n)
-    {
-    	println("In Statements");
-	println("look.toString()");
-        if (!look.toString().equals("}") && look.tag != Tag.EOF) // new line of code
-        {
-            switch (look.tag)
-            {
-	    	case Tag.BASIC:
-			n.decls = new DeclarationNode();
-            		n.decls.accept(this);
-			n.stmts = new Statements();
-			n.stmts.accept(this);
-			break;
-          	default:
-			n.stmt = new StatementNode();
-			n.stmt.accept(this);
-			n.stmts = new Statements();
-			n.stmts.accept(this);
-			break;
-            }
-        }
-    }
+//     public void visit (Statements n)
+//     {
+//     	println("In Statements");
+// 	println("look.toString()");
+//         if (!look.toString().equals("}") && look.tag != Tag.EOF) // new line of code
+//         {
+//             switch (look.tag)
+//             {
+// 	    	case Tag.BASIC:
+// 			n.decls = new DeclarationNode();
+//             		n.decls.accept(this);
+// 			n.stmts = new Statements();
+// 			n.stmts.accept(this);
+// 			break;
+//           	default:
+// 			n.stmt = new StatementNode();
+// 			n.stmt.accept(this);
+// 			n.stmts = new Statements();
+// 			n.stmts.accept(this);
+// 			break;
+//             }
+//         }
+//     }
     public void visit(StatementNode n){
     	 switch (look.tag)
         {
