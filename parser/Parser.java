@@ -353,22 +353,22 @@ public class Parser extends ASTVisitor
 
     public void visit(ConditionalNode n)
     {
-        IdentifierNode leftId = new IdentifierNode(new Word("i", Tag.ID),Type.Int);
-	AssignmentNode newAssign1 = new AssignmentNode(leftId, new NumNode(new Num(2)));
-	AssignmentNode newAssign2 = new AssignmentNode(leftId, new NumNode(new Num(219)));
-	AssignmentNode newAssign3 = new AssignmentNode(leftId, new NumNode(new Num(19)));
+//         IdentifierNode leftId = new IdentifierNode(new Word("i", Tag.ID),Type.Int);
+// 	AssignmentNode newAssign1 = new AssignmentNode(leftId, new NumNode(new Num(2)));
+// 	AssignmentNode newAssign2 = new AssignmentNode(leftId, new NumNode(new Num(219)));
+// 	AssignmentNode newAssign3 = new AssignmentNode(leftId, new NumNode(new Num(19)));
 
-	enclosingBlock.stmts.add(newAssign1);
-	enclosingBlock.stmts.add(newAssign2);
-	enclosingBlock.stmts.add(newAssign3);
+// 	enclosingBlock.stmts.add(newAssign1);
+// 	enclosingBlock.stmts.add(newAssign2);
+// 	enclosingBlock.stmts.add(newAssign3);
 
-	AssignmentNode newAssign4 = new AssignmentNode(leftId, new NumNode(new Num(500)));
-	int idx = enclosingBlock.stmts.indexOf(newAssign2);
-	enclosingBlock.stmts.add(idx,newAssign4);
-	for (StatementNode s : enclosingBlock.stmts)
-		System.out.println(s);
-	if(enclosingBlock.stmts.contains(n))
-		println("********EnclosingBlock has this IfStatementNode**************");
+// 	AssignmentNode newAssign4 = new AssignmentNode(leftId, new NumNode(new Num(500)));
+// 	int idx = enclosingBlock.stmts.indexOf(newAssign2);
+// 	enclosingBlock.stmts.add(idx,newAssign4);
+// 	for (StatementNode s : enclosingBlock.stmts)
+// 		System.out.println(s);
+// 	if(enclosingBlock.stmts.contains(n))
+// 		println("********EnclosingBlock has this IfStatementNode**************");
 
         match(Tag.IF);
 	n.condition = new ParenNode();
