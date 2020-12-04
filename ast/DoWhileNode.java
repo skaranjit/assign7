@@ -6,7 +6,12 @@ public class DoWhileNode extends StatementNode
 {
     public StatementNode stmt;
     public ExprNode condition;
-
+    public List<AssignmentNode> assigns = new ArrayList<AssignmentNode>();
+    
+    
+    //Label for intermediate Code
+    public LabelNode falseLabel;
+    
     public DoWhileNode()
     {
 
