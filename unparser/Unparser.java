@@ -143,9 +143,9 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
-//        printIndent();
+        printIndent();
         n.left.accept(this);
-//        print(" = ");
+        print(" = ");
 
         if (n.right instanceof  IdentifierNode)
             ((IdentifierNode)n.right).accept(this);
