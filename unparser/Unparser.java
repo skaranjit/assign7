@@ -266,19 +266,16 @@ public class Unparser extends ASTVisitor
 
     public void visit(ConditionalNode n)
     {
+    	for (AssignmentNode assign : n.assigns)
+		assign.accept(this);
         printIndent();
-        print("if (");
+        print("ifFalse ");
         n.condition.accept(this);
-        println(")");
-        indentUp();
+        println(" goto " + n.falseLabel.id)");
         n.stmt.accept(this);
-        indentDown();
         if (n.elseStmt != null)
         {
-            println("else");
-            indentUp();
             n.elseStmt.accept(this);
-            indentDown();
         }
     }
 
