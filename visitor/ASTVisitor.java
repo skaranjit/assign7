@@ -2,6 +2,7 @@ package assign7.visitor;
 
 import assign7.ast.*;
 import assign7.parser.*;
+import assign7.intercode.*;
 
 public class ASTVisitor
 {
