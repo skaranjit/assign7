@@ -13,9 +13,9 @@ public class Unparser extends ASTVisitor
 
     public File tempFile;
     public FileWriter tempFileWriter;
-    public InterCode inter;
+    public InterCodeGen inter;
 
-    public Unparser(InterCode inter)
+    public Unparser(InterCodeGen inter)
     {
         try
         {
