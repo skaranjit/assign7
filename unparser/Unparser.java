@@ -312,9 +312,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(ParenNode n)
     {
-        print("(");
         n.node.accept(this);
-        print(")");
     }
 }
 
