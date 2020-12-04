@@ -101,8 +101,6 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(DeclarationNode n)
     {
-	print("L"+lnum+": ");
-	lnum++;
         n.type.accept(this);
 	n.id.type =n.type.basic;
 	
@@ -126,17 +124,24 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(ConditionalNode n)
     {
-	print("L"+lnum +": ");
-	print("IfFalse ");
-	int tmp = lnum;
-	lnum++;
+	println("IfStatementNode");
         n.condition.accept(this);
-	println("");
-	indent++;
+	IdentifierNode temp = TempNode.newTemp();
+	ParenNode cond = (ParenNode)n.condition;
+	ExprNode expr = null;
+	    
+	if(cond.node instanceof BinExprNode){
+		expr = (BinExprNode)cond.node;
+	} else if (cond.node instance of BoleanNode){
+		expr = (BoleanNode)cond.node;
+	}
+	AssignmentNode assign = new AssignmentNode(temp, expr);
+	n.assigns.add(assign);
+	n.cond.node = temp;
+	n.falseLabel = LabelNode.newLabel();
         n.stmt.accept(this);
-	indent--;
-	print("L"+lnum+" Goto L"+tmp+"\n");
-        if (n.elseStmt != null)
+	
+	if (n.elseStmt != null)
         {
             print("Else Clause");
             n.elseStmt.accept(this);
@@ -194,9 +199,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(AssignmentNode n)
     {
-	print("L"+lnum +": ");
         n.left.accept(this);
-	lnum++;
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
 	print(" =");
