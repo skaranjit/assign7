@@ -1,6 +1,9 @@
 package assign7.ast;
 
 import assign7.visitor.*;
+import assign7.intercode.*;
+import assign7.lexer.*;
+import java.util.*;
 
 
 public class ConditionalNode extends StatementNode
