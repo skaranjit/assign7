@@ -14,8 +14,8 @@ public class Main {
         Lexer lexer = new Lexer();
         Parser parser = new Parser(lexer);
         TypeChecker typeCheck = new TypeChecker(parser);
-        Unparser unparser = new Unparser(typeCheck);
-        InterCodeGen inter= new InterCodeGen(parser);
+        InterCodeGen inter= new InterCodeGen(typeCheck);
+        Unparser unparser = new Unparser(inter);
 
     }
 }
