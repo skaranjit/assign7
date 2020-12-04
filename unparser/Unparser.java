@@ -100,35 +100,24 @@ public class Unparser extends ASTVisitor
 
     public void visit(BlockStatementNode n)
     {
-        println("{");
-
-        indentUp();
         for(DeclarationNode decl: n.decls) 
 	        decl.accept(this);
-        indentDown();
         
-        indentUp();
         for(StatementNode stmt : n.stmts)
 	        stmt.accept(this);
-        indentDown();
         
         printIndent();
-        println("}");
     }
 
     public void visit(DeclarationNode n)
     {
             n.type.accept(this);
-            print(" ");
             n.id.accept(this);
-
-            println(" ;");
     }
 
     public void visit(TypeNode n)
     {
-        printIndent();
-        print(n.basic.toString());
+        //print(n.basic.toString());
 
         if(n.array != null)
             n.array.accept(this);
@@ -136,12 +125,12 @@ public class Unparser extends ASTVisitor
 
     public void visit(ArrayTypeNode n)
     {
-        print("[");
+      //  print("[");
         (n.size).accept(this);
 //         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
 //         if(n.size instanceof NumNode) print("" + ((NumNode)n.size).value);
 //         print("" +n.size);
-        print("]");
+        //print("]");
 
         if(n.type != null)
             n.type.accept(this);
@@ -154,9 +143,9 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
-        printIndent();
+//        printIndent();
         n.left.accept(this);
-        print(" = ");
+//        print(" = ");
 
         if (n.right instanceof  IdentifierNode)
             ((IdentifierNode)n.right).accept(this);
@@ -283,8 +272,9 @@ public class Unparser extends ASTVisitor
 
     public void visit(WhileNode n)
     {
-        printIndent();
-        print("while (");
+        for (AssignmentNode assign : n.assigns)
+		assign.accept(this);
+        print("");
         n.condition.accept(this);
         print(")");
         indentUp();
