@@ -14,7 +14,7 @@ public class ConditionalNode extends StatementNode
 
     //AssignmentNode which will be added before IFStatementNode for Intermediate Code
     
-    public List<AssignmentNode> assigns = new ArrayList<AssignmnetNode>();
+    public List<AssignmentNode> assigns = new ArrayList<AssignmentNode>();
     
     
     //Label for intermediate Code
