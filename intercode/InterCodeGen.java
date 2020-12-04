@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
 
 public class InterCodeGen extends ASTVisitor {
-    public Parser parser = null;
+    public TypeChecker checker = null;
     public CompilationUnit cu = null;
    
     int lnum = 1;
@@ -17,15 +17,15 @@ public class InterCodeGen extends ASTVisitor {
 
     public Env top = null;
 
-    public InterCodeGen(Parser parser)
+    public InterCodeGen(TypeChecker checker)
     {
-            this.parser = parser;
+            this.checker = checker;
             cu = parser.cu;
             visit(cu);
     }
     public InterCodeGen()
     {
-            visit(this.parser.cu);
+            visit(this.checker.cu);
     }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
