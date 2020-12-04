@@ -6,7 +6,7 @@ import assign7.visitor.*;
 
 public class TempNode extends IdentifierNode {
   public static int num = 0;
-  publi TempNode() {
+  public TempNode() {
     
   }
   public static IdentifierNode newTemp() {
