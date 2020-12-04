@@ -4,7 +4,7 @@ import assign7.ast.*;
 import assign7.parser.*;
 import assign7.typechecker.TypeChecker;
 import assign7.visitor.*;
-import assign7.inter.*;
+import assign7.intercode.*;
 import java.io.*;
 
 
