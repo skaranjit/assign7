@@ -120,9 +120,7 @@ public class ASTVisitor
     {
 
     }
-    public void visit(GotoNode n){
-        
-    }
+    
 
     public void visit(WhileNode n)
     {
@@ -142,5 +140,19 @@ public class ASTVisitor
     public void visit(ParenNode n)
     {
 
+    }
+    ////////////////////////////////////////////////////////
+    ////////// For Intermediate Code Generator ////////////
+    
+    public void visit (GotoNode n){
+        
+    }
+    
+    public void visit (LabelNode n) {
+        
+    }
+    
+    public void visit (TempNode n) {
+        
     }
 }
