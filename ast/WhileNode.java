@@ -7,7 +7,12 @@ public class WhileNode extends StatementNode
 {
     public ExprNode condition;
     public StatementNode stmt;
-
+    public List<AssignmentNode> assigns = new ArrayList<AssignmentNode>();
+    
+    
+    //Label for intermediate Code
+    public LabelNode falseLabel;
+    
     public WhileNode()
     {
 
