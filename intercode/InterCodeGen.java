@@ -20,7 +20,7 @@ public class InterCodeGen extends ASTVisitor {
     public InterCodeGen(TypeChecker checker)
     {
             this.checker = checker;
-            cu = parser.cu;
+            this.cu = checker.cu;
             visit(cu);
     }
     public InterCodeGen()
