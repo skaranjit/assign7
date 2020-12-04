@@ -13,9 +13,9 @@ public class Unparser extends ASTVisitor
 
     public File tempFile;
     public FileWriter tempFileWriter;
-    public TypeChecker typeCheck;
+    public InterCode inter;
 
-    public Unparser(TypeChecker typeChecker)
+    public Unparser(InterCode inter)
     {
         try
         {
@@ -28,8 +28,8 @@ public class Unparser extends ASTVisitor
 
         }
 
-        this.typeCheck = typeChecker;
-        visit(this.typeCheck.cu);
+        this.inter = inter;
+        visit(this.inter.cu);
 
         try
         {
