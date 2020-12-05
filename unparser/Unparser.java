@@ -100,17 +100,13 @@ public class Unparser extends ASTVisitor
 
     public void visit(BlockStatementNode n)
     {
-        println("{");
-
-        indentUp();
         for(DeclarationNode decl: n.decls) 
 	        decl.accept(this);
-        indentDown();
         
-        indentUp();
+//        indentUp();
         for(StatementNode stmt : n.stmts)
 	        stmt.accept(this);
-        indentDown();
+//        indentDown();
         
         printIndent();
         println("}");
