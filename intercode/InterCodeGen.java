@@ -119,13 +119,13 @@ public class InterCodeGen extends ASTVisitor {
 
     
     public void visit(ParenNode n) {
-        //n.node.accept(this);
+        n.node.accept(this);
     }
 
     public void visit(ConditionalNode n)
     {
 	println("IfStatementNode");
-        //n.condition.accept(this);
+        n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	ParenNode cond = (ParenNode)n.condition;
 	ExprNode expr = null;
