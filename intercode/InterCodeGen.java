@@ -210,7 +210,7 @@ public class InterCodeGen extends ASTVisitor {
     }
     int countB = 0;
     public void visit(BinExprNode n) {
-	count ++;
+	countB ++;
         Type leftType = null;
 	 
         IdentifierNode leftId = null;
