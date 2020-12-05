@@ -246,9 +246,11 @@ public class InterCodeGen extends ASTVisitor {
             } else {
                ((BinExprNode) n.right).accept(this);
            }
+	
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
+	 println("\n End " + countB);
     }
 
     public void visit(StatementNode n)
