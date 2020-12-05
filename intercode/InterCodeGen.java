@@ -211,7 +211,7 @@ public class InterCodeGen extends ASTVisitor {
 
         Type leftType = null;
         IdentifierNode leftId = null;
-
+	println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
        	    ((IdentifierNode) n.left).accept(this);
 	     leftType = n.left.type;
