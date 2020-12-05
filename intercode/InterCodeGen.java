@@ -225,8 +225,8 @@ public class InterCodeGen extends ASTVisitor {
             ((BooleanNode)n.left).accept(this);
         }else if (n.left instanceof ParenNode) {
             ((ParenNode) n.left).accept(this);
-        }else
-            ((BinExprNode) n.left).accept(this);
+        }//else
+            //((BinExprNode) n.left).accept(this);
         print(" "+n.op);
         Type rightType = null;
         if (n.right != null) {
@@ -241,9 +241,9 @@ public class InterCodeGen extends ASTVisitor {
                 ((BooleanNode) n.right).accept(this);
             } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
-            } else {
-                ((BinExprNode) n.right).accept(this);
-            }
+            }// else {
+               // ((BinExprNode) n.right).accept(this);
+           // }
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
