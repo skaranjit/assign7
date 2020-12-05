@@ -250,8 +250,8 @@ public class TypeChecker extends ASTVisitor
                 ((BooleanNode) n.right).accept(this);
             } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
-            } else {
-                ((BinExprNode) n.right).accept(this);
+            } //else {
+                //((BinExprNode) n.right).accept(this);
             }
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
