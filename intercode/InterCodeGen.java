@@ -138,6 +138,7 @@ public class InterCodeGen extends ASTVisitor {
 	}
 	AssignmentNode assign = new AssignmentNode(temp, expr);
 	n.assigns.add(assign);
+	println(" Size : " + n.assigns.size());
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
         n.stmt.accept(this);
