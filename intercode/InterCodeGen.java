@@ -228,7 +228,7 @@ public class InterCodeGen extends ASTVisitor {
             ((ParenNode) n.left).accept(this);
         }else
             ((BinExprNode) n.left).accept(this);
-	println(" " + countB);
+	println("\n\n " + countB);
         print(" "+n.op);
         Type rightType = null;
         if (n.right != null) {
