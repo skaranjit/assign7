@@ -5,8 +5,8 @@ import assign7.visitor.ASTVisitor;
 public class ParenNode extends ExprNode
 {
     public Node node;
-    public LabelNode falseLabel;
-    public List<AssignmentNode> assignsparen = new ArrayList<AssignmentNode>();
+//     public LabelNode falseLabel;
+//     public List<AssignmentNode> assignsparen = new ArrayList<AssignmentNode>();
     public ParenNode()
     {
 
