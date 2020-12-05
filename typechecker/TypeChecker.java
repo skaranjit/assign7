@@ -232,8 +232,8 @@ public class TypeChecker extends ASTVisitor
             ((BooleanNode)n.left).accept(this);
         } else if (n.left instanceof ParenNode) {
             ((ParenNode) n.left).accept(this);
-        } //else
-            //((BinExprNode) n.left).accept(this);
+        } else
+            ((BinExprNode) n.left).accept(this);
 
         Type rightType = null;
 	IdentifierNode rightId = null;
@@ -250,9 +250,9 @@ public class TypeChecker extends ASTVisitor
                 ((BooleanNode) n.right).accept(this);
             } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
-            } //else {
-                //((BinExprNode) n.right).accept(this);
-            //}
+            } else {
+                ((BinExprNode) n.right).accept(this);
+            }
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
