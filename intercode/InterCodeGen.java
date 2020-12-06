@@ -11,9 +11,7 @@ import java.util.*;
 public class InterCodeGen extends ASTVisitor {
     public TypeChecker checker = null;
     public CompilationUnit cu = null;
-   
-    int lnum = 1;
-    int tnum = 1;
+ 
     int level = 0;
 
     public Env top = null;
@@ -134,8 +132,8 @@ public class InterCodeGen extends ASTVisitor {
 		count ++;
 		expr = (BinExprNode)cond.node;	
 		println(" " + ((BinExprNode)cond.node).assigns.size());
-		for (AssignmentNode as : ((BinExprNode)cond.node).assigns)
-			as.accept(this);
+		//for (AssignmentNode as : ((BinExprNode)cond.node).assigns)
+		//	as.accept(this);
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
 	}
