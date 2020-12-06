@@ -208,10 +208,11 @@ public class InterCodeGen extends ASTVisitor {
     ExprNode bR = null;
     ExprNode temp1 = null;
     ExprNode last = null;
+public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-	if(!n.assigns.isEmpty()){
+	if(!Bassigns.isEmpty()){
 		println("Debug Here");
 		bR = n.left;
 		n.left = temp1;
@@ -249,7 +250,7 @@ public class InterCodeGen extends ASTVisitor {
                ((BinExprNode) n.right).accept(this);
            }
 	   AssignmentNode assign = new AssignmentNode(temp, n);
-	   n.assigns.add(assign);
+	   Bassigns.add(assign);
 		
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
