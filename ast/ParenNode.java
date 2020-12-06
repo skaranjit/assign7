@@ -9,7 +9,6 @@ public class ParenNode extends ExprNode
 {
     public Node node;
     public LabelNode falseLabel;
-    public List<AssignmentNode> assignsparen = new ArrayList<AssignmentNode>();
     public ParenNode()
     {
 
