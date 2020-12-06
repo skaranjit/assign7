@@ -11,7 +11,12 @@ import java.util.*;
 public class InterCodeGen extends ASTVisitor {
     public TypeChecker checker = null;
     public CompilationUnit cu = null;
- 
+    ExprNode bR = null;
+    ExprNode temp1 = null;
+    ExprNode last = null;
+    int Count = 0;
+
+    IdentifierNode a = null;
     int level = 0;
 
     public Env top = null;
@@ -93,8 +98,10 @@ public class InterCodeGen extends ASTVisitor {
     {
 	for(DeclarationNode decl : n.decls)
 	     decl.accept(this);
-	for(StatementNode stmt : n.stmts)
+	for(StatementNode stmt : n.stmts){
+	     public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
 	     stmt.accept(this);
+	}
     }
 
     public void visit(DeclarationNode n)
@@ -203,24 +210,16 @@ public class InterCodeGen extends ASTVisitor {
         n.right.accept(this);
 	println("");
     }
-    ExprNode bR = null;
-    ExprNode temp1 = null;
-    ExprNode last = null;
-    int Count = 0;
-    IdentifierNode a = null;
-public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
+    
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
 	if(!(Bassigns.isEmpty())){
-		println("Debug Here");
 		bR = n.left;
-		
 		Count++;
 		n.left = a;
 		temp1 = n.right;
 		n.right = bR;
-		println("Debug Finished");
 	}
 	
 	IdentifierNode temp = TempNode.newTemp();
