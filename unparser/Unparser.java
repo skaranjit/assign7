@@ -170,16 +170,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(BinExprNode n)
     {
-    	if(!n.assigns.isEmpty()){
-		println("Debug:");
-		bR = n.left;
-		Count++;
-		n.left = a;
-		println("Test a:");
-		a.printNode();
-		temp1 = n.right;
-		n.right = bR;
-	}
+    	
         if (n.left instanceof IdentifierNode)
         {
             ((IdentifierNode)n.left).accept(this);
