@@ -129,7 +129,7 @@ public class InterCodeGen extends ASTVisitor {
 	ExprNode expr = null;
 	if(cond.node instanceof BinExprNode){
 		expr = (BinExprNode)cond.node;	
-		//expr.accept(this);
+		((BinExprNode)expr).accept(this);
 		println(" " + ((BinExprNode)cond.node).assigns.size());
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
@@ -207,6 +207,7 @@ public class InterCodeGen extends ASTVisitor {
     }
     ExprNode bR = null;
     ExprNode temp1 = null;
+    ExprNode last = null;
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
