@@ -135,7 +135,7 @@ public class InterCodeGen extends ASTVisitor {
 		println(" " + count);
 		expr = (BinExprNode)cond.node;		
 		println(" " + count);
-		for (AssignmentNode as : (BinExprNode(cond.node)).assigns)
+		for (AssignmentNode as : expr.assigns)
 			as.accept(this);
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
