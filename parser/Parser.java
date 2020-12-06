@@ -556,8 +556,10 @@ public class Parser extends ASTVisitor
         {
             n.node = rhs_assign;
         }
-        else
+        else{
+	    List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
             n.node = (BinExprNode) parseBinExprNode(rhs_assign, 0);
+	    ((BinExprNode)n.node).assigns = Bassigns;
 
         match(')');
 	
