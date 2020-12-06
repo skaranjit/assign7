@@ -229,7 +229,7 @@ public class InterCodeGen extends ASTVisitor {
 		n.right = bR;
 	}
 	
-	
+	println("\n "+n.left);
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
        	    ((IdentifierNode) n.left).accept(this);
