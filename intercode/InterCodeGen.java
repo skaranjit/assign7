@@ -271,7 +271,7 @@ public class InterCodeGen extends ASTVisitor {
 	if(n.left != null){
 		IdentifierNode temp = TempNode.newTemp();
 		expr = n;
-	   	AssignmentNode assign = new AssignmentNode(temp, expr);
+	   	AssignmentNode assign = new AssignmentNode(temp, n);
 		a = temp;
 	   	Bassigns.add(assign);
 		n.assigns = Bassigns;
