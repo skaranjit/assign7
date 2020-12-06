@@ -221,6 +221,7 @@ public class InterCodeGen extends ASTVisitor {
 		bR = n.left;
 		Count++;
 		n.left = a;
+		a.printNode();
 		temp1 = n.right;
 		n.right = bR;
 	}
@@ -258,9 +259,9 @@ public class InterCodeGen extends ASTVisitor {
 		println("\n");
 		temp.printNode();
     	
-	   AssignmentNode assign = new AssignmentNode(temp, n);
-	   Bassigns.add(assign);
-	   a = temp;	
+	   	AssignmentNode assign = new AssignmentNode(temp, n);
+	   	Bassigns.add(assign);
+	   	a = temp;	
 	   }
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
