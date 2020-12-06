@@ -124,7 +124,9 @@ public class InterCodeGen extends ASTVisitor {
 
     
     public void visit(ParenNode n) {
+	((BinExprNode)n.node).assigns = Bassigns;
 	n.node.accept(this);
+	    
     }
 
     public void visit(ConditionalNode n)
@@ -220,7 +222,7 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-	if(!Bassigns.isEmpty()){
+	if(!n.assigns.isEmpty()){
 		println("Debug:");
 		bR = n.left;
 		Count++;
