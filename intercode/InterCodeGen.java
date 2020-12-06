@@ -248,7 +248,7 @@ public class InterCodeGen extends ASTVisitor {
 	    println(" " + n.left);
 	    println(" " + n.right);
 
-	AssignmentNode assign = new AssignmentNode(temp, expr);
+	AssignmentNode assign = new AssignmentNode(temp, (BinExprNode)expr);
 	n.assigns.add(assign);
     }
 
