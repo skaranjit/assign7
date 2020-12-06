@@ -219,7 +219,7 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-	if(!Bassigns.isEmpty()){
+	if(a!=null){
 		println("Debug:");
 		bR = n.left;
 		Count++;
