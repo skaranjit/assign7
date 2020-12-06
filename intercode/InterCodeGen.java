@@ -208,11 +208,9 @@ public class InterCodeGen extends ASTVisitor {
 	println("");
     }
     public void visit(BinExprNode n) {
-        IdentifierNode leftId = null;
 	println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
        	    ((IdentifierNode) n.left).accept(this);
-	     leftType = n.left.type;
         }else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
         }else if (n.left instanceof RealNode) {
@@ -224,11 +222,9 @@ public class InterCodeGen extends ASTVisitor {
         }else
             ((BinExprNode) n.left).accept(this);
         print(" "+n.op);
-        Type rightType = null;
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
                 ((IdentifierNode) n.right).accept(this);
-                rightType = n.right.type;
             } else if (n.right instanceof NumNode) {
                 ((NumNode) n.right).accept(this);
             } else if (n.right instanceof RealNode) {
