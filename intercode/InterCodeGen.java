@@ -133,7 +133,7 @@ public class InterCodeGen extends ASTVisitor {
 	println("IfStatementNode");
  	List<AssignmentNode> Bassigns1 = new ArrayList<AssignmentNode>();
 	Bassigns1 = Bassigns;
-	Bassigns = null;
+	Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	temp.printNode();
