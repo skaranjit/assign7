@@ -4,7 +4,7 @@ import assign7.ast.*;
 import assign7.visitor.*;
 import assign7.lexer.*;
 import java.io.*;
-import java.util.*;
+
 public class Parser extends ASTVisitor
 {
     public CompilationUnit cu = null;
@@ -281,7 +281,7 @@ public class Parser extends ASTVisitor
 
     public void visit(BinExprNode n)
     {
-	n.accept(this);
+
     }
 
     int getPrecedence(int op)
@@ -342,7 +342,6 @@ public class Parser extends ASTVisitor
             lhs = new BinExprNode(token_op, lhs, rhs);
             lhs.type = rhs.type;
         }
-	
         return lhs;
     }
 
@@ -557,9 +556,8 @@ public class Parser extends ASTVisitor
         {
             n.node = rhs_assign;
         }
-        else{
+        else
             n.node = (BinExprNode) parseBinExprNode(rhs_assign, 0);
-	}
 
         match(')');
 	
