@@ -266,7 +266,7 @@ public class InterCodeGen extends ASTVisitor {
 	   	AssignmentNode assign = new AssignmentNode(temp, n);
 	   	Bassigns.add(assign);
 	   	a = temp;
-		   n.left = Bassigns.get(Bassigns.size()-1).left;
+		   n.left = a;
 	   }
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
