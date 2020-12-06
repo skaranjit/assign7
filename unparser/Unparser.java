@@ -224,8 +224,7 @@ public class Unparser extends ASTVisitor
 //                 ((BinExprNode) n.right).accept(this);
 
         }
-	for (AssignmentNode as : n.assigns)
-		as.accept(this);
+	println("Size: " + n.assigns.size());
     }
 
     public void visit(IdentifierNode n)
