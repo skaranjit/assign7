@@ -121,6 +121,7 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ParenNode n) {
 	n.node.accept(this);
     }
+    int count = 1;
 
     public void visit(ConditionalNode n)
     {
@@ -129,8 +130,8 @@ public class InterCodeGen extends ASTVisitor {
 	IdentifierNode temp = TempNode.newTemp();
 	ParenNode cond = (ParenNode)n.condition;
 	ExprNode expr = null;
-	int count = 1;
 	if(cond.node instanceof BinExprNode){
+		count ++;
 		println(" " + count);
 		expr = (BinExprNode)cond.node;		
 		println(" " + count);
