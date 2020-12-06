@@ -123,13 +123,13 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ConditionalNode n)
     {
 	println("IfStatementNode");
-        n.condition.accept(this);
+     //   n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	ParenNode cond = (ParenNode)n.condition;
 	ExprNode expr = null;
 	if(cond.node instanceof BinExprNode){
 		expr = (BinExprNode)cond.node;	
-		expr.accept(this);
+		(BinExprNode)expr.accept(this);
 		println(" " + ((BinExprNode)cond.node).assigns.size());
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
@@ -253,11 +253,7 @@ public class InterCodeGen extends ASTVisitor {
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
-	 //   println(" " + n.left);
-	   // println(" " + n.right);
-	
-	
-	
+
 	
     }
 
