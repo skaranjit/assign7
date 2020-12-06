@@ -231,7 +231,7 @@ public class InterCodeGen extends ASTVisitor {
 	println("\n "+n.left);
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
-		if(a!=null) n.left =Bassigns.get(Bassigns.size()-1).left;;
+		//if(a!=null) n.left = Bassigns.get(Bassigns.size()-1).left;;
        	    ((IdentifierNode) n.left).accept(this);
         }else if (n.left instanceof NumNode) {
             ((NumNode) n.left).accept(this);
@@ -265,12 +265,10 @@ public class InterCodeGen extends ASTVisitor {
 	println("End");
 	if(n.left != null){
 		IdentifierNode temp = TempNode.newTemp();
-		println("\n");
-		temp.printNode();
-    	
+		a = temp;
 	   	AssignmentNode assign = new AssignmentNode(temp, n);
+		if(Bassigns!=null) n.left =a;
 	   	Bassigns.add(assign);
-	   	a = temp;
 	   }
 	
     }
