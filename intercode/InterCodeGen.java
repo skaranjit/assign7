@@ -223,16 +223,7 @@ public class InterCodeGen extends ASTVisitor {
 	
 	ExprNode expr = null;
 
-	if(!Bassigns.isEmpty()){
-		println("Debug:");
-		bR = n.left;
-		Count++;
-		n.left = a;
-		println("Test a:");
-		a.printNode();
-		temp1 = n.right;
-		n.right = bR;
-	}
+	
 	
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
@@ -268,6 +259,7 @@ public class InterCodeGen extends ASTVisitor {
         }
 // 	if(n.left != null){
 		IdentifierNode temp = TempNode.newTemp();
+	        if(Bassigns.isEmpty()) n.left =a;
 	    	t = new BinExprNode(n.op,n.left,n.right);
 	   	AssignmentNode assign = new AssignmentNode(temp, t);
 		a = temp;
