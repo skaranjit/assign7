@@ -133,7 +133,8 @@ public class InterCodeGen extends ASTVisitor {
     {
 	println("IfStatementNode");
  	List<AssignmentNode> Bassigns1 = new ArrayList<AssignmentNode>;
-
+	Bassigns1 = Bassigns;
+	Bassigns = null;
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	temp.printNode();
@@ -222,7 +223,7 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-	if(!Bassigns1.isEmpty()){
+	if(!Bassigns.isEmpty()){
 		println("Debug:");
 		bR = n.left;
 		Count++;
@@ -272,7 +273,7 @@ public class InterCodeGen extends ASTVisitor {
 		IdentifierNode temp = TempNode.newTemp();
 	   	AssignmentNode assign = new AssignmentNode(temp, n);
 		a = temp;
-	   	Bassigns1.add(assign);
+	   	Bassigns.add(assign);
 		n.assigns = Bassigns;
 	   }
 	
