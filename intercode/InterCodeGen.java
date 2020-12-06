@@ -245,10 +245,7 @@ public class InterCodeGen extends ASTVisitor {
 	
 	AssignmentNode assign = new AssignmentNode(temp, n);
 	n.assigns.add(assign);
-	n.assigns.get(count).accept(this);
-	    println("\n");
-	    count++;
-	    println(" ArrayList: " + n.assigns+"\n");
+	
 	
     }
 
