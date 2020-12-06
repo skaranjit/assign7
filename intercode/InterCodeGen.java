@@ -254,6 +254,8 @@ public class InterCodeGen extends ASTVisitor {
 	n.assigns.add(assign);
 	println(" Size : " + n.assigns.size());
 	 println("\n End " + countB);
+	 for(AssignmentNode assign : n.assigns)
+		 assign.accept(this);
     }
 
     public void visit(StatementNode n)
