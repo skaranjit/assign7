@@ -132,7 +132,8 @@ public class InterCodeGen extends ASTVisitor {
 	ExprNode expr = null;
 	if(cond.node instanceof BinExprNode){
 		count ++;
-		expr = (BinExprNode)cond.node;		
+		expr = (BinExprNode)cond.node;	
+		println(" " + ((BinExprNode)cond.node).assigns.size());
 		for (AssignmentNode as : ((BinExprNode)cond.node).assigns)
 			as.accept(this);
 	} else if (cond.node instanceof BooleanNode){
