@@ -132,7 +132,7 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ConditionalNode n)
     {
 	println("IfStatementNode");
- 	Bassigns = new ArrayList<AssignmentNode>();
+ 	List<AssignmentNode> Bassigns1 = new ArrayList<AssignmentNode>;
 
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
@@ -152,7 +152,7 @@ public class InterCodeGen extends ASTVisitor {
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
         n.stmt.accept(this);
-	
+	Bassigns = Bassigns1;
 	if (n.elseStmt != null)
         {
             print("Else Clause");
@@ -222,7 +222,7 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-	if(!n.assigns.isEmpty()){
+	if(!Bassigns1.isEmpty()){
 		println("Debug:");
 		bR = n.left;
 		Count++;
@@ -270,10 +270,9 @@ public class InterCodeGen extends ASTVisitor {
 	println("End");
 	if(n.left != null){
 		IdentifierNode temp = TempNode.newTemp();
-		expr = n;
 	   	AssignmentNode assign = new AssignmentNode(temp, n);
 		a = temp;
-	   	Bassigns.add(assign);
+	   	Bassigns1.add(assign);
 		n.assigns = Bassigns;
 	   }
 	
