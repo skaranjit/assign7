@@ -206,16 +206,20 @@ public class InterCodeGen extends ASTVisitor {
     ExprNode bR = null;
     ExprNode temp1 = null;
     ExprNode last = null;
+    int Count = 0;
 public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-	if(!Bassigns.isEmpty()){
+	if(!(Bassigns.isEmpty())){
 		println("Debug Here");
 		bR = n.left;
+		temp1 = Bassigns.get(Count);
+		Count++;
 		n.left = temp1;
 		temp1 = n.right;
 		n.right = bR;
+		println("Debug Finished");
 	}
 	
 	IdentifierNode temp = TempNode.newTemp();
