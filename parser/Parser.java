@@ -560,6 +560,7 @@ public class Parser extends ASTVisitor
 	    List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
             n.node = (BinExprNode) parseBinExprNode(rhs_assign, 0);
 	    ((BinExprNode)n.node).assigns = Bassigns;
+	}
 
         match(')');
 	
