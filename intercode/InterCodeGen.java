@@ -96,10 +96,11 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit (BlockStatementNode n)
     {
+	    Bassigns = new ArrayList<AssignmentNode>();
 	for(DeclarationNode decl : n.decls)
 	     decl.accept(this);
 	for(StatementNode stmt : n.stmts){
-	     Bassigns = new ArrayList<AssignmentNode>();
+	     
 	     stmt.accept(this);
 	}
     }
