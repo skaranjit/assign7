@@ -132,13 +132,12 @@ public class InterCodeGen extends ASTVisitor {
 	    
 	if(cond.node instanceof BinExprNode){
 		expr = (BinExprNode)cond.node;
-		println("asd: Debug");
+		n.assigns = ((BinExprNode)cond.node).assigns;
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
 	}
 	AssignmentNode assign = new AssignmentNode(temp, expr);
 	n.assigns.add(assign);
-	println(" Size : " + n.assigns.size());
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
         n.stmt.accept(this);
