@@ -170,60 +170,60 @@ public class Unparser extends ASTVisitor
 
     public void visit(BinExprNode n)
     {
-//         if (n.left instanceof IdentifierNode)
-//         {
-//             ((IdentifierNode)n.left).accept(this);
-//         }
-//         else if (n.left instanceof NumNode)
-//         {
-//             ((NumNode)n.left).accept(this);
-//         }
-//         else if (n.left instanceof RealNode)
-//         {
-//             ((RealNode)n.left).accept(this);
-//         }
-//         else if (n.left instanceof BooleanNode)
-//         {
-//             ((BooleanNode)n.left).accept(this);
-//         }
-//         else if (n.left instanceof ParenNode)
-//         {
-//             ((ParenNode)n.left).accept(this);
-//         }
+        if (n.left instanceof IdentifierNode)
+        {
+            ((IdentifierNode)n.left).accept(this);
+        }
+        else if (n.left instanceof NumNode)
+        {
+            ((NumNode)n.left).accept(this);
+        }
+        else if (n.left instanceof RealNode)
+        {
+            ((RealNode)n.left).accept(this);
+        }
+        else if (n.left instanceof BooleanNode)
+        {
+            ((BooleanNode)n.left).accept(this);
+        }
+        else if (n.left instanceof ParenNode)
+        {
+            ((ParenNode)n.left).accept(this);
+        }
 //         else
 //             ((BinExprNode)n.left).accept(this);
 
-//         if (n.op != null)
-//         {
-//             print(" " + n.op.toString() + " ");
-//         }
+        if (n.op != null)
+        {
+            print(" " + n.op.toString() + " ");
+        }
 
-//         if (n.right != null)
-//         {
-//             if (n.right instanceof IdentifierNode)
-//             {
-//                 ((IdentifierNode) n.right).accept(this);
-//             }
-//             else if (n.right instanceof NumNode)
-//             {
-//                 ((NumNode) n.right).accept(this);
-//             }
-//             else if (n.right instanceof RealNode)
-//             {
-//                 ((RealNode) n.right).accept(this);
-//             }
-//             else if (n.right instanceof BooleanNode)
-//             {
-//                 ((BooleanNode) n.right).accept(this);
-//             }
-//             else if (n.right instanceof ParenNode)
-//             {
-//                 ((ParenNode) n.right).accept(this);
-//             }
+        if (n.right != null)
+        {
+            if (n.right instanceof IdentifierNode)
+            {
+                ((IdentifierNode) n.right).accept(this);
+            }
+            else if (n.right instanceof NumNode)
+            {
+                ((NumNode) n.right).accept(this);
+            }
+            else if (n.right instanceof RealNode)
+            {
+                ((RealNode) n.right).accept(this);
+            }
+            else if (n.right instanceof BooleanNode)
+            {
+                ((BooleanNode) n.right).accept(this);
+            }
+            else if (n.right instanceof ParenNode)
+            {
+                ((ParenNode) n.right).accept(this);
+            }
 //             else
 //                 ((BinExprNode) n.right).accept(this);
 
-//         }
+        }
 	for (AssignmentNode as : n.assigns)
 		as.accept(this);
     }
