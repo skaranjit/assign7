@@ -9,6 +9,7 @@ public class BinExprNode extends ExprNode
 {
     public ExprNode left;
     public ExprNode right;
+    public AssignmentNode assign;
     public Token op;
     public Type type;
      //AssignmentNode which will be added before IFStatementNode for Intermediate Code
