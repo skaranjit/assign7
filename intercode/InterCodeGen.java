@@ -221,6 +221,7 @@ public class InterCodeGen extends ASTVisitor {
 		bR = n.left;
 		Count++;
 		n.left = a;
+		println("Test a:");
 		a.printNode();
 		temp1 = n.right;
 		n.right = bR;
