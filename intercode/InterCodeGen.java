@@ -222,13 +222,13 @@ public class InterCodeGen extends ASTVisitor {
 		bR = n.left;
 		Count++;
 		n.left = a;
+		n.left = Bassigns.get(Bassigns.size()-1).left;
 		println("Test a:");
 		a.printNode();
 		temp1 = n.right;
 		n.right = bR;
 	}
-	bR = n.left;
-	n.left = Bassigns.get(Bassigns.size()-1).left;
+	
 	
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
