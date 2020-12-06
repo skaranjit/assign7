@@ -281,7 +281,7 @@ public class Parser extends ASTVisitor
 
     public void visit(BinExprNode n)
     {
-
+	n.accept(this);
     }
 
     int getPrecedence(int op)
