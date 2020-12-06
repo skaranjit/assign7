@@ -210,6 +210,7 @@ public class InterCodeGen extends ASTVisitor {
 	
 	ExprNode expr = null;
 	if(!n.assigns.isEmpty()){
+		println("Debug Here");
 		bR = n.left;
 		n.left = temp1;
 		temp1 = n.right;
