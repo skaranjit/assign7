@@ -190,8 +190,8 @@ public class Unparser extends ASTVisitor
         {
             ((ParenNode)n.left).accept(this);
         }
-//         else
-//             ((BinExprNode)n.left).accept(this);
+        else
+            ((BinExprNode)n.left).accept(this);
 
         if (n.op != null)
         {
@@ -220,8 +220,8 @@ public class Unparser extends ASTVisitor
             {
                 ((ParenNode) n.right).accept(this);
             }
-//             else
-//                 ((BinExprNode) n.right).accept(this);
+            else
+                ((BinExprNode) n.right).accept(this);
 
         }
 	println("Size: " + n.assigns.size());
