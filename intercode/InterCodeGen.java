@@ -15,7 +15,7 @@ public class InterCodeGen extends ASTVisitor {
     ExprNode temp1 = null;
     ExprNode last = null;
     int Count = 0;
-
+    public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
     IdentifierNode a = null;
     int level = 0;
 
@@ -99,7 +99,7 @@ public class InterCodeGen extends ASTVisitor {
 	for(DeclarationNode decl : n.decls)
 	     decl.accept(this);
 	for(StatementNode stmt : n.stmts){
-	     public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
+	     Bassigns = new ArrayList<AssignmentNode>();
 	     stmt.accept(this);
 	}
     }
