@@ -342,6 +342,7 @@ public class Parser extends ASTVisitor
             lhs = new BinExprNode(token_op, lhs, rhs);
             lhs.type = rhs.type;
         }
+	
         return lhs;
     }
 
@@ -558,6 +559,7 @@ public class Parser extends ASTVisitor
         }
         else{
 	    List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
+	    Bassigns = ((BinExprNode)n.node).assigns;
             n.node = (BinExprNode) parseBinExprNode(rhs_assign, 0);
 	    ((BinExprNode)n.node).assigns = Bassigns;
 	}
