@@ -218,7 +218,7 @@ public class InterCodeGen extends ASTVisitor {
         n.right.accept(this);
 	println("");
     }
-    BinExprNode t = null;
+    ExprNode t = null;
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
