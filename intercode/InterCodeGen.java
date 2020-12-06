@@ -226,7 +226,8 @@ public class InterCodeGen extends ASTVisitor {
 	}
 	
 	IdentifierNode temp = TempNode.newTemp();
-	
+	println("\n");
+	temp.printNode();
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
        	    ((IdentifierNode) n.left).accept(this);
