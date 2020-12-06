@@ -250,6 +250,8 @@ public class InterCodeGen extends ASTVisitor {
 
 	AssignmentNode assign = new AssignmentNode(temp, (BinExprNode)expr);
 	n.assigns.add(assign);
+	for (AssignmentNode as : n.assigns)
+		as.accept(this);
     }
 
     public void visit(StatementNode n)
