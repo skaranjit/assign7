@@ -204,14 +204,14 @@ public class InterCodeGen extends ASTVisitor {
         n.right.accept(this);
 	println("");
     }
-    Expr bR = null;
-    Expr temp1 = null;
+    ExprNode bR = null;
+    ExprNode temp1 = null;
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
 	if(!n.assigns.isEmpty()){
 		bR = n.left;
-		n.left = temp;
+		n.left = temp1;
 		temp1 = n.right;
 		n.right = bR;
 	}
