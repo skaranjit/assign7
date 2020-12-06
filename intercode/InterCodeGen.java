@@ -208,6 +208,7 @@ public class InterCodeGen extends ASTVisitor {
         n.right.accept(this);
 	println("");
     }
+    int count;
     public void visit(BinExprNode n) {
 	IdentifierNode temp = TempNode.newTemp();
 	ExprNode expr = null;
@@ -248,6 +249,8 @@ public class InterCodeGen extends ASTVisitor {
 	
 	AssignmentNode assign = new AssignmentNode(temp, n);
 	n.assigns.add(assign);
+	n.assigns.get(count).accept(this);
+	    count++;
 	    println(" ArrayList: " + n.assigns);
 	
     }
