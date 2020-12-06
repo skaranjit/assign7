@@ -234,7 +234,6 @@ public class InterCodeGen extends ASTVisitor {
 		n.right = bR;
 	}
 	
-	println("\n "+n.left);
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
 		//if(a!=null) n.left = Bassigns.get(Bassigns.size()-1).left;;
