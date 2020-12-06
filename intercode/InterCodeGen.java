@@ -240,14 +240,15 @@ public class InterCodeGen extends ASTVisitor {
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
-	    println(" " + n.left);
-	    println(" " + n.right);
+	 //   println(" " + n.left);
+	   // println(" " + n.right);
 	
 	AssignmentNode assign = new AssignmentNode(temp, n);
 	n.assigns.add(assign);
 	n.assigns.get(count).accept(this);
+	    println("\n");
 	    count++;
-	    println(" ArrayList: " + n.assigns);
+	    println(" ArrayList: " + n.assigns+"\n");
 	
     }
 
