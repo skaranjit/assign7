@@ -215,7 +215,7 @@ public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
 	if(!(Bassigns.isEmpty())){
 		println("Debug Here");
 		bR = n.left;
-		a = Bassigns.get(Count);
+		
 		Count++;
 		n.left = a;
 		temp1 = n.right;
@@ -224,6 +224,7 @@ public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
 	}
 	
 	IdentifierNode temp = TempNode.newTemp();
+	a = temp;
 	println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
        	    ((IdentifierNode) n.left).accept(this);
