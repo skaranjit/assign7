@@ -261,8 +261,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(BreakNode n)
     {
-        printIndent();
-        println("break;");
+        println("Break: goto "+ n.bLabel);
     }
 
     public void visit(ConditionalNode n)
