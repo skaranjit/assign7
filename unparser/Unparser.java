@@ -252,10 +252,11 @@ public class Unparser extends ASTVisitor
 	    }
             
         }
-	        print(n.id);
+	printIndent();
+	print(n.id);
 	if (n.array != null)
         {   
-	    printIndent();
+	    
 
 	    n.array.accept(this);
             
