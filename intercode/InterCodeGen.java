@@ -253,7 +253,7 @@ public class InterCodeGen extends ASTVisitor {
 	    n.assigns = Bassigns;
         println("");
         if(Bassigns.size()<2){
-            TempNode.Tempminus;
+            TempNode.Tempminus();
             Bassigns = new ArrayList<AssignmentNode>();
         }
     }
