@@ -293,6 +293,9 @@ public class Unparser extends ASTVisitor
         //n.stmt.accept(this);
         indentDown();
     }
+    public void visit(GotoNode n){
+        n.stmt.accept(this);
+    }
     public void visit(DoWhileNode n)
     {
        printIndent();
