@@ -133,9 +133,6 @@ public class Unparser extends ASTVisitor
 
     public void visit(ArrayTypeNode n)
     {
-    	 for (AssignmentNode a : n.assigns){
-		a.accept(this);
-	}
         print("[");
         (n.size).accept(this);
 //         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
