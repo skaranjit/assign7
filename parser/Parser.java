@@ -233,7 +233,7 @@ public class Parser extends ASTVisitor
                     n.stmt = new BlockStatementNode(enclosingBlock);
 		            n.stmt.accept(this);
                }
-               error("Syntax Error: Statement needed");
+               else error("Syntax Error: Statement needed");
         }
     }
 
