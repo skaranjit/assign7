@@ -212,6 +212,10 @@ public class Parser extends ASTVisitor
                 n.stmt  = new ConditionalNode();
                 n.stmt.accept(this);
 		break;
+	    case Tag.ELSE:
+	    	n.stmt = new ConditionalNode();
+		n.stmt.accept(this);
+		break;
             case Tag.WHILE:
                 n.stmt = new WhileNode();
                 n.stmt.accept(this);
@@ -371,10 +375,8 @@ public class Parser extends ASTVisitor
 // 		println("********EnclosingBlock has this IfStatementNode**************");
 
         match(Tag.IF);
-	if(n.condition != null) {
-		n.condition = new ParenNode();
-		((ParenNode)n.condition).accept(this);
-	}
+	n.condition = new ParenNode();
+	((ParenNode)n.condition).accept(this);
 	ExprNode rhs_assign = null;
         n.stmt = new StatementNode();
 	n.stmt.accept(this);
