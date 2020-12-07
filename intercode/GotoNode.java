@@ -6,7 +6,7 @@ import java.util.*;
 import assign7.parser.*;
 import assign7.ast.*;
 
-public class GotoNode extends ASTVisitor
+public class GotoNode extends StatementNode
 {
     public LabelNode gotoLabel = null;
     public StatementNode gotostmts = null;
