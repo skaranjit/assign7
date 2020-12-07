@@ -112,7 +112,7 @@ public class Parser extends ASTVisitor
 		n.decls.add(decl);
 		decl.accept(this);
 	}
-	while (opt(Tag.ID, Tag.IF, Tag.WHILE,Tag.DO,Tag.BREAK)){
+	while (opt(Tag.ID, Tag.IF, Tag.WHILE,Tag.DO,Tag.BREAK,Tag.BASIC)){
 		StatementNode stmt = new StatementNode();
 		
 		stmt.accept(this);
@@ -228,16 +228,12 @@ public class Parser extends ASTVisitor
 	   	        n.stmt = new BlockStatementNode(enclosingBlock);
 		        n.stmt.accept(this);
                 break;
-            // case Tag.BASIC:
-            //     n.stmt = new BlockStatementNode(enclosingBlock);
-            //     n.stmt.accept(this);
-            //     break;
+            case Tag.BASIC:
+                n.stmt = new BlockStatementNode(enclosingBlock);
+                n.stmt.accept(this);
+                break;
            default :
-               if(look.tag == Tag.BASIC){
-                    n.stmt = new BlockStatementNode(enclosingBlock);
-		            n.stmt.accept(this);
-               }
-               else error("Syntax Error: Statement needed");
+                error("Syntax Error: Statement needed");
         }
     }
 
