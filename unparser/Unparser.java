@@ -236,9 +236,16 @@ public class Unparser extends ASTVisitor
     {
         if (n.array != null)
         {
-            n.array.accept(this);
+	    for (AssingmentNode a: n.array.assigns)
+	    	a.accept(this);
+            
         }
 	        print(n.id);
+	if (n.array != null)
+        {
+	    n.array.accept(this);
+            
+        }
 
     }
 
