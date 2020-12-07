@@ -13,7 +13,7 @@ public class TempNode extends IdentifierNode {
     num ++;
     return new IdentifierNode(new Word("t" + num, Tag.ID),null);
   }
-  public static void Tempminux(){
+  public static void Tempminus(){
       num --;
   }
   
