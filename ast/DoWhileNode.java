@@ -14,7 +14,7 @@ public class DoWhileNode extends StatementNode
     
     //Label for intermediate Code
     public LabelNode falseLabel;
-    public LabelNode startNode;
+    public LabelNode startLabel;
     public GotoNode dGoto;
     public DoWhileNode()
     {
