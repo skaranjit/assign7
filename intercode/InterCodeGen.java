@@ -131,25 +131,22 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ConditionalNode n)
     {
 	println("IfStatementNode");
-//  	List<AssignmentNode> Bassigns1 = new ArrayList<AssignmentNode>();
-// 	Bassigns1 = Bassigns;
  	Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
-	//IdentifierNode temp = TempNode.newTemp();
-	//temp.printNode();
+	IdentifierNode temp = TempNode.newTemp();
 	ParenNode cond = (ParenNode)n.condition;
 	ExprNode expr = null;
 	if(cond.node instanceof BinExprNode){
-		expr = (BinExprNode)cond.node;
+		//expr = (BinExprNode)cond.node;
 // 		//((BinExprNode)expr).accept(this);
-// 		expr = Bassigns.get(Bassigns.size()-1).left;
+		expr = Bassigns.get(Bassigns.size()-1).left;
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
 	}
 	AssignmentNode assign = new AssignmentNode(temp, expr);
  	n.assigns = Bassigns;
-//	n.assigns.add(assign);
-	//((ParenNode)n.condition).node = temp;
+	n.assigns.add(assign);
+	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
         n.stmt.accept(this);
 // 	Bassigns = Bassigns1;
