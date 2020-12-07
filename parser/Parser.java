@@ -212,10 +212,6 @@ public class Parser extends ASTVisitor
                 n.stmt  = new ConditionalNode();
                 n.stmt.accept(this);
 		break;
-	    case Tag.ELSE:
-	    	n.stmt = new ConditionalNode();
-		n.stmt.accept(this);
-		break;
             case Tag.WHILE:
                 n.stmt = new WhileNode();
                 n.stmt.accept(this);
@@ -383,6 +379,7 @@ public class Parser extends ASTVisitor
 
         if (look.tag == Tag.ELSE)
         {
+	   match(Tag.ELSE);
             n.elseStmt = new StatementNode();
             (n.elseStmt).accept(this);
            
