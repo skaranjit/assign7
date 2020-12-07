@@ -162,8 +162,6 @@ public class Unparser extends ASTVisitor
         printIndent();
          n.left.accept(this);
          print(" = ");
-	         printIndent();
-
          if (n.right instanceof  IdentifierNode)
              ((IdentifierNode)n.right).accept(this);
          else if (n.right instanceof NumNode)
