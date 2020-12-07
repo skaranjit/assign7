@@ -224,16 +224,16 @@ public class Parser extends ASTVisitor
                 n.stmt = new BreakNode();
                 n.stmt.accept(this);
                 break;
-	        // case '{' :
-	   	    //     n.stmt = new BlockStatementNode(enclosingBlock);
-		    //     n.stmt.accept(this);
-		    //     break;
+	        case '{' :
+	   	        n.stmt = new BlockStatementNode(enclosingBlock);
+		        n.stmt.accept(this);
+                break;
+            case Tag.BASIC:
+                n.stmt = new BlockStatementNode(enclosingBlock);
+                n.stmt.accept(this);
+                break;
            default :
-               if(look.tag == '{'){
-                    n.stmt = new BlockStatementNode(enclosingBlock);
-		            n.stmt.accept(this);
-               }
-               else error("Syntax Error: Statement needed");
+               error("Syntax Error: Statement needed");
         }
     }
 
