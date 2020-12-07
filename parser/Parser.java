@@ -99,10 +99,16 @@ public class Parser extends ASTVisitor
 	println("**************End of Parser*****************");
     }
 
-
+    boolean tagMatch = false;
     public void visit (BlockStatementNode n)
     {
-        if(look.tag != Tag.BASIC) match('{');
+        if(look.tag == Tag.BASIC){
+            tagMatch = true;
+        }
+        else{
+            match('{');
+            tagMatch = false;
+        }
         n.sTable = top; // new code
         top = new Env(top); // new code
 	//Set EnclosingBlock to the current level block 
@@ -118,7 +124,7 @@ public class Parser extends ASTVisitor
 		stmt.accept(this);
 		n.stmts.add(stmt);
 	}
-        match('}');
+    if(!tagMatch) match('}');
 	println("End of Block Statement");
         top = n.sTable; // new code
 	enclosingBlock = n.parent;
