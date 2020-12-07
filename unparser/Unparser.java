@@ -234,11 +234,12 @@ public class Unparser extends ASTVisitor
 
     public void visit(IdentifierNode n)
     {
-        print(n.id);
         if (n.array != null)
         {
             n.array.accept(this);
         }
+	        print(n.id);
+
     }
 
     public void visit(ArrayIDNode n)
