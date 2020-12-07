@@ -288,6 +288,7 @@ public class Unparser extends ASTVisitor
         print("ifFalse ");
        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
+        println(n.falseLabel.id+":");
         n.wGoto.accept(this);
         indentUp();
         //n.stmt.accept(this);
