@@ -304,14 +304,20 @@ public class Unparser extends ASTVisitor
     }
     public void visit(DoWhileNode n)
     {
-       println("do");
-       indentUp();
-       n.stmt.accept(this);
-       indentDown();
-       printIndent();
-       print("while (");
-       n.condition.accept(this);
-       println(");");
+        for (AssignmentNode assign : n.assigns)
+		assign.accept(this);
+      //  printIndent();
+        println(n.startLabel.id + ": ");
+       
+        printIndent();
+        n.dGoto.accept(this);
+        print("iffalse ");
+        n.condition.accept(this);
+        println(" goto " + n.falseLabel.id);
+      
+        println("goto "+n.startLabel.id);
+        println(n.falseLabel.id+":");
+       
     }
     public void visit(BooleanNode n)
     {
