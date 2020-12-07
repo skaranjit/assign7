@@ -237,11 +237,8 @@ public class InterCodeGen extends ASTVisitor {
 	Bassigns = new ArrayList<AssignmentNode>();
 	IdentifierNode temp = TempNode.newTemp();
 	n.node.accept(this);
-//         ParenNode cond = (ParenNode)n.condition;
         ExprNode expr = null;
         if(n.node instanceof BinExprNode){
-            expr = (BinExprNode)n.node;
-    // 		//((BinExprNode)expr).accept(this);
             expr = Bassigns.get(Bassigns.size()-1).left;
         } else if (n.node instanceof NumNode){
             expr = (NumNode)n.node;
@@ -254,11 +251,6 @@ public class InterCodeGen extends ASTVisitor {
         }
         n.assigns.add(assign);
 	n.node = temp;
-// 	if(n.node instanceof NumNode) ((NumNode)n.node).accept(this);
-// 	if(n.node instanceof IdentifierNode) ((IdentifierNode)n.node).accept(this);
-// 	if (n.node.type != Type.Int){
-//             error("Index of Array must be an Integer");
-//         }
         if(n.id != null)
         {
             n.id.accept(this);
@@ -277,7 +269,6 @@ public class InterCodeGen extends ASTVisitor {
 	ExprNode expr = null;
         if(n.size instanceof BinExprNode){
             expr = (BinExprNode)n.size;
-    // 		//((BinExprNode)expr).accept(this);
             expr = Bassigns.get(Bassigns.size()-1).left;
         } else if (n.size instanceof NumNode){
             expr = (NumNode)n.size;
@@ -314,28 +305,28 @@ public class InterCodeGen extends ASTVisitor {
 	    print(" =");
        
 	ExprNode expr = null;
-	    n.right.accept(this);
-        if(n.right instanceof BinExprNode){
-           // expr = (BinExprNode)n.right;
-    // 		//((BinExprNode)expr).accept(this);
-	    if(!temp1.isEmpty())
-            	expr = temp1.get(temp1.size()-1).left;
-	    else if (n.right instanceof NumNode)
-            	expr = (NumNode)n.right;
-             else if (n.right instanceof IdentifierNode)
-            	expr = (IdentifierNode)n.right;
+	n.right.accept(this);
+//         if(n.right instanceof BinExprNode){
+//            // expr = (BinExprNode)n.right;
+//     // 		//((BinExprNode)expr).accept(this);
+// 	    if(!temp1.isEmpty())
+//             	expr = temp1.get(temp1.size()-1).left;
+// 	    else if (n.right instanceof NumNode)
+//             	expr = (NumNode)n.right;
+//              else if (n.right instanceof IdentifierNode)
+//             	expr = (IdentifierNode)n.right;
 	     
 	
-        }
-// 	else{
-// 		 n.right.accept(this);
-// 	}
-	IdentifierNode temp = TempNode.newTemp();
-	AssignmentNode assign = new AssignmentNode(temp, expr);
-        for(AssignmentNode assign1 : temp1){
-            n.assigns.add(assign1);
-        }
-	n.right = temp;
+//         }
+// // 	else{
+// // 		 n.right.accept(this);
+// // 	}
+// 	IdentifierNode temp = TempNode.newTemp();
+// 	AssignmentNode assign = new AssignmentNode(temp, expr);
+//         for(AssignmentNode assign1 : temp1){
+//             n.assigns.add(assign1);
+//         }
+//	n.right = temp;
         println("");
 //         if(Bassigns.size()<2){
 //             TempNode.Tempminus();
