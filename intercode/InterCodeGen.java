@@ -250,7 +250,7 @@ public class InterCodeGen extends ASTVisitor {
         Type leftType = leftId.type;
 	    print(" =");
         n.right.accept(this);
-	    n.assign = Bassigns;
+	    n.assigns = Bassigns;
         println("");
         
     }
