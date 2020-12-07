@@ -318,7 +318,7 @@ public class InterCodeGen extends ASTVisitor {
            // expr = (BinExprNode)n.right;
     // 		//((BinExprNode)expr).accept(this);
 	    if(!temp1.isEmpty())
-            	expr = temp1.get(Bassigns.size()-1).left;
+            	expr = temp1.get(temp1.size()-1).left;
 	    else expr = n.right;
 	
         }
