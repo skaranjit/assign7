@@ -151,6 +151,9 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
+    	for (AssignmentNode a: n.assigns){
+		a.aceept(this);
+	}
         printIndent();
         n.left.accept(this);
         print(" = ");
@@ -248,9 +251,6 @@ public class Unparser extends ASTVisitor
 
     public void visit(ArrayIDNode n)
     {
-        for (AssignmentNode a : n.assigns){
-		a.accept(this);
-	}
         print("[");
         n.node.accept(this);
         print("]");
