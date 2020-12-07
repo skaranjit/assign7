@@ -371,8 +371,10 @@ public class Parser extends ASTVisitor
 // 		println("********EnclosingBlock has this IfStatementNode**************");
 
         match(Tag.IF);
-	n.condition = new ParenNode();
-	((ParenNode)n.condition).accept(this);
+	if(n.condition != null) {
+		n.condition = new ParenNode();
+		((ParenNode)n.condition).accept(this);
+	}
 	ExprNode rhs_assign = null;
         n.stmt = new StatementNode();
 	n.stmt.accept(this);
