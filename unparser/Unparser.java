@@ -287,11 +287,11 @@ public class Unparser extends ASTVisitor
 		assign.accept(this);
       //  printIndent();
         println(n.startLabel.id + ": ");
-        print("ifFalse ");
+        print("iffalse ");
        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
         n.wGoto.accept(this);
-        print("goto "+n.startLabel.id);
+        println("goto "+n.startLabel.id);
         println(n.falseLabel.id+":");
 
         indentUp();
@@ -303,7 +303,6 @@ public class Unparser extends ASTVisitor
     }
     public void visit(DoWhileNode n)
     {
-       printIndent();
        println("do");
        indentUp();
        n.stmt.accept(this);

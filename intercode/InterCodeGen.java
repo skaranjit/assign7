@@ -195,8 +195,17 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(DoWhileNode n)
     {
         System.out.println("visiting DoWhileNode");
-        n.stmt.accept(this);
+        n.startLabel = LabelNode.newLabel();
+        n.dGoto = new GotoNode(n.startLabel, n.stmt);
+        n.dGoto.accept(this);
+        println(n.startLabel.id + ": ");
+        print("iffalse ");
         n.condition.accept(this);
+        n.falseLabel = LabelNode.newLabel();
+        println(" goto " + n.falseLabel.id);
+        println("goto "+n.startLabel.id);
+
+
     }
 
     public void visit (ArrayIDNode n)
