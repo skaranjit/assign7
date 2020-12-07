@@ -244,21 +244,15 @@ public class InterCodeGen extends ASTVisitor {
         n.left.accept(this);
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
-	print(" =");
+	    print(" =");
         n.right.accept(this);
-	if(Bassigns.size() < 2) {
-			Bassigns = new ArrayList<AssignmentNode>();
-			TempNode.Tempminus();
-		}
-	println("");
+	    
+	    println("");
     }
     ExprNode t = null;
     public void visit(BinExprNode n) {
 	
 	ExprNode expr = null;
-
-	
-	
 	//println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
        	    ((IdentifierNode) n.left).accept(this);
@@ -272,8 +266,7 @@ public class InterCodeGen extends ASTVisitor {
             ((ParenNode) n.left).accept(this);
         }else if(n.left instanceof BinExprNode){
             ((BinExprNode) n.left).accept(this);
-	} else { 
-		
+	} else { 	
 	}
         print(" "+n.op);
         if (n.right != null) {
@@ -292,7 +285,6 @@ public class InterCodeGen extends ASTVisitor {
            } else { 
 		    
 	    }
-	   
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
@@ -300,14 +292,10 @@ public class InterCodeGen extends ASTVisitor {
 		IdentifierNode temp = TempNode.newTemp();
 	        if(!Bassigns.isEmpty()) n.left =a;
 	    	t = new BinExprNode(n.op,n.left,n.right);
-	   	AssignmentNode assign = new AssignmentNode(temp, t);
-		a = temp;
-	   	Bassigns.add(assign);
-		
+	   	    AssignmentNode assign = new AssignmentNode(temp, t);
+		    a = temp;
+	   	    Bassigns.add(assign);
 	}
-	println("End");
-	
-	
     }
 
     public void visit(StatementNode n)
