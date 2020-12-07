@@ -245,15 +245,14 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(AssignmentNode n)
     {
 
-        // n.left.accept(this);
-        // IdentifierNode leftId = (IdentifierNode)n.left;
-        // Type leftType = leftId.type;
-	    // print(" =");
-        // n.right.accept(this);
-	    // n.assign = Bassigns;
-        // println("");
-        for(AssignmentNode a: n.assign)
-            a.accept(this);
+        n.left.accept(this);
+        IdentifierNode leftId = (IdentifierNode)n.left;
+        Type leftType = leftId.type;
+	    print(" =");
+        n.right.accept(this);
+	    n.assign = Bassigns;
+        println("");
+        
     }
     ExprNode t = null;
     public void visit(BinExprNode n) {
