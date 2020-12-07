@@ -178,7 +178,7 @@ public class Unparser extends ASTVisitor
 	     for (AssignmentNode a : ((BinExprNode)n.right).assigns){
 		a.accept(this);
 		}
-		}
+		
 	}
 	//else{ n.right.accept(this);}
 
