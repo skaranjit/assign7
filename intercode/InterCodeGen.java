@@ -168,7 +168,6 @@ public class InterCodeGen extends ASTVisitor {
         System.out.println("WhileStatement");
         Bassigns = new ArrayList<AssignmentNode>();
         n.startLabel = LabelNode.newLabel();
-        globalLabel = n.startLabel;
         n.condition.accept(this);
         IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
@@ -188,6 +187,8 @@ public class InterCodeGen extends ASTVisitor {
 	    	((ParenNode)n.condition).node = temp;
 
         n.falseLabel = LabelNode.newLabel();
+	globalLabel = n.falseLabel;
+
     //n.stmt.accept(this);
         n.wGoto = new GotoNode(n.falseLabel, n.stmt);
 	    n.wGoto.accept(this);
@@ -231,11 +232,30 @@ public class InterCodeGen extends ASTVisitor {
     public void visit (ArrayIDNode n)
     {
         System.out.println("visiting ArrayIDNode");
-	if(n.node instanceof NumNode) ((NumNode)n.node).accept(this);
-	if(n.node instanceof IdentifierNode) ((IdentifierNode)n.node).accept(this);
-	if (n.node.type != Type.Int){
-            error("Index of Array must be an Integer");
+	IdentifierNode temp = TempNode.newTemp();
+	n.node.accept(this);
+//         ParenNode cond = (ParenNode)n.condition;
+        ExprNode expr = null;
+        if(n.node instanceof BinExprNode){
+            expr = (BinExprNode)cond.node;
+    // 		//((BinExprNode)expr).accept(this);
+            expr = Bassigns.get(Bassigns.size()-1).left;
+        } else if (n.node instanceof NumNode){
+            expr = (NumNode)n.node;
+        }else if (n.node instanceof IdentifierNode){
+            expr = (IdentifierNode)n.node;
         }
+	AssignmentNode assign = new AssignmentNode(temp, expr);
+        for(AssignmentNode assign1 : Bassigns){
+            n.assigns.add(assign1);
+        }
+        n.assigns.add(assign);
+	n.node = temp;
+// 	if(n.node instanceof NumNode) ((NumNode)n.node).accept(this);
+// 	if(n.node instanceof IdentifierNode) ((IdentifierNode)n.node).accept(this);
+// 	if (n.node.type != Type.Int){
+//             error("Index of Array must be an Integer");
+//         }
         if(n.id != null)
         {
             n.id.accept(this);
@@ -246,9 +266,22 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.println("ArrayDimsNode");
         n.size.accept(this);
-        if (n.size.type != Type.Int ){
-            error("Index of Array must be an Integer");
+	ExprNode expr = null;
+        if(n.size instanceof BinExprNode){
+            expr = (BinExprNode)cond.node;
+    // 		//((BinExprNode)expr).accept(this);
+            expr = Bassigns.get(Bassigns.size()-1).left;
+        } else if (n.size instanceof NumNode){
+            expr = (NumNode)n.node;
+        }else if (n.size instanceof IdentifierNode){
+            expr = (IdentifierNode)n.node;
         }
+	AssignmentNode assign = new AssignmentNode(temp, expr);
+        for(AssignmentNode assign1 : Bassigns){
+            n.assigns.add(assign1);
+        }
+        n.assigns.add(assign);
+	n.size = temp;
         if(n.type != null)
         {
             n.type.accept(this);
