@@ -306,6 +306,9 @@ public class InterCodeGen extends ASTVisitor {
     {
 
         n.left.accept(this);
+	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+	temp1 = Bassigns;
+	Bassigns = new ArrayList<AssignmentNode>();
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
 	    print(" =");
@@ -314,7 +317,7 @@ public class InterCodeGen extends ASTVisitor {
         if(n.right instanceof BinExprNode){
            // expr = (BinExprNode)n.right;
     // 		//((BinExprNode)expr).accept(this);
-	    if(!Bassigns.isEmpty())
+	    if(!temp1.isEmpty())
             	expr = Bassigns.get(Bassigns.size()-1).left;
 	    else expr = n.right;
 	
@@ -324,16 +327,16 @@ public class InterCodeGen extends ASTVisitor {
 // 	}
 	IdentifierNode temp = TempNode.newTemp();
 	AssignmentNode assign = new AssignmentNode(temp, expr);
-        for(AssignmentNode assign1 : Bassigns){
+        for(AssignmentNode assign1 : temp1){
             n.assigns.add(assign1);
         }
-	n.assigns = Bassigns;
 	n.right = temp;
         println("");
 //         if(Bassigns.size()<2){
 //             TempNode.Tempminus();
 //             Bassigns = new ArrayList<AssignmentNode>();
 //         }
+	Bassigns = temp1;
     }
     ExprNode t = null;
     public void visit(BinExprNode n) {
