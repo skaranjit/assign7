@@ -148,9 +148,9 @@ public class InterCodeGen extends ASTVisitor {
 	n.assigns.add(assign);
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
+	n.stmt.accept(this);
 	GotoNode goto = new GotoNode(n.falseLabel,n.stmt);
 	goto.accept(this);
-// 		n.stmt.accept(this);
 // 	Bassigns = Bassigns1;
 	if (n.elseStmt != null)
         {
