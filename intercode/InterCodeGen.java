@@ -270,8 +270,9 @@ public class InterCodeGen extends ASTVisitor {
         if(n.right instanceof BinExprNode){
            // expr = (BinExprNode)n.right;
     // 		//((BinExprNode)expr).accept(this);
-	    
-            expr = Bassigns.get(Bassigns.size()-1).left;
+	    if(!Bassigns.isEmpty())
+            	expr = Bassigns.get(Bassigns.size()-1).left;
+	    else expr = n.right;
 	
         }
 	else{
