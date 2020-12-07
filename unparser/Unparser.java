@@ -138,7 +138,8 @@ public class Unparser extends ASTVisitor
     }
 
     public void visit(ArrayTypeNode n)
-    {
+    {   
+        
         print("[");
         (n.size).accept(this);
 //         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
@@ -161,7 +162,8 @@ public class Unparser extends ASTVisitor
         printIndent();
          n.left.accept(this);
          print(" = ");
-	  
+	         printIndent();
+
          if (n.right instanceof  IdentifierNode)
              ((IdentifierNode)n.right).accept(this);
          else if (n.right instanceof NumNode)
@@ -252,14 +254,10 @@ public class Unparser extends ASTVisitor
 	    }
             
         }
-	printIndent();
 	print(n.id);
 	if (n.array != null)
-        {   
-	    
-
-	    n.array.accept(this);
-            
+        { 
+	    n.array.accept(this); 
         }
 
     }
