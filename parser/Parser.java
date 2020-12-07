@@ -102,7 +102,7 @@ public class Parser extends ASTVisitor
 
     public void visit (BlockStatementNode n)
     {
-        match('{');
+        if(look.tag != Tag.BASIC) match('{');
         n.sTable = top; // new code
         top = new Env(top); // new code
 	//Set EnclosingBlock to the current level block 
