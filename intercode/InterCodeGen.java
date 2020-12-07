@@ -266,15 +266,16 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.println("ArrayDimsNode");
         n.size.accept(this);
+	IdentifierNode temp = TempNode.newTemp();
 	ExprNode expr = null;
         if(n.size instanceof BinExprNode){
             expr = (BinExprNode)n.size;
     // 		//((BinExprNode)expr).accept(this);
             expr = Bassigns.get(Bassigns.size()-1).left;
         } else if (n.size instanceof NumNode){
-            expr = (NumNode)n.node;
+            expr = (NumNode)n.size;
         }else if (n.size instanceof IdentifierNode){
-            expr = (IdentifierNode)n.node;
+            expr = (IdentifierNode)n.size;
         }
 	AssignmentNode assign = new AssignmentNode(temp, expr);
         for(AssignmentNode assign1 : Bassigns){
