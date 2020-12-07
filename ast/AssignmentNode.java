@@ -9,7 +9,8 @@ public class AssignmentNode extends StatementNode
     // **for the future version of Compiler, it should not be IdentifierNode, it should be Array for final version**
     public IdentifierNode left;
     public ExprNode right;
-
+    public List<AssignmentNode> assigns = new ArrayList<AssignmentNode>();
+    
     public AssignmentNode()
     {
 
