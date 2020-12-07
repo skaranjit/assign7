@@ -190,9 +190,11 @@ public class Unparser extends ASTVisitor
         else if (n.left instanceof ParenNode)
         {
             ((ParenNode)n.left).accept(this);
-        }
-        else
+        } else if(n.left instanceof BinExprNode){
             ((BinExprNode)n.left).accept(this);
+	}else {
+	
+	}
 
         if (n.op != null)
         {
@@ -220,10 +222,9 @@ public class Unparser extends ASTVisitor
             else if (n.right instanceof ParenNode)
             {
                 ((ParenNode) n.right).accept(this);
-            }
-            else
-                ((BinExprNode) n.right).accept(this);
-
+            } else if(n.right instanceof BinExprNode){
+            	((BinExprNode)n.right).accept(this);
+            else{ }
         }
     }
 
