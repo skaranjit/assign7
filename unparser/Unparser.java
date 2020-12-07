@@ -272,12 +272,12 @@ public class Unparser extends ASTVisitor
         print("ifFalse ");
        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.IfGoto.stmt.accept(this);
+       // n.IfGoto.accept(this);
 	println(n.falseLabel.id+":");
-        if (n.elseStmt != null)
-        {
-            n.elseStmt.accept(this);
-        }
+        // if (n.elseStmt != null)
+        // {
+        //     n.elseStmt.accept(this);
+        // }
     }
     public void visit(WhileNode n)
     {
@@ -288,7 +288,7 @@ public class Unparser extends ASTVisitor
         print("ifFalse ");
        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.wGoto.stmt.accept(this);
+        n.wGoto.accept(this);
         indentUp();
         //n.stmt.accept(this);
         indentDown();

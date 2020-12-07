@@ -188,7 +188,7 @@ public class InterCodeGen extends ASTVisitor {
     //n.stmt.accept(this);
         n.wGoto = new GotoNode(n.falseLabel, n.stmt);
 	    n.wGoto.accept(this);
-        n.stmt.accept(this);
+       // n.stmt.accept(this);
     }
 
     public void visit(DoWhileNode n)
