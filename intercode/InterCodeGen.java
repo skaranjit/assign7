@@ -101,6 +101,8 @@ public class InterCodeGen extends ASTVisitor {
 	for(DeclarationNode decl : n.decls)
 	     decl.accept(this);
 	for(StatementNode stmt : n.stmts){
+		 	Bassigns = new ArrayList<AssignmentNode>();
+
 	     stmt.accept(this);
 	}
     }
@@ -132,7 +134,6 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ConditionalNode n)
     {
 	println("IfStatementNode");
- 	Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	ParenNode cond = (ParenNode)n.condition;
