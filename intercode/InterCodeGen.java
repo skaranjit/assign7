@@ -314,6 +314,7 @@ public class InterCodeGen extends ASTVisitor {
 	    print(" =");
        
 	ExprNode expr = null;
+	    n.right.accept(this);
         if(n.right instanceof BinExprNode){
            // expr = (BinExprNode)n.right;
     // 		//((BinExprNode)expr).accept(this);
