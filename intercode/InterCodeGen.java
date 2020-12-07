@@ -319,7 +319,7 @@ public class InterCodeGen extends ASTVisitor {
     // 		//((BinExprNode)expr).accept(this);
 	    if(!temp1.isEmpty())
             	expr = temp1.get(temp1.size()-1).left;
-	    else if (n.right instanceof NumNode){
+	    else if (n.right instanceof NumNode)
             	expr = (NumNode)n.right;
              else if (n.right instanceof IdentifierNode)
             	expr = (IdentifierNode)n.right;
