@@ -18,6 +18,7 @@ public class InterCodeGen extends ASTVisitor {
     public List<AssignmentNode> Bassigns = new ArrayList<AssignmentNode>();
     IdentifierNode a = null;
     int level = 0;
+    public LabelNode globalLabel;
 
     public Env top = null;
 
@@ -169,6 +170,7 @@ public class InterCodeGen extends ASTVisitor {
         System.out.println("WhileStatement");
         Bassigns = new ArrayList<AssignmentNode>();
         n.startLabel = LabelNode.newLabel();
+        globalLabel = startLabel;
         n.condition.accept(this);
         IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
@@ -237,6 +239,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(BreakNode n)
     {
+
     }
 
     public void visit(AssignmentNode n)
