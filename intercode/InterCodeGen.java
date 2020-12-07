@@ -131,23 +131,23 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ConditionalNode n)
     {
 	println("IfStatementNode");
- 	List<AssignmentNode> Bassigns1 = new ArrayList<AssignmentNode>();
-	Bassigns1 = Bassigns;
-	Bassigns = new ArrayList<AssignmentNode>();
+//  	List<AssignmentNode> Bassigns1 = new ArrayList<AssignmentNode>();
+// 	Bassigns1 = Bassigns;
+// 	Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	temp.printNode();
 	ParenNode cond = (ParenNode)n.condition;
 	ExprNode expr = null;
 	if(cond.node instanceof BinExprNode){
-		//expr = (BinExprNode)cond.node;
-		//((BinExprNode)expr).accept(this);
-		expr = Bassigns.get(Bassigns.size()-1).left;
+		expr = (BinExprNode)cond.node;
+// 		//((BinExprNode)expr).accept(this);
+// 		expr = Bassigns.get(Bassigns.size()-1).left;
 	} else if (cond.node instanceof BooleanNode){
 		expr = (BooleanNode)cond.node;
 	}
 	AssignmentNode assign = new AssignmentNode(temp, expr);
-	n.assigns = Bassigns;
+// 	n.assigns = Bassigns;
 	n.assigns.add(assign);
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
@@ -236,8 +236,11 @@ public class InterCodeGen extends ASTVisitor {
             ((BooleanNode)n.left).accept(this);
         }else if (n.left instanceof ParenNode) {
             ((ParenNode) n.left).accept(this);
-        }else
+        }else if(n.left instanceof BinExprNode){
             ((BinExprNode) n.left).accept(this);
+	} else { 
+		
+	}
         print(" "+n.op);
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
@@ -250,9 +253,11 @@ public class InterCodeGen extends ASTVisitor {
                 ((BooleanNode) n.right).accept(this);
             } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
-            } else {
+            } else if(n.right instanceof BinExprNode) {
                ((BinExprNode) n.right).accept(this);
-           }
+           } else { 
+		    
+	    }
 	   
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
