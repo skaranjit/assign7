@@ -168,6 +168,7 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.println("WhileStatement");
         Bassigns = new ArrayList<AssignmentNode>();
+        n.startLabel = LabelNode.newLabel();
         n.condition.accept(this);
         IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
