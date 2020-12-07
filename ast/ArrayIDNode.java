@@ -1,7 +1,8 @@
 package assign7.ast;
 
 import assign7.visitor.*;
-
+import assign7.ast.*;
+import assign7.intercode.*;
 public class ArrayIDNode extends IdentifierNode
 {
     public ArrayIDNode id;
