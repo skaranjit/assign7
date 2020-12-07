@@ -14,7 +14,7 @@ public class WhileNode extends StatementNode
     
     //Label for intermediate Code
     public LabelNode falseLabel;
-    
+    public GotoNode wGoto;
     public WhileNode()
     {
 

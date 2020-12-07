@@ -164,8 +164,26 @@ public class InterCodeGen extends ASTVisitor {
     }
     public void visit(WhileNode n)
     {
-        System.out.println("visiting WhileNode");
+        System.out.println("WhileStatement");
+        Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
+        IdentifierNode temp = TempNode.newTemp();
+        ParenNode cond = (ParenNode)n.condition;
+        ExprNode expr = null;
+        if(cond.node instanceof BinExprNode){
+            //expr = (BinExprNode)cond.node;
+    // 		//((BinExprNode)expr).accept(this);
+            expr = Bassigns.get(Bassigns.size()-1).left;
+        } else if (cond.node instanceof BooleanNode){
+            expr = (BooleanNode)cond.node;
+        }
+        AssignmentNode assign = new AssignmentNode(temp, expr);
+         n.assigns = Bassigns;
+        n.assigns.add(assign);
+        n.falseLabel = LabelNode.newLabel();
+    //n.stmt.accept(this);
+        n.wGoto = new GotoNode(n.falseLabel, n.stmt);
+	    n.wGoto.accept(this);
         n.stmt.accept(this);
     }
 
