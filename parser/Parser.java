@@ -225,11 +225,11 @@ public class Parser extends ASTVisitor
                 n.stmt.accept(this);
                 break;
 	        case '{' :
-	   	        n.stmt = new BlockStatementNode(enclosingBlock);
+	   	        n.stmt = new BlockStatementNode(null);
 		        n.stmt.accept(this);
                 break;
             case Tag.BASIC:
-                n.stmt = new BlockStatementNode(enclosingBlock);
+                n.stmt = new BlockStatementNode(null);
                 n.stmt.accept(this);
                 break;
            default :
