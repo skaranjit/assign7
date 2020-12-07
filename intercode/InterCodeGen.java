@@ -202,7 +202,23 @@ public class InterCodeGen extends ASTVisitor {
         n.dGoto.accept(this);
         println(n.startLabel.id + ": ");
         print("iffalse ");
+	
         n.condition.accept(this);
+	IdentifierNode temp = TempNode.newTemp();
+        ParenNode cond = (ParenNode)n.condition;
+        ExprNode expr = null;
+        if(cond.node instanceof BinExprNode){
+            expr = (BinExprNode)cond.node;
+    // 		//((BinExprNode)expr).accept(this);
+            expr = Bassigns.get(Bassigns.size()-1).left;
+        } else if (cond.node instanceof BooleanNode){
+            expr = (BooleanNode)cond.node;
+        }
+	AssignmentNode assign = new AssignmentNode(temp, expr);
+        for(AssignmentNode assign1 : Bassigns){
+            n.assigns.add(assign1);
+        }
+        n.assigns.add(assign);
         n.falseLabel = LabelNode.newLabel();
         println(" goto " + n.falseLabel.id);
         println("goto "+n.startLabel.id);
@@ -249,8 +265,23 @@ public class InterCodeGen extends ASTVisitor {
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
 	    print(" =");
-        n.right.accept(this);
-	    n.assigns = Bassigns;
+       
+	ExprNode expr = null;
+        if(cond.node instanceof BinExprNode){
+           // expr = (BinExprNode)n.right;
+    // 		//((BinExprNode)expr).accept(this);
+            expr = Bassigns.get(Bassigns.size()-1).left;
+	
+        }
+	else{
+		 n.right.accept(this);
+	}
+	IdentifierNode temp = TempNode.newTemp();
+	AssignmentNode assign = new AssignmentNode(temp, expr);
+        for(AssignmentNode assign1 : Bassigns){
+            n.assigns.add(assign1);
+        }
+	n.assigns = Bassigns;
         println("");
         if(Bassigns.size()<2){
             TempNode.Tempminus();
