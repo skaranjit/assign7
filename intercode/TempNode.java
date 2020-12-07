@@ -13,6 +13,9 @@ public class TempNode extends IdentifierNode {
     num ++;
     return new IdentifierNode(new Word("t" + num, Tag.ID),null);
   }
+  public static void Tempminux(){
+      num --;
+  }
   
   public void accept(ASTVisitor v) {
      v.visit(this);
