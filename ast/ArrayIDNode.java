@@ -6,7 +6,7 @@ public class ArrayIDNode extends IdentifierNode
 {
     public ArrayIDNode id;
     public ExprNode node;
-
+    public List<AssignmentNode> assigns = new ArrayList<AssignmentNode>();
     public ArrayIDNode()
     {
 
