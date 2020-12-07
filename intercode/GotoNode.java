@@ -7,12 +7,13 @@ import assign7.parser.*;
 
 public class GotoNode extends StatementNode
 {
-    int Lnum;
-    int Tnum;
+    public LabelNode gotoLabel = null;
+    public StatementNode gotostmts = null;
     
-    public GotoNode()
+    public GotoNode(LabelNode label, StatementNode stmts)
     {
-
+        this.gotoLabel = label;
+        this.gotostmts = stmts;
     }
    
     public void accept(ASTVisitor v)
