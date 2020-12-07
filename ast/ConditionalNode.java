@@ -20,7 +20,7 @@ public class ConditionalNode extends StatementNode
     //Label for intermediate Code
     public LabelNode falseLabel;
     
-    
+    public GotoNode goto;
     public ConditionalNode()
     {
 
