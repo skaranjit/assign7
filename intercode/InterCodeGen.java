@@ -144,7 +144,9 @@ public class InterCodeGen extends ASTVisitor {
 		expr = (BooleanNode)cond.node;
 	}
 	AssignmentNode assign = new AssignmentNode(temp, expr);
- 	n.assigns = Bassigns;
+ 	for(AssignmentNode assign1 : Bassigns){
+         n.assigns.add(assign1)
+     }
 	n.assigns.add(assign);
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
@@ -178,7 +180,9 @@ public class InterCodeGen extends ASTVisitor {
             expr = (BooleanNode)cond.node;
         }
         AssignmentNode assign = new AssignmentNode(temp, expr);
-         n.assigns = Bassigns;
+        for(AssignmentNode assign1 : Bassigns){
+            n.assigns.add(assign1)
+        }
         n.assigns.add(assign);
         n.falseLabel = LabelNode.newLabel();
     //n.stmt.accept(this);
