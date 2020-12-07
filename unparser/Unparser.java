@@ -247,15 +247,16 @@ public class Unparser extends ASTVisitor
         {
 	     println("");
 	    for (AssignmentNode a: n.array.assigns){
-	    	     printIndent();
-
+	    	printIndent();
 	    	a.accept(this);
-		}
+	    }
             
         }
 	        print(n.id);
 	if (n.array != null)
-        {
+        {   
+	    printIndent();
+
 	    n.array.accept(this);
             
         }
