@@ -148,7 +148,7 @@ public class InterCodeGen extends ASTVisitor {
 	n.assigns.add(assign);
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
-	n.stmt.accept(this);
+	//n.stmt.accept(this);
 	GotoNode goto = new GotoNode(n.falseLabel,n.stmt);
 	goto.accept(this);
 // 	Bassigns = Bassigns1;
@@ -161,7 +161,7 @@ public class InterCodeGen extends ASTVisitor {
     
     public void visit(GotoNode g){
 	    g.gotostmts.accept(this);
-	    
+    }
     public void visit(WhileNode n)
     {
         System.out.println("visiting WhileNode");
