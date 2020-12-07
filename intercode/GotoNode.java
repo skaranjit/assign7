@@ -16,7 +16,8 @@ public class GotoNode extends ASTVisitor
         this.gotoLabel = label;
         this.gotostmts = stmts;
     }
-   
+    public GotoNode(){ 
+    }
     public void accept(ASTVisitor v)
     {
         v.visit(this);
