@@ -224,7 +224,7 @@ public class Unparser extends ASTVisitor
                 ((ParenNode) n.right).accept(this);
             } else if(n.right instanceof BinExprNode){
             	((BinExprNode)n.right).accept(this);
-            else{ }
+            }else{ }
         }
     }
 
