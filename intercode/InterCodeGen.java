@@ -157,10 +157,7 @@ public class InterCodeGen extends ASTVisitor {
         }
     }
     
-    public void visit(GotoNode n){
-	    
-	    
-    }
+  
     public void visit(WhileNode n)
     {
         System.out.println("visiting WhileNode");
