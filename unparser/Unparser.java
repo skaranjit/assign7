@@ -153,9 +153,9 @@ public class Unparser extends ASTVisitor
     {
     	
         printIndent();
-// 	for (AssignmentNode a : n.assigns){
-// 		a.accept(this);
-// 	}
+	for (AssignmentNode a : n.assigns){
+		a.accept(this);
+	}
          n.left.accept(this);
          print(" = ");
 
