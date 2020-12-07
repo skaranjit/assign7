@@ -103,10 +103,11 @@ public class Unparser extends ASTVisitor
         for(DeclarationNode decl: n.decls) 
 	        decl.accept(this);
         
-        indentUp();
-        for(StatementNode stmt : n.stmts)
+        for(StatementNode stmt : n.stmts){
+            indentUp();
 	        stmt.accept(this);
-        indentDown();
+            indentDown();
+        }
         
         printIndent();
         println("}");
