@@ -213,6 +213,10 @@ public class InterCodeGen extends ASTVisitor {
         Type leftType = leftId.type;
 	print(" =");
         n.right.accept(this);
+	if(Bassigns.size() < 2) {
+			Bassigns = new ArrayList<AssignmentNode>();
+			TempNode.Tempminus();
+		}
 	println("");
     }
     ExprNode t = null;
@@ -266,10 +270,7 @@ public class InterCodeGen extends ASTVisitor {
 	   	AssignmentNode assign = new AssignmentNode(temp, t);
 		a = temp;
 	   	Bassigns.add(assign);
-		if(Bassigns.size() < 2) {
-			Bassigns = new ArrayList<AssignmentNode>();
-			TempNode.Tempminus();
-		}
+		
 	}
 	println("End");
 	
