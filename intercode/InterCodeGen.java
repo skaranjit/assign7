@@ -160,7 +160,7 @@ public class InterCodeGen extends ASTVisitor {
     }
     
     public void visit(GotoNode g){
-	   g.gotostmts.accept(this);
+	   g.stmt.accept(this);
     }
     public void visit(WhileNode n)
     {
