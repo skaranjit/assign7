@@ -150,7 +150,7 @@ public class InterCodeGen extends ASTVisitor {
 	n.falseLabel = LabelNode.newLabel();
 	//n.stmt.accept(this);
 	GotoNode goto = new GotoNode(n.falseLabel,n.stmt);
-	goto.accept(this);
+	goto.stmts.accept(this);
 // 	Bassigns = Bassigns1;
 	if (n.elseStmt != null)
         {
@@ -160,7 +160,7 @@ public class InterCodeGen extends ASTVisitor {
     }
     
     public void visit(GotoNode g){
-	    g.gotostmts.accept(this);
+	   // g.gotostmts.accept(this);
     }
     public void visit(WhileNode n)
     {
