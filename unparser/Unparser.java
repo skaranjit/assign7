@@ -142,9 +142,6 @@ public class Unparser extends ASTVisitor
         
         print("[");
         (n.size).accept(this);
-//         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
-//         if(n.size instanceof NumNode) print("" + ((NumNode)n.size).value);
-//         print("" +n.size);
         print("]");
 
         if(n.type != null)
@@ -175,8 +172,6 @@ public class Unparser extends ASTVisitor
 	    
 		
 	}
-	//else{ n.right.accept(this);}
-
         println(";");
     }
 
@@ -283,7 +278,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(BreakNode n)
     {
-        println("Break: goto "+ n.bLabel.id);
+        println("Break: goto "+ n.falseLabel.id);
     }
 
     public void visit(ConditionalNode n)
@@ -292,34 +287,28 @@ public class Unparser extends ASTVisitor
 		assign.accept(this);
         printIndent();
         print("ifFalse ");
-       n.condition.accept(this);
+        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.IfGoto.accept(this);
+        n.toGoto.accept(this);
         
 	println(n.falseLabel.id+":");
-        // if (n.elseStmt != null)
-        // {
-        //     n.elseStmt.accept(this);
-        // }
+        if (n.elseStmt != null)
+        {
+            n.elseStmt.accept(this);
+        }
     }
     public void visit(WhileNode n)
     {
-        //printIndent();
         for (AssignmentNode assign : n.assigns)
 		assign.accept(this);
-      //  printIndent();
         println(n.startLabel.id + ": WhileStatement");
         printIndent();
         print("iffalse ");
-       n.condition.accept(this);
+        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.wGoto.accept(this);
+        n.toGoto.accept(this);
         println("goto "+n.startLabel.id);
         println(n.falseLabel.id+":");
-
-        indentUp();
-        //n.stmt.accept(this);
-        indentDown();
     }
     public void visit(GotoNode n){
         n.stmt.accept(this);
@@ -332,7 +321,7 @@ public class Unparser extends ASTVisitor
         println(n.startLabel.id + ": Do Statement");
        
         printIndent();
-        n.dGoto.accept(this);
+        n.toGoto.accept(this);
         printIndent();
         print("iffalse ");
         n.condition.accept(this);
