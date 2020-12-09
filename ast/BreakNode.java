@@ -4,7 +4,6 @@ import assign7.visitor.ASTVisitor;
 
 public class BreakNode extends StatementNode
 {
-    public LabelNode bLabel;
     public BreakNode()
     {
 
