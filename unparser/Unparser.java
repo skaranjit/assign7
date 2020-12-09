@@ -107,7 +107,6 @@ public class Unparser extends ASTVisitor
             indentUp();
 	    println("");
 	    stmt.accept(this);
-	    println("");
             indentDown();
         }
         
