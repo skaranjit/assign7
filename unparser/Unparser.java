@@ -159,9 +159,19 @@ public class Unparser extends ASTVisitor
 		printIndent();
         	a.left.accept(this);
 		print(" = ");
-		a.right.accept(this);
+		if (a.right instanceof  IdentifierNode)
+             ((IdentifierNode)a.right).accept(this);
+         else if (a.right instanceof NumNode)
+            ((NumNode)a.right).accept(this);
+         else if (a.right instanceof RealNode)
+	    ((RealNode)a.right).accept(this);
+ 	else if (a.right instanceof BooleanNode)
+		((BooleanNode)a.right).accept(this);
+        else {
+             ((BinExprNode)a.right).accept(this);
 	}
-//          if (n.right instanceof  IdentifierNode)
+
+// 	             if (n.right instanceof  IdentifierNode)
 //              ((IdentifierNode)n.right).accept(this);
 //          else if (n.right instanceof NumNode)
 //             ((NumNode)n.right).accept(this);
@@ -171,9 +181,8 @@ public class Unparser extends ASTVisitor
 // 		((BooleanNode)n.right).accept(this);
 //         else {
 //              ((BinExprNode)n.right).accept(this);
-	    
 		
-// 	}
+// // 	}
         println(";");
     }
 
