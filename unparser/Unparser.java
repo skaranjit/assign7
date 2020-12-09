@@ -167,9 +167,9 @@ public class Unparser extends ASTVisitor
 	    ((RealNode)a.right).accept(this);
  	else if (a.right instanceof BooleanNode)
 		((BooleanNode)a.right).accept(this);
-        else {
-             ((BinExprNode)a.right).accept(this);
-	}
+        else 
+		((BinExprNode)a.right).accept(this);
+
 
 // 	             if (n.right instanceof  IdentifierNode)
 //              ((IdentifierNode)n.right).accept(this);
@@ -184,6 +184,7 @@ public class Unparser extends ASTVisitor
 		
 // // 	}
         println(";");
+		}
     }
 
     public void visit(BinExprNode n)
