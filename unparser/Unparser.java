@@ -155,40 +155,18 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
-//     	if(n.assigns!=null){
-//     	for (AssignmentNode a: n.assigns){
-		
-//         	n.left = a.left;
-// 		n.right = a.right;
-
-// 	}
 	printIndent();
 	n.left.accept(this);
 	print(" = ");
 	n.right.accept(this);
 	print(";");
 	indentDown();
-// 	             if (n.right instanceof  IdentifierNode)
-//              ((IdentifierNode)n.right).accept(this);
-//          else if (n.right instanceof NumNode)
-//             ((NumNode)n.right).accept(this);
-//          else if (n.right instanceof RealNode)
-// 	    ((RealNode)n.right).accept(this);
-//  	else if (n.right instanceof BooleanNode)
-// 		((BooleanNode)n.right).accept(this);
-//         else {
-//              ((BinExprNode)n.right).accept(this);
-		
-// // 	}
 
     }
 
     public void visit(BinExprNode n)
     {
-    	if(n.assigns != null){
-		for (AssignmentNode a: n.assigns)
-			a.accept(this);
-	}
+    	
         if (n.left instanceof IdentifierNode)
         {
             ((IdentifierNode)n.left).accept(this);
@@ -244,6 +222,10 @@ public class Unparser extends ASTVisitor
             	((BinExprNode)n.right).accept(this);
             }else{ }
         }
+	if(n.assigns != null){
+		for (AssignmentNode a: n.assigns)
+			a.accept(this);
+	}
     }
 
     public void visit(IdentifierNode n)
