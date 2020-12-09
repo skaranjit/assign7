@@ -300,7 +300,7 @@ public class InterCodeGen extends ASTVisitor {
        
 	ExprNode expr = null;
 	n.right.accept(this);
-	n.assigns = Bassigns;
+	//n.assigns = Bassigns;
 
         println("");
 //         if(Bassigns.size()<2){
