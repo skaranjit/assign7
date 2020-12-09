@@ -2,7 +2,9 @@ package assign7.ast;
 
 import assign7.visitor.*;
 import assign7.lexer.*;
-
+import assign7.intercode.*;
+import java.util.*;
+    
 public class ExprNode extends Node
 {
     //AssignmentNode which will be added before IFStatementNode for Intermediate Code
