@@ -161,6 +161,7 @@ public class Unparser extends ASTVisitor
 	print(" = ");
 	n.right.accept(this);
 	print(";");
+	println("");
 	indentDown();
 
     }
