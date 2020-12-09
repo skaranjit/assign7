@@ -179,8 +179,7 @@ public class Unparser extends ASTVisitor
 //              ((BinExprNode)n.right).accept(this);
 		
 // // 	}
-        println(";");
-		}
+
     }
 
     public void visit(BinExprNode n)
