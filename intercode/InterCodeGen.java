@@ -150,9 +150,9 @@ public class InterCodeGen extends ASTVisitor {
 	n.assigns.add(assign);
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
-    //n.stmt.accept(this);
-    n.IfGoto = new GotoNode(n.falseLabel, n.stmt);
-	n.IfGoto.accept(this);
+    	//n.stmt.accept(this);
+    	n.toGoto = new GotoNode(n.falseLabel, n.stmt);
+	n.toGoto.accept(this);
 // 	Bassigns = Bassigns1;
 	if (n.elseStmt != null)
         {
@@ -161,8 +161,8 @@ public class InterCodeGen extends ASTVisitor {
         }
     }
     
-    public void visit(GotoNode g){
-	   g.stmt.accept(this);
+    public void visit(GotoNode n){
+	   n.stmt.accept(this);
     }
     public void visit(WhileNode n)
     {
@@ -189,10 +189,8 @@ public class InterCodeGen extends ASTVisitor {
 
         n.falseLabel = LabelNode.newLabel();
 	globalLabel = n.falseLabel;
-
-    //n.stmt.accept(this);
-        n.wGoto = new GotoNode(n.falseLabel, n.stmt);
-	    n.wGoto.accept(this);
+        n.toGoto = new GotoNode(n.falseLabel, n.stmt);
+	n.toGoto.accept(this);
        // n.stmt.accept(this);
     }
 
@@ -200,18 +198,15 @@ public class InterCodeGen extends ASTVisitor {
     {
         System.out.println("visiting DoWhileNode");
         n.startLabel = LabelNode.newLabel();
-        n.dGoto = new GotoNode(n.startLabel, n.stmt);
-        n.dGoto.accept(this);
+        n.toGoto = new GotoNode(n.startLabel, n.stmt);
+        n.toGoto.accept(this);
         println(n.startLabel.id + ": ");
         print("iffalse ");
-	
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
         ExprNode expr = null;
         if(cond.node instanceof BinExprNode){
-            expr = (BinExprNode)cond.node;
-    // 		//((BinExprNode)expr).accept(this);
             expr = Bassigns.get(Bassigns.size()-1).left;
         } else if (cond.node instanceof BooleanNode){
             expr = (BooleanNode)cond.node;
@@ -291,7 +286,7 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(BreakNode n)
     {
-        n.bLabel = globalLabel;
+        n.falseLabel = globalLabel;
     }
 
     public void visit(AssignmentNode n)
@@ -307,27 +302,7 @@ public class InterCodeGen extends ASTVisitor {
        
 	ExprNode expr = null;
 	n.right.accept(this);
-//         if(n.right instanceof BinExprNode){
-//            // expr = (BinExprNode)n.right;
-//     // 		//((BinExprNode)expr).accept(this);
-// 	    if(!temp1.isEmpty())
-//             	expr = temp1.get(temp1.size()-1).left;
-// 	    else if (n.right instanceof NumNode)
-//             	expr = (NumNode)n.right;
-//              else if (n.right instanceof IdentifierNode)
-//             	expr = (IdentifierNode)n.right;
-	     
-	
-//         }
-// // 	else{
-// // 		 n.right.accept(this);
-// // 	}
-// 	IdentifierNode temp = TempNode.newTemp();
-// 	AssignmentNode assign = new AssignmentNode(temp, expr);
-//         for(AssignmentNode assign1 : temp1){
-//             n.assigns.add(assign1);
-//         }
-//	n.right = temp;
+
         println("");
 //         if(Bassigns.size()<2){
 //             TempNode.Tempminus();
