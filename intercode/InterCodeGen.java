@@ -334,6 +334,7 @@ public class InterCodeGen extends ASTVisitor {
         print(" "+n.op);
         if (n.right != null) {
             if (n.right instanceof IdentifierNode) {
+                println("onmyleft");
                 ((IdentifierNode) n.right).accept(this);
             } else if (n.right instanceof NumNode) {
                 ((NumNode) n.right).accept(this);
