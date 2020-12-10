@@ -251,15 +251,15 @@ public class Unparser extends ASTVisitor
     public void visit(IdentifierNode n)
     {
     	
-        if (n.array != null)
-        {
-	     println("");
+        // if (n.array != null)
+        // {
+	    //  println("");
            
 	        
             
-	    }
+	    // }
             
-        }
+        // }
 	    
 	    if (n.array != null)
         { 
