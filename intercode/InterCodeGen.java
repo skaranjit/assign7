@@ -223,9 +223,9 @@ public class InterCodeGen extends ASTVisitor {
     public void visit (ArrayIDNode n)
     {
         System.out.println("visiting ArrayIDNode");
-//         List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
-//         temp1 = Bassigns;
-//         Bassigns = new ArrayList<AssignmentNode>();
+        List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+        temp1 = Bassigns;
+        Bassigns = new ArrayList<AssignmentNode>();
         IdentifierNode temp = TempNode.newTemp();
 	ExprNode expr = null;
         n.node.accept(this);
@@ -258,7 +258,7 @@ public class InterCodeGen extends ASTVisitor {
         {
             n.id.accept(this);
         }
-	   // Bassigns = temp1;
+	   Bassigns = temp1;
     }
 
     public void visit(ArrayTypeNode n)
