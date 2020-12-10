@@ -254,10 +254,10 @@ public class Unparser extends ASTVisitor
 	    }
             
         }
-	print(n.id);
-	if (n.array != null)
+	    print(n.id);
+	    if (n.array != null)
         { 
-	    n.array.accept(this); 
+	        n.array.accept(this); 
         }
 
     }
@@ -294,7 +294,7 @@ public class Unparser extends ASTVisitor
 		assign.accept(this);
         printIndent();
         print("ifFalse ");
-       n.condition.accept(this);
+        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
         n.toGoto.accept(this);
         
@@ -334,7 +334,6 @@ public class Unparser extends ASTVisitor
        
         printIndent();
         n.toGoto.accept(this);
-        printIndent();
         for (AssignmentNode assign : n.assigns)
 		    assign.accept(this);
         print("iffalse ");
