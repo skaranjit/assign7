@@ -262,10 +262,10 @@ public class Unparser extends ASTVisitor
 	    
 	    if (n.array != null)
             { 	
-		print(n.id);
-		print("[");
+// 		print(n.id);
+// 		print("[");
 	        n.array.accept(this); 
-		println("]");
+// 		println("]");
         }
         else print(n.id);
 
@@ -275,12 +275,14 @@ public class Unparser extends ASTVisitor
     {
 
         for (AssignmentNode a: n.assigns){
-// 		   if(a.left instanceof IdentifierNode){
-// 		   	if(((IdentifierNode)a.left).array!=null){
-// 				print(((IdentifierNode)a.left).array.iden.id);
-// 			}
-// 		    }
-		    a.accept(this);  
+		   if(a.right instanceof IdentifierNode){
+		   	if(((IdentifierNode)a.left).array!=null){
+				print(((IdentifierNode)a.right).array.iden.id);
+				print("[");
+				a.accept(this);
+				print("]");
+			}
+		    }else a.accept(this);  
         }
 	
 //        print("[");
