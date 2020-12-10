@@ -200,6 +200,7 @@ public class InterCodeGen extends ASTVisitor {
         n.toGoto.accept(this);
         println(n.startLabel.id + ": ");
         print("iffalse ");
+	Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
