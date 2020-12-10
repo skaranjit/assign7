@@ -297,7 +297,6 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(AssignmentNode n)
     {
-
         n.left.accept(this);
         List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
         temp1 = Bassigns;
@@ -306,7 +305,7 @@ public class InterCodeGen extends ASTVisitor {
         Type leftType = leftId.type;
 	    print(" =");
         ExprNode expr = null;
-        n.right.accept(this);
+        ((BinExprNode)n.right).accept(this);
         n.assigns = Bassigns;
         println("");
 	    Bassigns = temp1;
@@ -344,8 +343,6 @@ public class InterCodeGen extends ASTVisitor {
             } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
             } else if(n.right instanceof BinExprNode) {
-                IdentifierNode temp = TempNode.newTemp();
-                a= temp;   
                 ((BinExprNode) n.right).accept(this);
            } else { 
 		    
