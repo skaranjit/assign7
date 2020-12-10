@@ -327,14 +327,15 @@ public class Unparser extends ASTVisitor
     }
     public void visit(DoWhileNode n)
     {
-        for (AssignmentNode assign : n.assigns)
-		    assign.accept(this);
+        
       //  printIndent();
         println(n.startLabel.id + ": Do Statement");
        
         printIndent();
         n.toGoto.accept(this);
         printIndent();
+        for (AssignmentNode assign : n.assigns)
+		    assign.accept(this);
         print("iffalse ");
         n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
