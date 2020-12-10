@@ -297,9 +297,6 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(AssignmentNode n)
     {
-        if(n.right instanceof IdentifierNode){
-            last = n.right;
-        }else {
         n.left.accept(this);
         List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
         temp1 = Bassigns;
@@ -311,11 +308,10 @@ public class InterCodeGen extends ASTVisitor {
          n.right.accept(this);
         n.assigns = Bassigns;
         println("");
-	    Bassigns = temp1;}
+	    Bassigns = temp1;
     }
-    ExprNode t = null;
-    public void visit(BinExprNode n) {
-	
+    public void visit(BinExprNode n) 
+    {
         ExprNode expr = null;
         //println("In Binary Expression Node:");
         if (n.left instanceof IdentifierNode){
