@@ -133,28 +133,29 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(ConditionalNode n)
     {
-	println("IfStatementNode");
+        Bassigns = new ArrayList<AssignmentNode>();
+
+	    println("IfStatementNode");
         n.condition.accept(this);
-	IdentifierNode temp = TempNode.newTemp();
-	ParenNode cond = (ParenNode)n.condition;
-	ExprNode expr = null;
-	if(cond.node instanceof BinExprNode){
-		expr = Bassigns.get(Bassigns.size()-1).left;
-	} else if (cond.node instanceof BooleanNode){
-		expr = (BooleanNode)cond.node;
-	}
-	AssignmentNode assign = new AssignmentNode(temp, expr);
- 	for(AssignmentNode assign1 : Bassigns){
-         n.assigns.add(assign1);
-     }
-	n.assigns.add(assign);
-	((ParenNode)n.condition).node = temp;
-	n.falseLabel = LabelNode.newLabel();
-    	//n.stmt.accept(this);
-    	n.toGoto = new GotoNode(n.falseLabel, n.stmt);
-	n.toGoto.accept(this);
-// 	Bassigns = Bassigns1;
-	if (n.elseStmt != null)
+        IdentifierNode temp = TempNode.newTemp();
+        ParenNode cond = (ParenNode)n.condition;
+        ExprNode expr = null;
+        if(cond.node instanceof BinExprNode){
+            expr = Bassigns.get(Bassigns.size()-1).left;
+        } else if (cond.node instanceof BooleanNode){
+            expr = (BooleanNode)cond.node;
+        }
+        AssignmentNode assign = new AssignmentNode(temp, expr);
+        for(AssignmentNode assign1 : Bassigns){
+            n.assigns.add(assign1);
+        }
+        n.assigns.add(assign);
+        ((ParenNode)n.condition).node = temp;
+        n.falseLabel = LabelNode.newLabel();
+        n.toGoto = new GotoNode(n.falseLabel, n.stmt);
+        n.toGoto.accept(this);
+    // 	Bassigns = Bassigns1;
+        if (n.elseStmt != null)
         {
             print("Else Clause");
             n.elseStmt.accept(this);
@@ -174,8 +175,6 @@ public class InterCodeGen extends ASTVisitor {
         ParenNode cond = (ParenNode)n.condition;
         ExprNode expr = null;
         if(cond.node instanceof BinExprNode){
-            expr = (BinExprNode)cond.node;
-    // 		//((BinExprNode)expr).accept(this);
             expr = Bassigns.get(Bassigns.size()-1).left;
         } else if (cond.node instanceof BooleanNode){
             expr = (BooleanNode)cond.node;
@@ -188,14 +187,15 @@ public class InterCodeGen extends ASTVisitor {
 	    	((ParenNode)n.condition).node = temp;
 
         n.falseLabel = LabelNode.newLabel();
-	globalLabel = n.falseLabel;
+	    globalLabel = n.falseLabel;
         n.toGoto = new GotoNode(n.falseLabel, n.stmt);
-	n.toGoto.accept(this);
+	    n.toGoto.accept(this);
        // n.stmt.accept(this);
     }
 
     public void visit(DoWhileNode n)
     {
+        Bassigns = new ArrayList<AssignmentNode>();
         System.out.println("visiting DoWhileNode");
         n.startLabel = LabelNode.newLabel();
         n.toGoto = new GotoNode(n.startLabel, n.stmt);
@@ -210,7 +210,7 @@ public class InterCodeGen extends ASTVisitor {
         } else if (cond.node instanceof BooleanNode){
             expr = (BooleanNode)cond.node;
         }
-	AssignmentNode assign = new AssignmentNode(temp, expr);
+	    AssignmentNode assign = new AssignmentNode(temp, expr);
         for(AssignmentNode assign1 : Bassigns){
             n.assigns.add(assign1);
         }
@@ -294,9 +294,9 @@ public class InterCodeGen extends ASTVisitor {
     {
 
         n.left.accept(this);
-        // List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
-        // temp1 = Bassigns;
-        // Bassigns = new ArrayList<AssignmentNode>();
+        List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+        temp1 = Bassigns;
+        Bassigns = new ArrayList<AssignmentNode>();
         IdentifierNode leftId = (IdentifierNode)n.left;
         Type leftType = leftId.type;
 	    print(" =");
@@ -304,7 +304,7 @@ public class InterCodeGen extends ASTVisitor {
         n.right.accept(this);
         n.assigns = Bassigns;
         println("");
-	    //Bassigns = temp1;
+	    Bassigns = temp1;
     }
     ExprNode t = null;
     public void visit(BinExprNode n) {
