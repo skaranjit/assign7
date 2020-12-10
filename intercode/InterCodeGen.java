@@ -273,7 +273,7 @@ public class InterCodeGen extends ASTVisitor {
         n.assigns.add(assign);
         
         IdentifierNode temp2 = TempNode.newTemp();
-        expr = new BinExprNode("*",temp,"8");
+        expr = new BinExprNode(new Word("*",null),temp,"8");
         AssignmentNode assign2 = new AssignmentNode (temp2 ,expr);
        
         n.assigns.add(assign2);
@@ -349,7 +349,7 @@ public class InterCodeGen extends ASTVisitor {
             IdentifierNode temp = TempNode.newTemp();
             if(!Bassigns.isEmpty()) n.left =a;
             last = n.left;
-            t = new BinExprNode(n.op,n.left,last);
+            t = new BinExprNode(n.op,n.left,n.right);
             AssignmentNode assign = new AssignmentNode(temp, t);
             a = temp;
             Bassigns.add(assign);
