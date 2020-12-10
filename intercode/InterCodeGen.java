@@ -310,6 +310,7 @@ public class InterCodeGen extends ASTVisitor {
         println("");
 	    Bassigns = temp1;
     }
+    ExprNode t = null;
     public void visit(BinExprNode n) 
     {
         ExprNode expr = null;
