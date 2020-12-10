@@ -139,7 +139,6 @@ public class Unparser extends ASTVisitor
 
     public void visit(ArrayTypeNode n)
     {   
-        IdentifierNode temp = Temp
         print("[");
         (n.size).accept(this);
 //         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
