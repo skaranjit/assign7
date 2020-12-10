@@ -162,20 +162,20 @@ public class Unparser extends ASTVisitor
             for(AssignmentNode a: n.assigns)
                 a.accept(this);
         
-        printIndent();
-        n.left.accept(this);
-        print(" = ");
-        if (n.right instanceof  IdentifierNode)
-            ((IdentifierNode)n.right).accept(this);
-        else if (n.right instanceof NumNode)
-            ((NumNode)n.right).accept(this);
-        else if (n.right instanceof RealNode)
-	        ((RealNode)n.right).accept(this);
- 	    else if (n.right instanceof BooleanNode)
-		    ((BooleanNode)n.right).accept(this);
-        else {
-             ((BinExprNode)n.right).accept(this);
-        	}
+        // printIndent();
+        // n.left.accept(this);
+        // print(" = ");
+        // if (n.right instanceof  IdentifierNode)
+        //     ((IdentifierNode)n.right).accept(this);
+        // else if (n.right instanceof NumNode)
+        //     ((NumNode)n.right).accept(this);
+        // else if (n.right instanceof RealNode)
+	    //     ((RealNode)n.right).accept(this);
+ 	    // else if (n.right instanceof BooleanNode)
+		//     ((BooleanNode)n.right).accept(this);
+        // else {
+        //      ((BinExprNode)n.right).accept(this);
+        // 	}
         println(";");
         }
     }
