@@ -307,11 +307,10 @@ public class InterCodeGen extends ASTVisitor {
         ExprNode expr = null;
         if(n.right instanceof IdentifierNode){
             last = n.right;
-        }
-        n.right.accept(this);
+        }else { n.right.accept(this);
         n.assigns = Bassigns;
         println("");
-	    Bassigns = temp1;
+	    Bassigns = temp1;}
     }
     ExprNode t = null;
     public void visit(BinExprNode n) {
