@@ -294,7 +294,7 @@ public class Unparser extends ASTVisitor
         print("ifFalse ");
        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.IfGoto.accept(this);
+        n.toGoto.accept(this);
         
 	println(n.falseLabel.id+":");
         // if (n.elseStmt != null)
@@ -313,7 +313,7 @@ public class Unparser extends ASTVisitor
         print("iffalse ");
        n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.wGoto.accept(this);
+        n.toGoto.accept(this);
         println("goto "+n.startLabel.id);
         println(n.falseLabel.id+":");
 
@@ -332,7 +332,7 @@ public class Unparser extends ASTVisitor
         println(n.startLabel.id + ": Do Statement");
        
         printIndent();
-        n.dGoto.accept(this);
+        n.toGoto.accept(this);
         printIndent();
         print("iffalse ");
         n.condition.accept(this);
