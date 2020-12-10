@@ -305,7 +305,10 @@ public class InterCodeGen extends ASTVisitor {
         Type leftType = leftId.type;
 	    print(" =");
         ExprNode expr = null;
-        ((BinExprNode)n.right).accept(this);
+        if(n.right instanceof IdentifierNode){
+            last = n.right;
+        }
+        n.right.accept(this);
         n.assigns = Bassigns;
         println("");
 	    Bassigns = temp1;
