@@ -201,9 +201,8 @@ public class InterCodeGen extends ASTVisitor {
         n.toGoto = new GotoNode(n.startLabel, n.stmt);
         n.toGoto.accept(this);
         println(n.startLabel.id + ": ");
-        print("iffalse ");
         n.condition.accept(this);
-	IdentifierNode temp = TempNode.newTemp();
+	    IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
         ExprNode expr = null;
         if(cond.node instanceof BinExprNode){
@@ -219,10 +218,6 @@ public class InterCodeGen extends ASTVisitor {
 	    	((ParenNode)n.condition).node = temp;
 
         n.falseLabel = LabelNode.newLabel();
-        println(" goto " + n.falseLabel.id);
-        println("goto "+n.startLabel.id);
-
-
     }
 
     public void visit (ArrayIDNode n)
