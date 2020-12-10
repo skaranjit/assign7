@@ -156,6 +156,10 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
+    if(n.assigns != null){
+		for (AssignmentNode a: n.assigns)
+			a.accept(this);
+	}
 	printIndent();
 	n.left.accept(this);
 	print(" = ");
@@ -224,10 +228,7 @@ public class Unparser extends ASTVisitor
             	((BinExprNode)n.right).accept(this);
             }else{ }
         }
-	if(n.assigns != null){
-		for (AssignmentNode a: n.assigns)
-			a.accept(this);
-	}
+	
     }
 
     public void visit(IdentifierNode n)
