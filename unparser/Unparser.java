@@ -152,9 +152,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(StatementNode n)
     {
-        indentUp();
         n.stmt.accept(this);
-        indentDown();
     }
 
     public void visit(AssignmentNode n)
@@ -185,6 +183,7 @@ public class Unparser extends ASTVisitor
         //      ((BinExprNode)n.right).accept(this);
         // 	}
         println(";");
+
     }
 
     public void visit(BinExprNode n)
