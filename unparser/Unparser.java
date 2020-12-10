@@ -158,11 +158,11 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
+        printIndent();
         if(n.right instanceof BinExprNode){
             for(AssignmentNode a: n.assigns)
                 a.accept(this);
         }
-        printIndent();
         n.left.accept(this);
         print(" = ");
         if (n.right instanceof  IdentifierNode)
@@ -202,6 +202,7 @@ public class Unparser extends ASTVisitor
         {
             ((ParenNode)n.left).accept(this);
         } else if(n.left instanceof BinExprNode){
+            print("WhatsUP");
             ((BinExprNode)n.left).accept(this);
 	}else {
 	
@@ -234,6 +235,8 @@ public class Unparser extends ASTVisitor
             {
                 ((ParenNode) n.right).accept(this);
             } else if(n.right instanceof BinExprNode){
+                print("WhatsUP");
+
             	((BinExprNode)n.right).accept(this);
             }else{ }
         }
