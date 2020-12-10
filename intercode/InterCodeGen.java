@@ -379,11 +379,12 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(IdentifierNode n)
     {
+        print (" " + n.w);
 	 if (n.array != null)
         {
             n.array.accept(this);
         }
-     else print (" " + n.w);
+    
        
 
     }
