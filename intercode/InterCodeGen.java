@@ -252,12 +252,12 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(ArrayTypeNode n)
     {
         System.out.println("ArrayDimsNode");
-	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
-	temp1 = Bassigns;
-	Bassigns = new ArrayList<AssignmentNode>();
+        List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+        temp1 = Bassigns;
+        Bassigns = new ArrayList<AssignmentNode>();
         n.size.accept(this);
-	IdentifierNode temp = TempNode.newTemp();
-	ExprNode expr = null;
+        IdentifierNode temp = TempNode.newTemp();
+        ExprNode expr = null;
         if(n.size instanceof BinExprNode){
             expr = (BinExprNode)n.size;
             expr = Bassigns.get(Bassigns.size()-1).left;
@@ -266,12 +266,18 @@ public class InterCodeGen extends ASTVisitor {
         }else if (n.size instanceof IdentifierNode){
             expr = (IdentifierNode)n.size;
         }
-	AssignmentNode assign = new AssignmentNode(temp, expr);
         for(AssignmentNode assign1 : Bassigns){
             n.assigns.add(assign1);
         }
+        AssignmentNode assign = new AssignmentNode(temp, expr);
         n.assigns.add(assign);
-	n.size = temp;
+        
+        IdentifierNode temp2 = TempNode.newTemp();
+        expr = temp;
+        AssignmentNode assign = new AssignmentNode (temp2 ,expr);
+       
+        n.assigns.add(assign);
+	    n.size = temp2;
         if(n.type != null)
         {
             n.type.accept(this);
@@ -339,15 +345,15 @@ public class InterCodeGen extends ASTVisitor {
         } else {
             println("@@@ n.right == null in BinExprNode: " + n.right);
         }
-	if(n.left != null){
-		IdentifierNode temp = TempNode.newTemp();
-	        if(!Bassigns.isEmpty()) n.left =a;
+        if(n.left != null){
+            IdentifierNode temp = TempNode.newTemp();
+            if(!Bassigns.isEmpty()) n.left =a;
             last = n.left;
-	    	t = new BinExprNode(n.op,n.left,last);
-	   	    AssignmentNode assign = new AssignmentNode(temp, t);
-		    a = temp;
-	   	    Bassigns.add(assign);
-	}
+            t = new BinExprNode(n.op,n.left,last);
+            AssignmentNode assign = new AssignmentNode(temp, t);
+            a = temp;
+            Bassigns.add(assign);
+        }
     }
 
     public void visit(StatementNode n)

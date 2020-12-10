@@ -139,7 +139,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(ArrayTypeNode n)
     {   
-        
+        IdentifierNode temp = Temp
         print("[");
         (n.size).accept(this);
 //         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
@@ -184,7 +184,7 @@ public class Unparser extends ASTVisitor
     	
         if (n.left instanceof IdentifierNode)
         {
-            println("Is it here or not?");
+            //println("Is it here or not?");
             ((IdentifierNode)n.left).accept(this);
         }
         else if (n.left instanceof NumNode)
@@ -203,7 +203,7 @@ public class Unparser extends ASTVisitor
         {
             ((ParenNode)n.left).accept(this);
         } else if(n.left instanceof BinExprNode){
-            print("WhatsUP");
+            //print("WhatsUP");
             ((BinExprNode)n.left).accept(this);
 	}else {
 	
@@ -236,8 +236,7 @@ public class Unparser extends ASTVisitor
             {
                 ((ParenNode) n.right).accept(this);
             } else if(n.right instanceof BinExprNode){
-                print("WhatsUPAgain");
-
+               // print("WhatsUPAgain");
             	((BinExprNode)n.right).accept(this);
             }else{ }
         }
