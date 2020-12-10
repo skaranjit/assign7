@@ -344,6 +344,7 @@ public class InterCodeGen extends ASTVisitor {
             } else if (n.right instanceof ParenNode) {
                 ((ParenNode) n.right).accept(this);
             } else if(n.right instanceof BinExprNode) {
+                println("onmyright");
                ((BinExprNode) n.right).accept(this);
            } else { 
 		    
