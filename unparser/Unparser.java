@@ -271,7 +271,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(ArrayIDNode n)
     {
-            
+              n.node.accept(this);
 
         for (AssignmentNode a: n.assigns){
 // 		   if(a.left instanceof IdentifierNode){
@@ -282,9 +282,9 @@ public class Unparser extends ASTVisitor
 		    a.accept(this);  
         }
 	
-       print("[");
-       n.node.accept(this);
-        print("]");
+//        print("[");
+     
+//         print("]");
         if (n.array != null)
         {
             n.array.accept(this);
