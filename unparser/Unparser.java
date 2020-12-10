@@ -152,12 +152,13 @@ public class Unparser extends ASTVisitor
 
     public void visit(StatementNode n)
     {
+        indentUp();
         n.stmt.accept(this);
+        indentDown();
     }
 
     public void visit(AssignmentNode n)
     {
-        printIndent();
         // if(n.right instanceof IdentifierNode){
         //     if(((IdentifierNode)n.right).array != null){
         //        for (AssignmentNode a : ((IdentifierNode)n.right).assigns)
@@ -259,6 +260,7 @@ public class Unparser extends ASTVisitor
 	    }
             
         }
+        printIndent();
 	    print(n.id);
 	    if (n.array != null)
         { 
