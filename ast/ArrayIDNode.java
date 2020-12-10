@@ -6,6 +6,7 @@ import assign7.intercode.*;
 import java.util.*;
 public class ArrayIDNode extends IdentifierNode
 {
+    public IdentifierNode iden;
     public ArrayIDNode id;
     public ExprNode node;
     public List<AssignmentNode> assigns = new ArrayList<AssignmentNode>();

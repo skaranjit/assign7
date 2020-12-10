@@ -475,6 +475,7 @@ public class Parser extends ASTVisitor
         match(Tag.ID);
         if(look.tag == '['){
             n.array = new ArrayIDNode();
+            n.array.iden = new IdentifierNode(n.w);
             n.array.accept(this);
         }
         n.printNode(); // new code
