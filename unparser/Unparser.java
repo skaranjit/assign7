@@ -264,7 +264,7 @@ public class Unparser extends ASTVisitor
         { 
 	        n.array.accept(this); 
         }
-        print(n.id);
+        else print(n.id);
 
     }
 
