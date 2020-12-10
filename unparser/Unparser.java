@@ -210,7 +210,6 @@ public class Unparser extends ASTVisitor
         {
             ((ParenNode)n.left).accept(this);
         } else if(n.left instanceof BinExprNode){
-            //print("WhatsUP");
             ((BinExprNode)n.left).accept(this);
 	}else {
 	
@@ -337,10 +336,10 @@ public class Unparser extends ASTVisitor
         
       //  printIndent();
         println(n.startLabel.id + ": Do Statement");
-       
         n.toGoto.accept(this);
         for (AssignmentNode assign : n.assigns)
 		    assign.accept(this);
+        printIndent();
         print("iffalse ");
         n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
