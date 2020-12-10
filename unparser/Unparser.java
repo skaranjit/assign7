@@ -273,7 +273,7 @@ public class Unparser extends ASTVisitor
     {
         for (AssignmentNode a: n.assigns){
 	    	    a.accept(this);
-        
+        }
         print("[");
         n.node.accept(this);
         print("]");
