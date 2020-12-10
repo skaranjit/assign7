@@ -105,8 +105,7 @@ public class Unparser extends ASTVisitor
         
         for(StatementNode stmt : n.stmts){
             indentUp();
-	    println("");
-	    stmt.accept(this);
+	        stmt.accept(this);
             indentDown();
         }
         
@@ -143,6 +142,9 @@ public class Unparser extends ASTVisitor
         
         print("[");
         (n.size).accept(this);
+//         if(n.size instanceof IdentifierNode) print("" + ((IdentifierNode)n.size).w);
+//         if(n.size instanceof NumNode) print("" + ((NumNode)n.size).value);
+//         print("" +n.size);
         print("]");
 
         if(n.type != null)
@@ -156,18 +158,26 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
-    if(n.assigns != null){
-		for (AssignmentNode a: n.assigns)
-			a.accept(this);
+    	
+        printIndent();
+         n.left.accept(this);
+         print(" = ");
+         if (n.right instanceof  IdentifierNode)
+             ((IdentifierNode)n.right).accept(this);
+         else if (n.right instanceof NumNode)
+            ((NumNode)n.right).accept(this);
+         else if (n.right instanceof RealNode)
+	    ((RealNode)n.right).accept(this);
+ 	else if (n.right instanceof BooleanNode)
+		((BooleanNode)n.right).accept(this);
+        else {
+             ((BinExprNode)n.right).accept(this);
+	    
+		
 	}
-	printIndent();
-	n.left.accept(this);
-	print(" = ");
-	n.right.accept(this);
-	print(";");
-	println("");
-	indentDown();
+	//else{ n.right.accept(this);}
 
+        println(";");
     }
 
     public void visit(BinExprNode n)
@@ -228,7 +238,6 @@ public class Unparser extends ASTVisitor
             	((BinExprNode)n.right).accept(this);
             }else{ }
         }
-	
     }
 
     public void visit(IdentifierNode n)
@@ -274,7 +283,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(BreakNode n)
     {
-        println("Break: goto "+ n.falseLabel.id);
+        println("Break: goto "+ n.bLabel.id);
     }
 
     public void visit(ConditionalNode n)
@@ -283,28 +292,34 @@ public class Unparser extends ASTVisitor
 		assign.accept(this);
         printIndent();
         print("ifFalse ");
-        n.condition.accept(this);
+       n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.toGoto.accept(this);
+        n.IfGoto.accept(this);
         
 	println(n.falseLabel.id+":");
-        if (n.elseStmt != null)
-        {
-            n.elseStmt.accept(this);
-        }
+        // if (n.elseStmt != null)
+        // {
+        //     n.elseStmt.accept(this);
+        // }
     }
     public void visit(WhileNode n)
     {
+        //printIndent();
         for (AssignmentNode assign : n.assigns)
 		assign.accept(this);
+      //  printIndent();
         println(n.startLabel.id + ": WhileStatement");
         printIndent();
         print("iffalse ");
-        n.condition.accept(this);
+       n.condition.accept(this);
         println(" goto " + n.falseLabel.id);
-        n.toGoto.accept(this);
+        n.wGoto.accept(this);
         println("goto "+n.startLabel.id);
         println(n.falseLabel.id+":");
+
+        indentUp();
+        //n.stmt.accept(this);
+        indentDown();
     }
     public void visit(GotoNode n){
         n.stmt.accept(this);
@@ -317,7 +332,7 @@ public class Unparser extends ASTVisitor
         println(n.startLabel.id + ": Do Statement");
        
         printIndent();
-        n.toGoto.accept(this);
+        n.dGoto.accept(this);
         printIndent();
         print("iffalse ");
         n.condition.accept(this);

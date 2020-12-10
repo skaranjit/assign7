@@ -150,8 +150,10 @@ public class InterCodeGen extends ASTVisitor {
 	n.assigns.add(assign);
 	((ParenNode)n.condition).node = temp;
 	n.falseLabel = LabelNode.newLabel();
+    	//n.stmt.accept(this);
     	n.toGoto = new GotoNode(n.falseLabel, n.stmt);
 	n.toGoto.accept(this);
+// 	Bassigns = Bassigns1;
 	if (n.elseStmt != null)
         {
             print("Else Clause");
@@ -200,7 +202,6 @@ public class InterCodeGen extends ASTVisitor {
         n.toGoto.accept(this);
         println(n.startLabel.id + ": ");
         print("iffalse ");
-	Bassigns = new ArrayList<AssignmentNode>();
         n.condition.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
         ParenNode cond = (ParenNode)n.condition;
@@ -227,9 +228,9 @@ public class InterCodeGen extends ASTVisitor {
     public void visit (ArrayIDNode n)
     {
         System.out.println("visiting ArrayIDNode");
-// 	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
-// 	temp1 = Bassigns;
-// 	Bassigns = new ArrayList<AssignmentNode>();
+	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+	temp1 = Bassigns;
+	Bassigns = new ArrayList<AssignmentNode>();
 	IdentifierNode temp = TempNode.newTemp();
 	n.node.accept(this);
         ExprNode expr = null;
@@ -250,15 +251,15 @@ public class InterCodeGen extends ASTVisitor {
         {
             n.id.accept(this);
         }
-	//Bassigns = temp1;
+	Bassigns = temp1;
     }
 
     public void visit(ArrayTypeNode n)
     {
         System.out.println("ArrayDimsNode");
-// 	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
-// 	temp1 = Bassigns;
-// 	Bassigns = new ArrayList<AssignmentNode>();
+	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+	temp1 = Bassigns;
+	Bassigns = new ArrayList<AssignmentNode>();
         n.size.accept(this);
 	IdentifierNode temp = TempNode.newTemp();
 	ExprNode expr = null;
@@ -280,7 +281,7 @@ public class InterCodeGen extends ASTVisitor {
         {
             n.type.accept(this);
         }
-	//Bassigns= temp1;
+	Bassigns= temp1;
     }
 
     public void visit(BreakNode n)
@@ -292,23 +293,22 @@ public class InterCodeGen extends ASTVisitor {
     {
 
         n.left.accept(this);
-// 	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
-// 	temp1 = Bassigns;
-// 	Bassigns = new ArrayList<AssignmentNode>();
-//         IdentifierNode leftId = (IdentifierNode)n.left;
-//         Type leftType = leftId.type;
-	print(" =");
+	List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
+	temp1 = Bassigns;
+	Bassigns = new ArrayList<AssignmentNode>();
+        IdentifierNode leftId = (IdentifierNode)n.left;
+        Type leftType = leftId.type;
+	    print(" =");
        
 	ExprNode expr = null;
 	n.right.accept(this);
-	//n.assigns = Bassigns;
 
         println("");
 //         if(Bassigns.size()<2){
 //             TempNode.Tempminus();
 //             Bassigns = new ArrayList<AssignmentNode>();
 //         }
-//  	Bassigns = temp1;
+	Bassigns = temp1;
     }
     ExprNode t = null;
     public void visit(BinExprNode n) {
