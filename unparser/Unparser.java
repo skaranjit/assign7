@@ -160,7 +160,7 @@ public class Unparser extends ASTVisitor
     {
     	
         printIndent();
-         n.left.accept(this);
+         
          print(" = ");
          if (n.right instanceof  IdentifierNode)
              ((IdentifierNode)n.right).accept(this);
@@ -174,7 +174,7 @@ public class Unparser extends ASTVisitor
              ((BinExprNode)n.right).accept(this);
 	    for(AssignmentNode a: n.assigns)
             a.accept(this);
-		
+		n.left.accept(this);
 	}
 	//else{ n.right.accept(this);}
 
