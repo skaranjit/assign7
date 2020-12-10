@@ -302,7 +302,7 @@ public class InterCodeGen extends ASTVisitor {
        
 	ExprNode expr = null;
 	n.right.accept(this);
-        n.assign = Bassigns;
+        n.assigns = Bassigns;
         println("");
 //         if(Bassigns.size()<2){
 //             TempNode.Tempminus();
