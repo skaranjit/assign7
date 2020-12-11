@@ -281,7 +281,7 @@ public class Unparser extends ASTVisitor
 				
 				print(((IdentifierNode)a.right).id);
 				print("[");
-				(IdentifierNode)a.right).n.accept(this);
+				((IdentifierNode)a.right).n.accept(this);
 
 				print("]");
 // 				a.accept(this);
