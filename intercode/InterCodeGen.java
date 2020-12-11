@@ -109,20 +109,20 @@ public class InterCodeGen extends ASTVisitor {
 
     public void visit(DeclarationNode n)
     {
-        n.type.accept(this);
-	n.id.type =n.type.basic;
+//         n.type.accept(this);
+// 	n.id.type =n.type.basic;
 	
-        n.id.accept(this);
-	println("");
+//         n.id.accept(this);
+// 	println("");
     }
 
     public void visit(TypeNode n)
     {
-        print(" "+n.basic);
-        if(n.array != null)
-        {
-            n.array.accept(this);
-        }
+//         print(" "+n.basic);
+//         if(n.array != null)
+//         {
+//             n.array.accept(this);
+//         }
     }
 
     
