@@ -302,10 +302,10 @@ public class Unparser extends ASTVisitor
 // 		    }else a.accept(this);  
 //         }
 	
-//        print("[");
+       print("[");
                    n.node.accept(this);
 
-//         print("]");
+         print("]");
         if (n.array != null)
         {
             n.array.accept(this);
