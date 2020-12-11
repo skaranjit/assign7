@@ -247,12 +247,12 @@ public class InterCodeGen extends ASTVisitor {
         }else if (n.node instanceof IdentifierNode){
             expr = (IdentifierNode)n.node;
         }
+	
+	AssignmentNode assign = new AssignmentNode(temp, expr);
+	             n.assigns.add(assign);
 	for(AssignmentNode assign1 : Bassigns){
             n.assigns.add(assign1);
         }
-	AssignmentNode assign = new AssignmentNode(temp, expr);
-	             n.assigns.add(assign);
-
 	n.node = temp3;
         if(n.id != null)
         {
