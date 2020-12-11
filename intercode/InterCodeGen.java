@@ -305,10 +305,11 @@ public class InterCodeGen extends ASTVisitor {
     public void visit(AssignmentNode n)
     {
 	if (n.right instanceof BinExprNode){
-		n.right.accept(this);
+		
 		List<AssignmentNode> temp1 = new ArrayList<AssignmentNode>();
 		temp1 = Bassigns;
 		Bassigns = new ArrayList<AssignmentNode>();
+		n.right.accept(this);
 		IdentifierNode leftId = (IdentifierNode)n.left;
 		Type leftType = leftId.type;
 		ExprNode expr = Bassigns.get(Bassigns.size()-1).left;
