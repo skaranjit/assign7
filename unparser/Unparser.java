@@ -199,6 +199,7 @@ public class Unparser extends ASTVisitor
 
     public void visit(BinExprNode n)
     {
+    	printIndent();
     	
         if (n.left instanceof IdentifierNode)
         {
