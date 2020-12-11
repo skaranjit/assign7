@@ -157,12 +157,12 @@ public class Unparser extends ASTVisitor
 
     public void visit(AssignmentNode n)
     {
-    	printIndent();
-    	 for(AssignmentNode a: n.assigns)
-		a.accept(this);
-		n.left.accept(this);
-		print(" = ");
-		n.right.accept(this);
+			printIndent();
+			for(AssignmentNode a: n.assigns)
+				a.accept(this);
+			n.left.accept(this);
+			print(" = ");
+			n.right.accept(this);
         // if(n.right instanceof IdentifierNode){
         //     if(((IdentifierNode)n.right).array != null){
         //        for (AssignmentNode a : ((IdentifierNode)n.right).assigns)
@@ -199,7 +199,6 @@ public class Unparser extends ASTVisitor
 
     public void visit(BinExprNode n)
     {
-    	printIndent();
     	
         if (n.left instanceof IdentifierNode)
         {
@@ -286,21 +285,21 @@ public class Unparser extends ASTVisitor
     public void visit(ArrayIDNode n)
     {
 
-        for (AssignmentNode a: n.assigns){
-		   if(a.right instanceof IdentifierNode){
-		   	if(((IdentifierNode)a.right).array!=null){
-				printIndent();
-				print(((IdentifierNode)a.left).id);
-				print("=");
-				print(((IdentifierNode)a.right).id);
-				print("[");
-				((IdentifierNode)a.right).array.accept(this);
+//         for (AssignmentNode a: n.assigns){
+// 		   if(a.right instanceof IdentifierNode){
+// 		   	if(((IdentifierNode)a.right).array!=null){
+// 				printIndent();
+// 				print(((IdentifierNode)a.left).id);
+// 				print("=");
+// 				print(((IdentifierNode)a.right).id);
+// 				print("[");
+// 				((IdentifierNode)a.right).array.accept(this);
 
-				println("]");
-// 				a.accept(this);
+// 				println("]");
+// // 				a.accept(this);
 				
-			}
-		    }else a.accept(this);  
+// 			}
+// 		    }else a.accept(this);  
         }
 	
 //        print("[");
