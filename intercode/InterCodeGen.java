@@ -206,6 +206,7 @@ public class InterCodeGen extends ASTVisitor {
         ParenNode cond = (ParenNode)n.condition;
         ExprNode expr = null;
         if(cond.node instanceof BinExprNode){
+		println("Yes ");
             expr = Bassigns.get(Bassigns.size()-1).left;
         } else if (cond.node instanceof BooleanNode){
             expr = (BooleanNode)cond.node;
@@ -240,16 +241,16 @@ public class InterCodeGen extends ASTVisitor {
         x.array.node = expr;
         AssignmentNode assign3 = new AssignmentNode (temp3,x);
         n.assigns.add(assign3);
-        if(n.node instanceof BinExprNode){
-            expr = Bassigns.get(Bassigns.size()-1).left;
-        } else if (n.node instanceof NumNode){
-            expr = (NumNode)n.node;
-        }else if (n.node instanceof IdentifierNode){
-            expr = (IdentifierNode)n.node;
-        }
+//         if(n.node instanceof BinExprNode){
+//             expr = Bassigns.get(Bassigns.size()-1).left;
+//         } else if (n.node instanceof NumNode){
+//             expr = (NumNode)n.node;
+//         }else if (n.node instanceof IdentifierNode){
+//             expr = (IdentifierNode)n.node;
+//         }
 	
-	AssignmentNode assign = new AssignmentNode(temp, expr);
-	             n.assigns.add(assign);
+// 	AssignmentNode assign = new AssignmentNode(temp, expr);
+// 	n.assigns.add(assign);
 	for(AssignmentNode assign1 : Bassigns){
             n.assigns.add(assign1);
         }
