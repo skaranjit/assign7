@@ -258,7 +258,7 @@ public class InterCodeGen extends ASTVisitor {
         {
             n.id.accept(this);
         }
-	   Bassigns = temp1;
+	   //Bassigns = temp1;
     }
 
     public void visit(ArrayTypeNode n)
