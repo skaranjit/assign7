@@ -277,7 +277,7 @@ public class Unparser extends ASTVisitor
         for (AssignmentNode a: n.assigns){
 		   if(a.right instanceof IdentifierNode){
 		   	if(((IdentifierNode)a.right).array!=null){
-				print((IdentifierNode)a.left).id);
+				print(((IdentifierNode)a.left).id);
 				
 				print(((IdentifierNode)a.right).id);
 				print("[");
