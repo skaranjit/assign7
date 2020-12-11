@@ -313,7 +313,7 @@ public class InterCodeGen extends ASTVisitor {
 		IdentifierNode leftId = (IdentifierNode)n.left;
 		Type leftType = leftId.type;
 		    print(" =");
-		ExprNode expr = Bassigns.get(Bassigns.size()-1).left;.;
+		ExprNode expr = Bassigns.get(Bassigns.size()-1).left;
 		 n.right = expr;
 		n.right.accept(this);
 		n.assigns = Bassigns;
